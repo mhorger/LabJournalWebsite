@@ -1,0 +1,23 @@
+---
+title: "Education"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+**2016-Present**	Doctoral Program, Department of Psychology
+Program in Developmental Psychology
+Graduate Center, City University of New York
+Advisor: Sarah Berger, Ph.D.  
+
+**2009- 2013**		Bachelor of the Arts, Department of Psychology 
+Millersville University, Honors College
+Millersville, PA 17551
+Major: Psychology
+Minor: Anthropology 
+Thesis Title: The Allocation of Preferred and Nonpreferred Rewards among Collaborating Children Advisor: Karena Rush, Ph.D

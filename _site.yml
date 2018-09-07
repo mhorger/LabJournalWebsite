@@ -4,6 +4,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Education"
+      href: Education.html
     - text: "Research"
       href: Journal.html
     - text: "Links"
