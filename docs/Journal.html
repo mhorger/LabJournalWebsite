@@ -424,7 +424,19 @@ div.tocify {
 <div id="put-numbers-into-variables-do-simple-math-on-the-variables" class="section level2">
 <h2>2. Put numbers into variables, do simple math on the variables</h2>
 <pre class="r"><code>mel &lt;-1
-other&lt;-23456789</code></pre>
+other&lt;-23456789
+a&lt;-1
+b&lt;-20
+c&lt;-40
+
+a+b</code></pre>
+<pre><code>## [1] 21</code></pre>
+<pre class="r"><code>c-b</code></pre>
+<pre><code>## [1] 20</code></pre>
+<pre class="r"><code>other/c </code></pre>
+<pre><code>## [1] 586419.7</code></pre>
+<pre class="r"><code>(a+c)/b</code></pre>
+<pre><code>## [1] 2.05</code></pre>
 </div>
 <div id="write-code-that-will-place-the-numbers-1-to-100-separately-into-a-variable-using-for-loop.-then-again-using-the-seq-function." class="section level2">
 <h2>3. Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.</h2>
@@ -470,7 +482,7 @@ other&lt;-23456789</code></pre>
 <p>So, let’s say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:</p>
 <pre class="r"><code>samples &lt;- rnorm(100, mean=0, sd=1)
 hist(samples)</code></pre>
-<p><img src="Journal_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="Journal_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag), from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You learn all of these things and more can be customized in each R code block.</p>
 </div>
 <div id="the-big-idea" class="section level1">

@@ -40,12 +40,16 @@ a+b
 c-b
 
 other/c 
+
+(a+c)/b
+
 ```
 
 
 ## 3. Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.
 
 ```{r}
+
 
 ```
 
