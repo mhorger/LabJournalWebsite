@@ -15,7 +15,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
 
-# My first problems 
+# Problems 1-10 
 
 ## 1. Do simple math with numbers, addition, subtraction, multiplication, division
 
@@ -49,12 +49,23 @@ other/c
 ## 3. Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.
 
 ```{r}
+for(i in 1:100)
+print (i)
 
 
+seq(1,100)
 ```
 
 
 ## 4. Find the sum of all the integer numbers from 1 to 100.
+```{r}
+sum(i)
+
+sum(1:100)
+
+sum(seq(1,100))
+```
+
 
 ## 5. Write a function to find the sum of all integers between any two values.
 
