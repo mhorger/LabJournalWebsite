@@ -1,5 +1,5 @@
 ---
-title: "Journal"
+title: "Learning_R"
 output:
   html_document:
     toc: true
@@ -14,16 +14,55 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
-IMPORTANT: You can delete everything in here and start fresh. You might want to start by not deleting anything above this line until you know what that stuff is doing.
+
+# My first problems 
+
+## 1. Do simple math with numbers, addition, subtraction, multiplication, division
+
+```{r}
+1+1
+89392-8373 
+4*3
+122/12
+```
 
 
-This is an .Rmd file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a \# in front of your text, it will create a top level-header.
+## 2. Put numbers into variables, do simple math on the variables
+```{r}
+mel <-1
+other<-23456789
+a<-1
+b<-20
+c<-40
 
-# My first post
+a+b
 
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
+c-b
 
-Notice that whatever you define as a top level header, automatically gets put into the table of contents bar on the left. 
+other/c 
+```
+
+
+## 3. Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.
+
+```{r}
+
+```
+
+
+## 4. Find the sum of all the integer numbers from 1 to 100.
+
+## 5. Write a function to find the sum of all integers between any two values.
+
+## 6. List all of the odd numbers from 1 to 100.
+
+## 7. List all of the prime numbers from 1 to 1000.
+
+## 8.Generate 100 random numbers
+
+## 9. Generate 100 random numbers within a specific range
+
+## 10.Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation
 
 ## Second level header
 

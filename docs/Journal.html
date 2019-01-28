@@ -11,7 +11,7 @@
 
 
 
-<title>Journal</title>
+<title>Learning_R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -403,17 +403,53 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Journal</h1>
+<h1 class="title toc-ignore">Learning_R</h1>
 
 </div>
 
 
-<p>IMPORTANT: You can delete everything in here and start fresh. You might want to start by not deleting anything above this line until you know what that stuff is doing.</p>
-<p>This is an .Rmd file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a # in front of your text, it will create a top level-header.</p>
-<div id="my-first-post" class="section level1">
-<h1>My first post</h1>
-<p>2018 | 7 | 23 Last compiled: 2019-01-28</p>
-<p>Notice that whatever you define as a top level header, automatically gets put into the table of contents bar on the left.</p>
+<div id="my-first-problems" class="section level1">
+<h1>My first problems</h1>
+<div id="do-simple-math-with-numbers-addition-subtraction-multiplication-division" class="section level2">
+<h2>1. Do simple math with numbers, addition, subtraction, multiplication, division</h2>
+<pre class="r"><code>1+1</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>89392-8373 </code></pre>
+<pre><code>## [1] 81019</code></pre>
+<pre class="r"><code>4*3</code></pre>
+<pre><code>## [1] 12</code></pre>
+<pre class="r"><code>122/12</code></pre>
+<pre><code>## [1] 10.16667</code></pre>
+</div>
+<div id="put-numbers-into-variables-do-simple-math-on-the-variables" class="section level2">
+<h2>2. Put numbers into variables, do simple math on the variables</h2>
+<pre class="r"><code>mel &lt;-1
+other&lt;-23456789</code></pre>
+</div>
+<div id="write-code-that-will-place-the-numbers-1-to-100-separately-into-a-variable-using-for-loop.-then-again-using-the-seq-function." class="section level2">
+<h2>3. Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.</h2>
+</div>
+<div id="find-the-sum-of-all-the-integer-numbers-from-1-to-100." class="section level2">
+<h2>4. Find the sum of all the integer numbers from 1 to 100.</h2>
+</div>
+<div id="write-a-function-to-find-the-sum-of-all-integers-between-any-two-values." class="section level2">
+<h2>5. Write a function to find the sum of all integers between any two values.</h2>
+</div>
+<div id="list-all-of-the-odd-numbers-from-1-to-100." class="section level2">
+<h2>6. List all of the odd numbers from 1 to 100.</h2>
+</div>
+<div id="list-all-of-the-prime-numbers-from-1-to-1000." class="section level2">
+<h2>7. List all of the prime numbers from 1 to 1000.</h2>
+</div>
+<div id="generate-100-random-numbers" class="section level2">
+<h2>8.Generate 100 random numbers</h2>
+</div>
+<div id="generate-100-random-numbers-within-a-specific-range" class="section level2">
+<h2>9. Generate 100 random numbers within a specific range</h2>
+</div>
+<div id="write-your-own-functions-to-give-descriptive-statistics-for-a-vector-variable-storing-multiple-numbers.-write-functions-for-the-following-without-using-r-intrinsics-mean-mode-median-range-standard-deviation" class="section level2">
+<h2>10.Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation</h2>
+</div>
 <div id="second-level-header" class="section level2">
 <h2>Second level header</h2>
 <p>You can add more headers by adding more hashtags. These won’t be put into the table of contents</p>
@@ -434,7 +470,7 @@ div.tocify {
 <p>So, let’s say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:</p>
 <pre class="r"><code>samples &lt;- rnorm(100, mean=0, sd=1)
 hist(samples)</code></pre>
-<p><img src="Journal_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="Journal_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag), from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You learn all of these things and more can be customized in each R code block.</p>
 </div>
 <div id="the-big-idea" class="section level1">
