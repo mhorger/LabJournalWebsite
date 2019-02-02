@@ -139,16 +139,30 @@ sample(20:400, 100, replace=FALSE)
 ## 10.Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation
 
 ```{r}
-a<-c(2,4,6,8,10,12,14, 16)
+a<-c(2,4,6,8,10,12,14,16)
 b<-c(2,4,4,6)
 
 (sum(a))/length(a)
 
+b[duplicated(b)]
 
 
 b[length(b)/2]
 a[length(a)/2]
 
+
+
+(a[length(a)])-(a[1])
+
+
+
+average<-c(sum(a))/length(a)
+average
+d<-c((a-average)^2)
+d 
+sqrt((sum(d))/length(d))
+
+sd(a)
 
 ```
 
