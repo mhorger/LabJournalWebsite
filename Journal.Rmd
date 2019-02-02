@@ -15,7 +15,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
 
-# Problems 1-10 
+# Practice Problems
 
 ## 1. Do simple math with numbers, addition, subtraction, multiplication, division
 
