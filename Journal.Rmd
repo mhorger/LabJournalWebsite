@@ -165,7 +165,25 @@ sqrt((sum(d))/length(d))
 sd(a)
 
 ```
+## 11. Count the number of characters in a string variable
 
+## 12. Count the number of words in a string variable
+
+## 13. Count the number of sentences in a string variable
+
+## 14. Count the number of times a specific character occurs in a string variable
+
+## 15. Do a logical test to see if one word is found within the text of another string variable.
+
+## 16. Put the current computer time in milliseconds into a variable
+
+## 17. Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time
+
+## 18. Read a .txt file or .csv file into a variable
+
+## 19. Output the contents of a variable to a .txt file
+
+## 20. Create a variable that stores a 20x20 matrix of random numbers
 
 # Adding R stuff
 
