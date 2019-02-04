@@ -19,11 +19,28 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##List of functions
 ###General bits
-help(topic)
+help(topic) - command to search the help page
 
-?topic
+```{r}
+help(sum)
+```
 
-ls()
+
+?topic - shorter command to search the help page 
+
+```{r}
+?sum
+?ls
+?dir
+```
+
+
+ls() - list objects 
+```{r}
+ls(a)
+
+```
+
 
 dir()
 
@@ -44,18 +61,37 @@ read.csv()
 
 scan()
 
-print()
+print() = lists data, vectors, etc 
+
+```{r}
+print(a)
+```
 
 cat()
 
 write.table()
 
 ###Data Creation
-c()
+c() - combine. how we can add numbers to a vector 
+```{r}
+a<- c(a, "cat", "dog", "Pickles")
+```
+
 
 from:to (where from and to are replaced with numbers, e.g. 1:10)
+```{r}
+d<-c(21, 22, 23, 24, 25, 25, 8, 83, 7, 85, 3,2,6)
+d<-c(3:7, 10)
+1:10
 
-seq()
+```
+
+
+seq() - generate a sequence of numbers 
+```{r}
+seq(20)
+```
+
 
 rep()
 
@@ -159,34 +195,68 @@ which()
 
 sort()
 
-unique()
+unique() - what are the unique/nonrepeated values in a string 
+```{r}
+b<-c(2, 2, 4, 5, 64, 8, 1, 6, 9)
+
+
+unique(b)
+```
+
 
 table()
 
 sample()
 
 ###Math
-max()
+max() - lists the maximum number in a string 
 
-min()
+```{r}
+vector<- c(1, 2, 3, 4, 5)
+max(vector)
+```
 
-range()
 
-sum()
+min()- lists the maximum number in a string
+```{r}
+min(vector)
+```
 
-mean()
+range() - lists the min and max of a string
 
-median()
+```{r}
+range(vector)
+range(a)
+```
 
-var()
+sum() - adds the values 
 
-sd()
+```{r}
+sum(vector)
+sum(a)
+```
+
+
+mean() - average 
+```{r}
+mean(vector)
+```
+
+median() - middle value 
+
+```{r}
+median(vector)
+```
+
+var() - variance 
+
+sd() - standard deviation 
 
 cor()
 
 round()
 
-abs()
+abs() - absolute value? 
 
 ###Matrices
 t()
@@ -209,7 +279,13 @@ aggregate()
 ###Strings
 paste()
 
-strsplit()
+strsplit() - used to split up character strings - it's called a string split 
+```{r}
+a<-"sdjflskdflksdjflkjs"
+a[1]
+strsplit(a, split ="s")
+```
+
 
 tolower()
 

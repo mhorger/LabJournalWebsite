@@ -425,7 +425,145 @@ div.tocify {
 </div>
 <div id="input-and-output" class="section level3">
 <h3>Input and output</h3>
-<p>save() load() data() library() read.table() read.csv() scan() print() cat() write.table() ###Data Creation c() from:to (where from and to are replaced with numbers, e.g. 1:10) seq() rep() data.frame() list() matrix() factor() rbind() cbind() ###Slicing and extracting data ####indexing vectors x[n] nth element x[-n] all but nth element x[1:n] first n elements x[-(1:n)] elements from n+1 to the end x[c(1,4,2)] specific elements x[“name”] elements named “name” x[x&gt;3] all elements greater than 3 x[x &gt; 3 &amp; x &lt; 5] all elements between 3 and 5 x[x %in% c(“a”,“and”,“the”)] all elements in given set ####Indexing lists x[n] list with elements n x[[n]] nt h element of the list x[[“name”]] element of the list named “name” x<span class="math inline">\(name id. ####Indexing matrices x[i,j] element at row i, column j x[i,] row i x[,j] column j x[,c(1,3)] columns 1 and 3 x[“name”,] row named “name” ####Indexing data frames (matrix indexing plus the following) x[[“name”]] column named “name” x\)</span>nameid. ###Variable conversion as.data.frame(x) as.numeric(x) as.logical(x) as.character(x) ###Variable information is.na(x) is.null(x) is.data.frame(x) is.numeric(x) is.character(x) length(x) dim(x) dimnames(x) nrow(x) ncol(x) class() attributes() ###Data selection and manipulation which.max() which.min() which() sort() unique() table() sample() ###Math max() min() range() sum() mean() median() var() sd() cor() round() abs() ###Matrices t() diag() rowSums() colSums() rowMeans() colMeans() ###Advanced Data processing apply() aggregate() ###Strings paste() strsplit() tolower() toupper ###Plotting hist() plot() ###Distributions rnorm() runif() ###Programming show that you can define a function show that you can write a for loop show that you can write a while loop show that you can write an if else statement Explain what return() does inside a function, show you can use it Explain what break() does, show you can use it</p>
+<p>save()</p>
+<p>load()</p>
+<p>data()</p>
+<p>library()</p>
+<p>read.table()</p>
+<p>read.csv()</p>
+<p>scan()</p>
+<p>print()</p>
+<p>cat()</p>
+<p>write.table()</p>
+</div>
+<div id="data-creation" class="section level3">
+<h3>Data Creation</h3>
+<p>c()</p>
+<p>from:to (where from and to are replaced with numbers, e.g. 1:10)</p>
+<p>seq()</p>
+<p>rep()</p>
+<p>data.frame()</p>
+<p>list()</p>
+<p>matrix()</p>
+<p>factor()</p>
+<p>rbind()</p>
+<p>cbind()</p>
+</div>
+<div id="slicing-and-extracting-data" class="section level3">
+<h3>Slicing and extracting data</h3>
+<div id="indexing-vectors" class="section level4">
+<h4>indexing vectors</h4>
+<p>x[n] nth element</p>
+<p>x[-n] all but nth element</p>
+<p>x[1:n] first n elements</p>
+<p>x[-(1:n)] elements from n+1 to the end</p>
+<p>x[c(1,4,2)] specific elements</p>
+<p>x[“name”] elements named “name”</p>
+<p>x[x&gt;3] all elements greater than 3</p>
+<p>x[x &gt; 3 &amp; x &lt; 5] all elements between 3 and 5</p>
+<p>x[x %in% c(“a”,“and”,“the”)] all elements in given set</p>
+</div>
+<div id="indexing-lists" class="section level4">
+<h4>Indexing lists</h4>
+<p>x[n] list with elements n</p>
+<p>x[[n]] nt h element of the list</p>
+<p>x[[“name”]] element of the list named “name”</p>
+<p>x$name id.</p>
+</div>
+<div id="indexing-matrices" class="section level4">
+<h4>Indexing matrices</h4>
+<p>x[i,j] element at row i, column j</p>
+<p>x[i,] row i</p>
+<p>x[,j] column j</p>
+<p>x[,c(1,3)] columns 1 and 3</p>
+<p>x[“name”,] row named “name”</p>
+</div>
+<div id="indexing-data-frames-matrix-indexing-plus-the-following" class="section level4">
+<h4>Indexing data frames (matrix indexing plus the following)</h4>
+<p>x[[“name”]] column named “name”</p>
+<p>x$nameid.</p>
+</div>
+</div>
+<div id="variable-conversion" class="section level3">
+<h3>Variable conversion</h3>
+<p>as.data.frame(x)</p>
+<p>as.numeric(x)</p>
+<p>as.logical(x)</p>
+<p>as.character(x)</p>
+</div>
+<div id="variable-information" class="section level3">
+<h3>Variable information</h3>
+<p>is.na(x)</p>
+<p>is.null(x)</p>
+<p>is.data.frame(x)</p>
+<p>is.numeric(x)</p>
+<p>is.character(x)</p>
+<p>length(x)</p>
+<p>dim(x)</p>
+<p>dimnames(x)</p>
+<p>nrow(x)</p>
+<p>ncol(x)</p>
+<p>class()</p>
+<p>attributes()</p>
+</div>
+<div id="data-selection-and-manipulation" class="section level3">
+<h3>Data selection and manipulation</h3>
+<p>which.max()</p>
+<p>which.min()</p>
+<p>which()</p>
+<p>sort()</p>
+<p>unique()</p>
+<p>table()</p>
+<p>sample()</p>
+</div>
+<div id="math" class="section level3">
+<h3>Math</h3>
+<p>max()</p>
+<p>min()</p>
+<p>range()</p>
+<p>sum()</p>
+<p>mean()</p>
+<p>median()</p>
+<p>var()</p>
+<p>sd()</p>
+<p>cor()</p>
+<p>round()</p>
+<p>abs()</p>
+</div>
+<div id="matrices" class="section level3">
+<h3>Matrices</h3>
+<p>t()</p>
+<p>diag()</p>
+<p>rowSums()</p>
+<p>colSums()</p>
+<p>rowMeans()</p>
+<p>colMeans()</p>
+</div>
+<div id="advanced-data-processing" class="section level3">
+<h3>Advanced Data processing</h3>
+<p>apply()</p>
+<p>aggregate()</p>
+</div>
+<div id="strings" class="section level3">
+<h3>Strings</h3>
+<p>paste()</p>
+<p>strsplit()</p>
+<p>tolower()</p>
+<p>toupper</p>
+</div>
+<div id="plotting" class="section level3">
+<h3>Plotting</h3>
+<p>hist()</p>
+<p>plot()</p>
+</div>
+<div id="distributions" class="section level3">
+<h3>Distributions</h3>
+<p>rnorm()</p>
+<p>runif()</p>
+</div>
+<div id="programming" class="section level3">
+<h3>Programming</h3>
+<p>show that you can define a function show that you can write a for loop show that you can write a while loop show that you can write an if else statement Explain what return() does inside a function, show you can use it Explain what break() does, show you can use it</p>
 </div>
 </div>
 <div id="installing-some-packages" class="section level2">
