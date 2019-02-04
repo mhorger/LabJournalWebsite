@@ -267,25 +267,15 @@ HistoryOfBeer <- read.delim("TestFile.txt")
 ## 19. Output the contents of a variable to a .txt file
 
 ```{r}
-write.txt(Captain, paragraph)
 
+
+
+```
 write.table(keanu, file = "keanu.txt", sep = "\t",
             row.names = TRUE, col.names = NA)
 
-```
-
-
 ## 20. Create a variable that stores a 20x20 matrix of random numbers
 ```{r}
-keanu<-matrix(sample(1:20), ncol=20)
-view (keanu)
 
-
-
-fill.matrix = function(expr, nrow=20, ncol=20) {
-    matrix(eval(expr, envir=list(x=nrow*ncol)), nrow=nrow, ncol=ncol)
-}
-
-fill.matrix(rexp(x, rate=1), nrow=20, ncol=20)
 ```
 
