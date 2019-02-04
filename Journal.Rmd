@@ -167,108 +167,125 @@ sd(a)
 ```
 ## 11. Count the number of characters in a string variable
 
+
+```{r}
+Captain<- c("pickles", "is", "the", "best", "cat")
+Class<-c( "this class is comprised of learning r")
+
+nchar(Class)
+nchar (Captain)
+
+```
+
 ## 12. Count the number of words in a string variable
+
+
+```{r}
+sapply(strsplit(Class, " "), length)
+sapply(strsplit(Captain, " "), length)
+
+```
+
 
 ## 13. Count the number of sentences in a string variable
 
+```{r}
+paragraph<-c("A paragraph is a brief piece of writing that's around seven to ten sentences long. It has a topic sentence and supporting sentences that all relate closely to the topic sentence. The paragraph form refers to its overall structure, which is a group of sentences focusing on a single topic.")
+
+sapply(strsplit(paragraph, "[.]"), length)
+
+strsplit(paragraph, "[.]")
+```
+This answer is much too high. Unsure where this problem is coming from 
+
 ## 14. Count the number of times a specific character occurs in a string variable
+
+```{r}
+sapply(strsplit(paragraph, "paragraph"), length)
+sapply(strsplit(paragraph, "n"), length)
+```
+
 
 ## 15. Do a logical test to see if one word is found within the text of another string variable.
 
+```{r}
+a==b
+a!=Captain
+word<-"fart" 
+word==Captain
+word==paragraph
+strsplit(paragraph,split=" ")
+strsplit(Captain,split=" ")
+Captain==paragraph
+
+Captain%in%paragraph 
+
+```
+*not currently reading the all of the text within paragraph. should it be able to do that? 
+
+
 ## 16. Put the current computer time in milliseconds into a variable
+
+```{r}
+print(as.numeric(Sys.time())*1000, digits=10)
+time<- c(print(as.numeric(Sys.time())*1000, digits=10))
+```
+I can't read milliseconds so let's try it normally... 
+
+```{r}
+time<- c(time, print(as.numeric(Sys.time())*100, digits=10))
+Sys.time()
+
+time<-c(Sys.time())
+print (time)
+
+```
+
 
 ## 17. Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time
 
+```{r}
+time1<- print(as.numeric(Sys.time())*1000, digits=10)
+
+seq(10000000)
+
+time2 <- print(as.numeric(Sys.time())*1000, digits=10)
+
+time2-time1 
+```
+
 ## 18. Read a .txt file or .csv file into a variable
+
+```{r}
+
+breweries <- read.csv("Breweries .csv")
+HistoryOfBeer <- read.delim("TestFile.txt")
+
+```
+
 
 ## 19. Output the contents of a variable to a .txt file
 
+```{r}
+write.txt(Captain, paragraph)
+
+write.table(keanu, file = "keanu.txt", sep = "\t",
+            row.names = TRUE, col.names = NA)
+
+```
+
+
 ## 20. Create a variable that stores a 20x20 matrix of random numbers
-
-# Adding R stuff
-
-So far this is just a blog where you can write in plain text and serve your writing to a webpage. One of the main purposes of this lab journal is to record your progress learning R. The reason I am asking you to use this process is because you can both make a website, and a lab journal, and learn R all in R-studio. This makes everything really convenient and in the sam place. 
-
-So, let's say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:
-
 ```{r}
-samples <- rnorm(100, mean=0, sd=1)
-hist(samples)
-```
-
-When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag), from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You learn all of these things and more can be customized in each R code block.
-
-# The big idea
-
-Use this lab journal to record what you do in R. This way I will be able to see what you are doing and help you along the way. You will also be creating a repository of all the things you do. You can make posts about everything. Learning specific things in R (project unrelated), and doing things for the project that we will discuss at the beginning of the Fall semester. You can get started now by fiddling around with googling things, and trying stuff out in R. I've placed some helpful starting links in the links page on this website
-
-# What can you do right now by yourself?
-
-It's hard to learn programming when you don't have specific problems that you are trying to solve. Everything just seems abstract.
-
-I wrote an [introductory programming book that introduces R](https://crumplab.github.io/programmingforpsych/), and gives some [concrete problems for you to solve](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). 
-
-To get the hang of journaling and solving the problems to learn programming, my suggestion is that you use this .Rmd file to solve the problems. It would look like this:
-
-# Problem 1
-
-Do simple math with numbers, addition, subtraction, multiplication, division
-
-```{r}
-1+2
-2*5
-5/3
-(1+6+4)/5
-
-```
-
-# Problem 2
-
-Put numbers into variables, do simple math on the variables
-
-```{r}
-a<-1
-b<-2
-a+b
-
-d<-c(1,2,3)
-e<-c(5,6,7)
-d+e
-d*e
-d/e
-
-```
-
-# Problem 3
-
-Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.
-
-```{r}
-# for loop solution
-# i becomes the number 1 to 100 at each step of the loop
+keanu<-matrix(sample(1:20), ncol=20)
+view (keanu)
 
 
-a <- length(100) # make empty variable, set length to 100
-for (i in 1:100){
-  a[i] <-i #assigns the number in i, to the ith index of a
+
+fill.matrix = function(expr, nrow=20, ncol=20) {
+    matrix(eval(expr, envir=list(x=nrow*ncol)), nrow=nrow, ncol=ncol)
 }
 
-print(a)
-
-# for loop solution #2
-
-a<-c() #create empty variable using combine command
-for (i in 1:100){
-  a<-c(a,i) # keeps combining a with itself and the new number in i
-}
-print(a)
-
-# seq solution
-a <- seq(1,100,1) # look up help for seq using ?seq() in console
-print(a)
-
+fill.matrix(rexp(x, rate=1), nrow=20, ncol=20)
 ```
 
-# Replace this with problem 4
-
-And keep going. Try to solve the problems with different scripts that provide the same solution. Good luck, Happy coding.
