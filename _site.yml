@@ -10,6 +10,8 @@ navbar:
       href: Research.html
     - text: "Learning R"
       href: Journal.html
+    - text: "R dictionary"
+      href: Dictionary.html
     - text: "Links"
       href: Links.html
 output_dir: "docs"
