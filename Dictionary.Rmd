@@ -42,33 +42,90 @@ ls() - list objects
 ```
 
 
-dir()
+dir() - list the files in a directory or folder. 
 
-list.files()
+```{r}
+dir(path = ".", pattern = NULL, all.files = FALSE,
+           full.names = FALSE, recursive = FALSE,
+           ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+```
+
+
+list.files() - different command, same output 
+```{r}
+list.files(path = ".", pattern = NULL, all.files = FALSE,
+           full.names = FALSE, recursive = FALSE,
+           ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+
+```
+
 
 ###Input and output
-save()
+save() - writes an external representation of R objects  to a file 
 
-load()
+save(..., list = character(),
+     file = stop("'file' must be specified"),
+     ascii = FALSE, version = NULL, envir = parent.frame(),
+     compress = isTRUE(!ascii), compression_level,
+     eval.promises = TRUE, precheck = TRUE)
+   
+```{r}
+# save(mat, file = "mat.RData")
 
-data()
+```
 
-library()
 
-read.table()
+load()- Reload datasets written with the function save.
+load(file, envir = parent.frame(), verbose = FALSE)
 
-read.csv()
 
-scan()
+```{r}
+# load(file = "mat.RData")
+```
 
-print() = lists data, vectors, etc 
+
+
+data()- Loads specified data sets, or list the available data sets.
+data(..., list = character(), package = NULL, lib.loc = NULL,
+     verbose = getOption("verbose"), envir = .GlobalEnv)
+```{r}
+# data(file = mat.RData)
+# data
+```
+     
+
+library() - load and attach add-on packages 
+
+```{r}
+library(ggplot2)
+```
+
+
+read.table() - Reads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file. 
+```{r}
+
+```
+
+
+read.csv() - Reads a .csv file 
+
+scan() - Read data into a vector or list from the console or file.
+```{r}
+(x <- scan("https://stats.idre.ucla.edu/stat/data/scan.txt", what = list(age = 0,
+    name = "")))
+```
+
+
+print() = lists data, vectors, etc **can also be used as you are trying to de-bug 
 
 ```{r}
 a<- c(1:5)
 print(a)
 ```
 
-cat()
+cat() - outputs the objects, concatenating the representations 
+cat is useful for producing output in user-defined functions. It converts its arguments to character vectors, concatenates them to a single character vector, appends the given sep = string(s) to each element and then outputs them.
+
 
 write.table()
 

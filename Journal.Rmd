@@ -300,15 +300,18 @@ write(matr, file = "matr.csv",
 ## 1. The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.
 
 
-
-```{r}
 FB <- c(1:100)
   if (FB[1:100]%%3){
     FB[1:100]<-c("Fizz")
   }
 
 
+FB[FB%%3==0]<-"Fizz"
+#go into FB and return all the values where mod 3 is 0 
 FB
+
+```{r}
+
 
 ```
 ## 2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.

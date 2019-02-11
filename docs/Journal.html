@@ -9991,23 +9991,8 @@ matr&lt;-matrix(data = rnorm(4000, mean = 25, sd = 5), nrow = 20, ncol = 20)
 <h1>Harder Practice Problems</h1>
 <div id="the-fizzbuzz-problem.-list-the-numbers-from-1-to-100-with-the-following-constraints.-if-the-number-can-be-divided-by-three-evenly-then-print-fizz-instead-of-the-number.-if-the-number-can-be-divided-by-five-evenly-then-print-buzz-instead-of-the-number.-finally-if-the-number-can-be-divided-by-three-and-five-evenly-then-print-fizzbuzz-instead-of-the-number." class="section level2">
 <h2>1. The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.</h2>
-<pre class="r"><code>FB &lt;- c(1:100)
-  if (FB[1:100]%%3){
-    FB[1:100]&lt;-c(&quot;Fizz&quot;)
-  }
-
-
-FB</code></pre>
-<pre><code>##   [1] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [11] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [21] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [31] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [41] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [51] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [61] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [71] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [81] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;
-##  [91] &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot; &quot;Fizz&quot;</code></pre>
+<p>FB &lt;- c(1:100) if (FB[1:100]%%3){ FB[1:100]&lt;-c(“Fizz”) }</p>
+<p>FB[FB%%3==0]&lt;-“Fizz” #go into FB and return all the values where mod 3 is 0 FB</p>
 </div>
 <div id="frequency-counts-take-text-as-input-and-be-able-to-produce-a-table-that-shows-the-counts-for-each-character-in-the-text.-this-problem-is-related-to-the-earlier-easy-problem-asking-you-to-count-the-number-of-times-that-a-single-letter-appears-in-a-text.-the-slightly-harder-problem-is-the-more-general-version-count-the-frequencies-of-all-unique-characters-in-a-text." class="section level2">
 <h2>2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.</h2>

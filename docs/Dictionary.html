@@ -425,23 +425,68 @@ div.tocify {
 # ?dir</code></pre>
 <p>ls() - list objects</p>
 <pre class="r"><code># ls(a)</code></pre>
-<p>dir()</p>
-<p>list.files()</p>
+<p>dir() - list the files in a directory or folder.</p>
+<pre class="r"><code>dir(path = &quot;.&quot;, pattern = NULL, all.files = FALSE,
+           full.names = FALSE, recursive = FALSE,
+           ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;               &quot;Breweries .csv&quot;         
+##  [3] &quot;data.txt&quot;                &quot;Dictionary.html&quot;        
+##  [5] &quot;Dictionary.Rmd&quot;          &quot;docs&quot;                   
+##  [7] &quot;Education.html&quot;          &quot;Education.Rmd&quot;          
+##  [9] &quot;images&quot;                  &quot;index.html&quot;             
+## [11] &quot;index.Rmd&quot;               &quot;Journal.Rmd&quot;            
+## [13] &quot;Journal_cache&quot;           &quot;Journal_files&quot;          
+## [15] &quot;keanu.txt&quot;               &quot;LabJournalWebsite.Rproj&quot;
+## [17] &quot;Links.Rmd&quot;               &quot;mat.RData&quot;              
+## [19] &quot;matr.csv&quot;                &quot;README.md&quot;              
+## [21] &quot;Research.Rmd&quot;            &quot;Research_cache&quot;         
+## [23] &quot;Research_files&quot;          &quot;site_libs&quot;              
+## [25] &quot;TestFile.txt&quot;</code></pre>
+<p>list.files() - different command, same output</p>
+<pre class="r"><code>list.files(path = &quot;.&quot;, pattern = NULL, all.files = FALSE,
+           full.names = FALSE, recursive = FALSE,
+           ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;               &quot;Breweries .csv&quot;         
+##  [3] &quot;data.txt&quot;                &quot;Dictionary.html&quot;        
+##  [5] &quot;Dictionary.Rmd&quot;          &quot;docs&quot;                   
+##  [7] &quot;Education.html&quot;          &quot;Education.Rmd&quot;          
+##  [9] &quot;images&quot;                  &quot;index.html&quot;             
+## [11] &quot;index.Rmd&quot;               &quot;Journal.Rmd&quot;            
+## [13] &quot;Journal_cache&quot;           &quot;Journal_files&quot;          
+## [15] &quot;keanu.txt&quot;               &quot;LabJournalWebsite.Rproj&quot;
+## [17] &quot;Links.Rmd&quot;               &quot;mat.RData&quot;              
+## [19] &quot;matr.csv&quot;                &quot;README.md&quot;              
+## [21] &quot;Research.Rmd&quot;            &quot;Research_cache&quot;         
+## [23] &quot;Research_files&quot;          &quot;site_libs&quot;              
+## [25] &quot;TestFile.txt&quot;</code></pre>
 </div>
 <div id="input-and-output" class="section level3">
 <h3>Input and output</h3>
-<p>save()</p>
-<p>load()</p>
-<p>data()</p>
-<p>library()</p>
-<p>read.table()</p>
-<p>read.csv()</p>
-<p>scan()</p>
-<p>print() = lists data, vectors, etc</p>
+<p>save() - writes an external representation of R objects to a file</p>
+<p>save(…, list = character(), file = stop(“‘file’ must be specified”), ascii = FALSE, version = NULL, envir = parent.frame(), compress = isTRUE(!ascii), compression_level, eval.promises = TRUE, precheck = TRUE)</p>
+<pre class="r"><code># save(mat, file = &quot;mat.RData&quot;)</code></pre>
+<p>load()- Reload datasets written with the function save. load(file, envir = parent.frame(), verbose = FALSE)</p>
+<pre class="r"><code># load(file = &quot;mat.RData&quot;)</code></pre>
+<p>data()- Loads specified data sets, or list the available data sets. data(…, list = character(), package = NULL, lib.loc = NULL, verbose = getOption(“verbose”), envir = .GlobalEnv)</p>
+<pre class="r"><code># data(file = mat.RData)
+# data</code></pre>
+<p>library() - load and attach add-on packages</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<p>read.table() - Reads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file.</p>
+<p>read.csv() - Reads a .csv file</p>
+<p>scan() - Read data into a vector or list from the console or file.</p>
+<pre class="r"><code>(x &lt;- scan(&quot;https://stats.idre.ucla.edu/stat/data/scan.txt&quot;, what = list(age = 0,
+    name = &quot;&quot;)))</code></pre>
+<pre><code>## $age
+## [1] 12 24 35 20
+## 
+## $name
+## [1] &quot;bobby&quot;   &quot;kate&quot;    &quot;david&quot;   &quot;michael&quot;</code></pre>
+<p>print() = lists data, vectors, etc **can also be used as you are trying to de-bug</p>
 <pre class="r"><code>a&lt;- c(1:5)
 print(a)</code></pre>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<p>cat()</p>
+<p>cat() - outputs the objects, concatenating the representations cat is useful for producing output in user-defined functions. It converts its arguments to character vectors, concatenates them to a single character vector, appends the given sep = string(s) to each element and then outputs them.</p>
 <p>write.table()</p>
 </div>
 <div id="data-creation" class="section level3">
