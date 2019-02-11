@@ -277,14 +277,14 @@ write(AllNumbers, file = "data.txt",
 
 ## 20. Create a variable that stores a 20x20 matrix of random numbers
 ```{r}
-?matrix
+# ?matrix
 
 mat <- matrix(data = rexp(200, rate = 10), nrow = 20, ncol = 20)
 
 matr<-matrix(data = rnorm(4000, mean = 25, sd = 5), nrow = 20, ncol = 20)
 
-?rexp
-?Normal
+# ?rexp
+# ?Normal
 
 ```
 ##21. Output any matrix to a txt file using commas or tabs to separate column values, and new lines to separate row values
@@ -300,16 +300,15 @@ write(matr, file = "matr.csv",
 ## 1. The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.
 
 
+
 ```{r}
 FB <- c(1:100)
   if (FB[1:100]%%3){
-    FB[1:100]<-"Fizz"
+    FB[1:100]<-c("Fizz")
   }
-if (FB[1:100]%%5){
-  FB[1:100]<-"Buzz"}
+
 
 FB
-
 
 ```
 ## 2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.
@@ -336,7 +335,7 @@ roll_dice<- function(x){
 }
 
 
-roll_dice  (10)
+
 
 ```
 
