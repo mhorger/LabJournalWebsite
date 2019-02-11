@@ -15,7 +15,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
 
-# Practice Problems
+# Easy Practice Problems
 
 ## 1. Do simple math with numbers, addition, subtraction, multiplication, division
 
@@ -196,7 +196,7 @@ sapply(strsplit(paragraph, "[.]"), length)
 
 strsplit(paragraph, "[.]")
 ```
-This answer is much too high. Unsure where this problem is coming from 
+
 
 ## 14. Count the number of times a specific character occurs in a string variable
 
@@ -287,4 +287,55 @@ matr<-matrix(data = rnorm(4000, mean = 25, sd = 5), nrow = 20, ncol = 20)
 ?Normal
 
 ```
+##21. Output any matrix to a txt file using commas or tabs to separate column values, and new lines to separate row values
 
+
+```{r}
+write(matr, file = "matr.csv",
+      ncolumns = 20,
+      append = FALSE, sep = " ")
+```
+
+# Harder Practice Problems
+## 1. The FizzBuzz Problem. List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number.
+
+
+```{r}
+FB <- c(1:100)
+  if (FB[1:100]%%3){
+    FB[1:100]<-"Fizz"
+  }
+if (FB[1:100]%%5){
+  FB[1:100]<-"Buzz"}
+
+FB
+
+
+```
+## 2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.
+
+```{r}
+table (unlist(strsplit(paragraph,"")))
+```
+
+
+
+## 3. Test the Random Number Generator Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.
+
+## 4. Create a multiplication table Generate a matrix for a multiplication table. For example, the labels for the columns could be the numbers 1 to 10, and the labels for the rows could be the numbers 1 to 10. The contents of each of the cells in the matrix should be correct answer for multiplying the column value by the row value.
+
+## 5. Encrypt and Decrypt the Alphabet Turn any normal english text into an encrypted version of the text, and be able to turn any decrypted text back into normal english text. A simple encryption would be to scramble the alphabet such that each letter corresponds to a new randomly chosen (but unique) letter.
+
+## 6. Snakes and Ladders
+
+##7. Dice-rolling simulations. Assume that a pair of dice are rolled. Using monte carlo-simulation, compute the probabilities of rolling a 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12, respectively.
+
+##8. Monte Hall problem. The monte-hall problem is as follows. A contestant in a game show is presented with three closed doors. They are told that a prize is behind one door, and two goats are behind the other two doors. They are asked to choose which door contains the prize. After making their choice the game show host opens one of the remaining two doors (not chosen by the contestant), and reveals a goat. There are now two door remaining. The contestant is asked if they would like to switch their choice to the other door, or keep their initial choice. The correct answer is that the participant should switch their initial choice, and choose the other door. This will increase their odds of winning. Demonstrate by monte-carlo simulation that the odds of winning is higher if the participant switches than if the participants keeps their original choice.
+
+## 9. 100 doors problem. Problem: You have 100 doors in a row that are all initially closed. You make 100 passes by the doors. The first time through, you visit every door and toggle the door (if the door is closed, you open it; if it is open, you close it). The second time you only visit every 2nd door (door 2, 4, 6, etc.). The third time, every 3rd door (door 3, 6, 9, etc.), etc, until you only visit the 100th door.
+
+Question: What state are the doors in after the last pass? Which are open, which are closed?
+
+## 10. 99 Bottles of Beer Problem In this puzzle, write code to print out the entire “99 bottles of beer on the wall”" song. For those who do not know the song, the lyrics follow this form:
+
+## 11. Random Tic-Tac-Toe Imagine that two players make completely random choices when playing tic-tac-toe. Each game will either end in a draw or one of the two players will win. Create a monte-carlo simulation of this “random” version of tic-tac-toe. Out 10,000 simulations, what proportion of the time is the game won versus drawn?
