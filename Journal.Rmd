@@ -268,14 +268,23 @@ HistoryOfBeer <- read.delim("TestFile.txt")
 
 ```{r}
 
-
+write(AllNumbers, file = "data.txt",
+      ncolumns = 1,
+      append = FALSE, sep = " ")
 
 ```
-write.table(keanu, file = "keanu.txt", sep = "\t",
-            row.names = TRUE, col.names = NA)
+
 
 ## 20. Create a variable that stores a 20x20 matrix of random numbers
 ```{r}
+?matrix
+
+mat <- matrix(data = rexp(200, rate = 10), nrow = 20, ncol = 20)
+
+matr<-matrix(data = rnorm(4000, mean = 25, sd = 5), nrow = 20, ncol = 20)
+
+?rexp
+?Normal
 
 ```
 
