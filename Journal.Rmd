@@ -315,6 +315,7 @@ for(m in 1:100){
 
 ```{r}
 FB <- c(1:100) 
+
 for (i in 1:100) {
  if (i%%3==0)
    FB[i]<-"Fizz"
@@ -326,13 +327,7 @@ for (j in 1:100){
 for (k in 1:100){
   if (k%%3 ==0 & k%%5 == 0)
     FB[k]<-"FizzBuzz"
-    else FB<-as.integer(FB)
-}
-
-
-
-
-FB
+  }
 
 ```
 ## 2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.
@@ -389,35 +384,33 @@ matrix(data = mults, nrow = 10, ncol = 10, byrow = TRUE, dimnames = NULL)
 
 ```{r}
 alphabet<-c("A", "B", "C", "D","E", "F", "G", "H","I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"," S", "T"," U", "V" ,"W", "X", "Y", "Z")
-for (i in 1){
-  alphabet[i]<-c(FB[i])
-  print(alphabet)
 
 encrypt<-function (x){
+  for (x in 1:26)
   alphabet[x]<-c(FB[x])
 }
 
-
-encrypt(1)
-
-encrypt(2)
-encrypt(1:26)
-
-alphabet[1]<-c(FB[1])
-
-
-
-  x<- x+1
-  Counter<-Counter+1
+encrypted<-c()
+for(i in 1:26){
+   alphabet[i]<-c(FB[i])
 }
-print(x)  
-  
-  
-print(alphabet)
+
+decrypted<-c()
+for(i in 1:26){
+   alphabet[i]<-c(letters[i])
+}
+
+letters<-c("A", "B", "C", "D","E", "F", "G", "H","I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"," S", "T"," U", "V" ,"W", "X", "Y", "Z")
+
+
 ```
 
 
 ## 6. Snakes and Ladders
+```{r}
+
+```
+
 
 ##7. Dice-rolling simulations. Assume that a pair of dice are rolled. Using monte carlo-simulation, compute the probabilities of rolling a 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12, respectively.
 
