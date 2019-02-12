@@ -407,7 +407,19 @@ letters<-c("A", "B", "C", "D","E", "F", "G", "H","I", "J", "K", "L", "M", "N", "
 
 
 ## 6. Snakes and Ladders
+
+        psyc7709/figures/SnakesLadders.png
+      
 ```{r}
+!(LabJournalWebsite/images/SnakesLadders.png)
+
+
+
+roll_dice<- function(x){
+  return(sample(1:6, x, replace = TRUE, prob = NULL))
+}
+
+roll_dice(10)
 
 ```
 
