@@ -142,27 +142,35 @@ sample(20:400, 100, replace=FALSE)
 a<-c(2,4,6,8,10,12,14,16)
 b<-c(2,4,4,6)
 
-(sum(a))/length(a)
+neam<- function (x){
+  (sum(x))/length(x)
+}
 
-b[duplicated(b)]
-
-
-b[length(b)/2]
-a[length(a)/2]
-
+edom<- function(x){
+  x[duplicated(x)]}
 
 
-(a[length(a)])-(a[1])
+naidem<- function (x){
+  x[length(x)/2]
+}
 
 
+egnar<- function (x){
+  (x[length(x)])-(x[1])
+}
 
-average<-c(sum(a))/length(a)
-average
-d<-c((a-average)^2)
-d 
-sqrt((sum(d))/length(d))
+sumsquares<- function(x){
+ sum((x-neam(x))^2) 
+}
 
-sd(a)
+
+vednats<- function(x){
+  sqrt(sumsquares(x)/length(x))
+}
+  
+
+vednats(a)
+
 
 ```
 ## 11. Count the number of characters in a string variable
@@ -329,8 +337,15 @@ FB
 ```
 ## 2. Frequency Counts Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.
 
+table((unlist(strsplit(paragraph,""))recursive = FALSE, use.names = TRUE)
+      
+unlist(strsplit(paragraph,"")), recursive = FALSE, use.names = TRUE)
+
 ```{r}
-table (unlist(strsplit(paragraph,"")))
+table(unlist(strsplit(paragraph,"")))
+
+table(unique(unlist(strsplit(paragraph,""), recursive = FALSE, use.names = TRUE)))
+
 ```
 
 
