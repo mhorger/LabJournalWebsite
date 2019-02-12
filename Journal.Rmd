@@ -498,9 +498,22 @@ roll_dice<- function(x){
   return(sample (1:6,1))
 }
 
+di1 = c(1:6)
+di2 = c(1:6)
+di1_sample<-sample(x = di1, size = 100, replace = TRUE)
+di2_sample<-sample(x = di2, size = 100, replace = TRUE)
 
+table(di1_sample)
+table(di2_sample)
 
+totes_sample<-di1_sample+di2_sample
+data.frame(totes_sample)
+possible_rolls<-c( 2,  3,  4,  5, 6, 7,  8,  9, 10, 11, 12 )
+frequency<-c(3,  6,  5,  6, 21, 19,  9, 10, 12,  6,  3 )
 
+prob<-frequency/100 
+
+solution<-data.frame(possible_rolls, prob)
 ```
 
 
