@@ -408,18 +408,85 @@ letters<-c("A", "B", "C", "D","E", "F", "G", "H","I", "J", "K", "L", "M", "N", "
 
 ## 6. Snakes and Ladders
 
-        psyc7709/figures/SnakesLadders.png
-      
+  
+```{r 3snl, echo=FALSE,dev='png'}
+knitr::include_graphics('images/SnakesLadders.png')
+```
+
 ```{r}
-!(LabJournalWebsite/images/SnakesLadders.png)
-
-
 
 roll_dice<- function(x){
   return(sample(1:6, x, replace = TRUE, prob = NULL))
 }
 
 roll_dice(10)
+
+total_sum<-0
+number_of_rolls<-0
+while(total_sum < 25){
+  number_of_rolls <- number_of_rolls+1
+  total_sum <-total_sum+sample(c(1,2,3,4,5,6),1)
+}
+number_of_rolls
+
+# based on the demo in the assignment, the average number of rolls needed to finish the board is 7.5 
+
+
+total_sum<-0
+number_of_rolls<-0
+while(total_sum < 25){
+  number_of_rolls <- number_of_rolls+1
+  total_sum <-total_sum+sample(c(1,2,3,4,5,6),1)
+  if(total_sum==3)
+    total_sum+7
+  if(total_sum==4)
+    total_sum+10
+  if(total_sum==6)
+    total_sum+11
+  if(total_sum==8)
+    total_sum+11
+  if(total_sum==9)
+    total_sum+9
+  if(total_sum==10)
+    total_sum+2
+  if(total_sum==16)
+    total_sum+8
+  if(total_sum==20)
+    total_sum+2
+}
+number_of_rolls
+total_sum
+
+
+
+save_rolls <- c()
+for(sims in 1:100){
+  total_sum<-0
+  number_of_rolls<-0
+  while(total_sum < 25){
+    number_of_rolls <- number_of_rolls+1
+    total_sum <-total_sum+sample(c(1,2,3,4,5,6),1)
+  if(total_sum==3)
+    total_sum+7
+  if(total_sum==4)
+    total_sum+10
+  if(total_sum==6)
+    total_sum+11
+  if(total_sum==8)
+    total_sum+11
+  if(total_sum==9)
+    total_sum+9
+  if(total_sum==10)
+    total_sum+2
+  if(total_sum==16)
+    total_sum+8
+  if(total_sum==20)
+    total_sum+2
+  }
+  save_rolls[sims] <- number_of_rolls
+}
+
+save_rolls
 
 ```
 
