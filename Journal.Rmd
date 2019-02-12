@@ -351,10 +351,71 @@ table(unique(unlist(strsplit(paragraph,""), recursive = FALSE, use.names = TRUE)
 
 
 ## 3. Test the Random Number Generator Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.
+```{r}
+distribution<-runif(10000000, min=0, max=100)
+table(unlist(distribution))
+hist(distribution)
+```
+
+
+
 
 ## 4. Create a multiplication table Generate a matrix for a multiplication table. For example, the labels for the columns could be the numbers 1 to 10, and the labels for the rows could be the numbers 1 to 10. The contents of each of the cells in the matrix should be correct answer for multiplying the column value by the row value.
 
+```{r}
+
+row<-c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+column<-c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+
+multiplycol<-function(x){
+   row[1:10]*column[x]
+}
+multiplycol(1)
+
+
+mults<-c(multiplycol(1), multiplycol(2), multiplycol(3), multiplycol(4), multiplycol(5), multiplycol(6), multiplycol(7), multiplycol(8), multiplycol(9), multiplycol(10))
+
+
+
+matrix(data = mults, nrow = 10, ncol = 10, byrow = TRUE, dimnames = NULL)
+
+
+  
+```
+
+
 ## 5. Encrypt and Decrypt the Alphabet Turn any normal english text into an encrypted version of the text, and be able to turn any decrypted text back into normal english text. A simple encryption would be to scramble the alphabet such that each letter corresponds to a new randomly chosen (but unique) letter.
+
+```{r}
+alphabet<-c("A", "B", "C", "D","E", "F", "G", "H","I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"," S", "T"," U", "V" ,"W", "X", "Y", "Z")
+for (i in 1){
+  alphabet[i]<-c(FB[i])
+  print(alphabet)
+
+encrypt<-function (x){
+  alphabet[x]<-c(FB[x])
+}
+
+
+encrypt(1)
+
+encrypt(2)
+encrypt(1:26)
+
+alphabet[1]<-c(FB[1])
+
+
+
+  x<- x+1
+  Counter<-Counter+1
+}
+print(x)  
+  
+  
+print(alphabet)
+```
+
 
 ## 6. Snakes and Ladders
 
