@@ -151,9 +151,24 @@ seq(20)
 ```
 
 
-rep()
+rep() - replicate the values in x
+```{r}
+x<-c (1, 2, 3, 4)
 
-data.frame()
+rep(x)
+
+```
+
+
+
+data.frame() - creates data frames, tightly coupled collections of variables which share many of the properties of matrices and of lists, used as the fundamental data structure by most of R's modeling software.
+
+```{r}
+x<-c (1, 2, 3, 4)
+y<-c(a, b, c, d)
+data.frame(x, y)
+```
+
 
 list()
 
