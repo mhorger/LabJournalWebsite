@@ -11,7 +11,9 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+
+knitr::opts_chunk$set(echo = TRUE, messages=TRUE, error=TRUE) 
+
 ```
 
 
@@ -572,6 +574,9 @@ for (i in 1:100)
   if (Hallway[i]%%3==0 & Hallway[i]%%2==0)
     Status[i]<-c("open")
   }
+
+
+
 ```
 
 

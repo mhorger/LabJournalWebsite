@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Dictionary</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Melissa Horger</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Education.html">Education</a>
+</li>
+<li>
+  <a href="Research.html">Research</a>
+</li>
+<li>
+  <a href="Journal.html">Learning R</a>
+</li>
+<li>
+  <a href="Dictionary.html">R dictionary</a>
+</li>
+<li>
+  <a href="Links.html">Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Dictionary</h1>
+
+</div>
+
+
+<div id="r-intrinsics" class="section level1">
+<h1>R Intrinsics</h1>
+<div id="list-of-functions" class="section level2">
+<h2>List of functions</h2>
+<div id="general-bits" class="section level3">
+<h3>General bits</h3>
+<p>help(topic) - command to search the help page</p>
+<pre class="r"><code># help(sum)</code></pre>
+<p>?topic - shorter command to search the help page</p>
+<pre class="r"><code># ?sum
+# ?ls
+# ?dir</code></pre>
+<p>ls() - list objects</p>
+<pre class="r"><code># ls(a)</code></pre>
+<p>dir() - list the files in a directory or folder.</p>
+<pre class="r"><code>dir(path = &quot;.&quot;, pattern = NULL, all.files = FALSE,
+           full.names = FALSE, recursive = FALSE,
+           ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;               &quot;Breweries .csv&quot;         
+##  [3] &quot;data.txt&quot;                &quot;Dictionary.html&quot;        
+##  [5] &quot;Dictionary.Rmd&quot;          &quot;Education.html&quot;         
+##  [7] &quot;Education.Rmd&quot;           &quot;images&quot;                 
+##  [9] &quot;index.html&quot;              &quot;index.Rmd&quot;              
+## [11] &quot;Journal.html&quot;            &quot;Journal.Rmd&quot;            
+## [13] &quot;Journal_cache&quot;           &quot;Journal_files&quot;          
+## [15] &quot;keanu.txt&quot;               &quot;LabJournalWebsite.Rproj&quot;
+## [17] &quot;Links.html&quot;              &quot;Links.Rmd&quot;              
+## [19] &quot;mat.RData&quot;               &quot;matr.csv&quot;               
+## [21] &quot;README.html&quot;             &quot;README.md&quot;              
+## [23] &quot;Research.html&quot;           &quot;Research.Rmd&quot;           
+## [25] &quot;Research_cache&quot;          &quot;Research_files&quot;         
+## [27] &quot;TestFile.txt&quot;</code></pre>
+<p>list.files() - different command, same output</p>
+<pre class="r"><code>list.files(path = &quot;.&quot;, pattern = NULL, all.files = FALSE,
+           full.names = FALSE, recursive = FALSE,
+           ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;               &quot;Breweries .csv&quot;         
+##  [3] &quot;data.txt&quot;                &quot;Dictionary.html&quot;        
+##  [5] &quot;Dictionary.Rmd&quot;          &quot;Education.html&quot;         
+##  [7] &quot;Education.Rmd&quot;           &quot;images&quot;                 
+##  [9] &quot;index.html&quot;              &quot;index.Rmd&quot;              
+## [11] &quot;Journal.html&quot;            &quot;Journal.Rmd&quot;            
+## [13] &quot;Journal_cache&quot;           &quot;Journal_files&quot;          
+## [15] &quot;keanu.txt&quot;               &quot;LabJournalWebsite.Rproj&quot;
+## [17] &quot;Links.html&quot;              &quot;Links.Rmd&quot;              
+## [19] &quot;mat.RData&quot;               &quot;matr.csv&quot;               
+## [21] &quot;README.html&quot;             &quot;README.md&quot;              
+## [23] &quot;Research.html&quot;           &quot;Research.Rmd&quot;           
+## [25] &quot;Research_cache&quot;          &quot;Research_files&quot;         
+## [27] &quot;TestFile.txt&quot;</code></pre>
+</div>
+<div id="input-and-output" class="section level3">
+<h3>Input and output</h3>
+<p>save() - writes an external representation of R objects to a file</p>
+<p>save(…, list = character(), file = stop(“‘file’ must be specified”), ascii = FALSE, version = NULL, envir = parent.frame(), compress = isTRUE(!ascii), compression_level, eval.promises = TRUE, precheck = TRUE)</p>
+<pre class="r"><code># save(mat, file = &quot;mat.RData&quot;)</code></pre>
+<p>load()- Reload datasets written with the function save. load(file, envir = parent.frame(), verbose = FALSE)</p>
+<pre class="r"><code># load(file = &quot;mat.RData&quot;)</code></pre>
+<p>data()- Loads specified data sets, or list the available data sets. data(…, list = character(), package = NULL, lib.loc = NULL, verbose = getOption(“verbose”), envir = .GlobalEnv)</p>
+<pre class="r"><code># data(file = mat.RData)
+# data</code></pre>
+<p>library() - load and attach add-on packages</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<p>read.table() - Reads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file.</p>
+<p>read.csv() - Reads a .csv file</p>
+<p>scan() - Read data into a vector or list from the console or file.</p>
+<pre class="r"><code>(x &lt;- scan(&quot;https://stats.idre.ucla.edu/stat/data/scan.txt&quot;, what = list(age = 0,
+    name = &quot;&quot;)))</code></pre>
+<pre><code>## $age
+## [1] 12 24 35 20
+## 
+## $name
+## [1] &quot;bobby&quot;   &quot;kate&quot;    &quot;david&quot;   &quot;michael&quot;</code></pre>
+<p>print() = lists data, vectors, etc **can also be used as you are trying to de-bug</p>
+<pre class="r"><code>a&lt;- c(1:5)
+print(a)</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>cat() - outputs the objects, concatenating the representations cat is useful for producing output in user-defined functions. It converts its arguments to character vectors, concatenates them to a single character vector, appends the given sep = string(s) to each element and then outputs them.</p>
+<p>write.table()</p>
+</div>
+<div id="data-creation" class="section level3">
+<h3>Data Creation</h3>
+<p>c() - combine. how we can add numbers to a vector</p>
+<pre class="r"><code># a&lt;- c(a, &quot;cat&quot;, &quot;dog&quot;, &quot;Pickles&quot;)</code></pre>
+<p>from:to (where from and to are replaced with numbers, e.g. 1:10)</p>
+<pre class="r"><code># d&lt;-c(21, 22, 23, 24, 25, 25, 8, 83, 7, 85, 3,2,6)
+# d&lt;-c(3:7, 10)
+# 1:10</code></pre>
+<p>seq() - generate a sequence of numbers</p>
+<pre class="r"><code>seq(20)</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<p>rep()</p>
+<p>data.frame()</p>
+<p>list()</p>
+<p>matrix()</p>
+<p>factor()</p>
+<p>rbind()</p>
+<p>cbind()</p>
+</div>
+<div id="slicing-and-extracting-data" class="section level3">
+<h3>Slicing and extracting data</h3>
+<div id="indexing-vectors" class="section level4">
+<h4>indexing vectors</h4>
+<p>x[n] nth element</p>
+<p>x[-n] all but nth element</p>
+<p>x[1:n] first n elements</p>
+<p>x[-(1:n)] elements from n+1 to the end</p>
+<p>x[c(1,4,2)] specific elements</p>
+<p>x[“name”] elements named “name”</p>
+<p>x[x&gt;3] all elements greater than 3</p>
+<p>x[x &gt; 3 &amp; x &lt; 5] all elements between 3 and 5</p>
+<p>x[x %in% c(“a”,“and”,“the”)] all elements in given set</p>
+</div>
+<div id="indexing-lists" class="section level4">
+<h4>Indexing lists</h4>
+<p>x[n] list with elements n</p>
+<p>x[[n]] nt h element of the list</p>
+<p>x[[“name”]] element of the list named “name”</p>
+<p>x$name id.</p>
+</div>
+<div id="indexing-matrices" class="section level4">
+<h4>Indexing matrices</h4>
+<p>x[i,j] element at row i, column j</p>
+<p>x[i,] row i</p>
+<p>x[,j] column j</p>
+<p>x[,c(1,3)] columns 1 and 3</p>
+<p>x[“name”,] row named “name”</p>
+</div>
+<div id="indexing-data-frames-matrix-indexing-plus-the-following" class="section level4">
+<h4>Indexing data frames (matrix indexing plus the following)</h4>
+<p>x[[“name”]] column named “name”</p>
+<p>x$nameid.</p>
+</div>
+</div>
+<div id="variable-conversion" class="section level3">
+<h3>Variable conversion</h3>
+<p>as.data.frame(x)</p>
+<p>as.numeric(x)</p>
+<p>as.logical(x)</p>
+<p>as.character(x)</p>
+</div>
+<div id="variable-information" class="section level3">
+<h3>Variable information</h3>
+<p>is.na(x)</p>
+<p>is.null(x)</p>
+<p>is.data.frame(x)</p>
+<p>is.numeric(x)</p>
+<p>is.character(x)</p>
+<p>length(x)</p>
+<p>dim(x)</p>
+<p>dimnames(x)</p>
+<p>nrow(x)</p>
+<p>ncol(x)</p>
+<p>class()</p>
+<p>attributes()</p>
+</div>
+<div id="data-selection-and-manipulation" class="section level3">
+<h3>Data selection and manipulation</h3>
+<p>which.max()</p>
+<p>which.min()</p>
+<p>which()</p>
+<p>sort()</p>
+<p>unique() - what are the unique/nonrepeated values in a string</p>
+<pre class="r"><code>b&lt;-c(2, 2, 4, 5, 64, 8, 1, 6, 9)
+
+
+unique(b)</code></pre>
+<pre><code>## [1]  2  4  5 64  8  1  6  9</code></pre>
+<p>table()</p>
+<p>sample()</p>
+</div>
+<div id="math" class="section level3">
+<h3>Math</h3>
+<p>max() - lists the maximum number in a string</p>
+<pre class="r"><code>vector&lt;- c(1, 2, 3, 4, 5)
+max(vector)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>min()- lists the maximum number in a string</p>
+<pre class="r"><code>min(vector)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>range() - lists the min and max of a string</p>
+<pre class="r"><code>range(vector)</code></pre>
+<pre><code>## [1] 1 5</code></pre>
+<pre class="r"><code>range(a)</code></pre>
+<pre><code>## [1] 1 5</code></pre>
+<p>sum() - adds the values</p>
+<pre class="r"><code>sum(vector)</code></pre>
+<pre><code>## [1] 15</code></pre>
+<pre class="r"><code>sum(a)</code></pre>
+<pre><code>## [1] 15</code></pre>
+<p>mean() - average</p>
+<pre class="r"><code>mean(vector)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>median() - middle value</p>
+<pre class="r"><code>median(vector)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>var() - variance</p>
+<p>sd() - standard deviation</p>
+<p>cor()</p>
+<p>round()</p>
+<p>abs() - absolute value?</p>
+</div>
+<div id="matrices" class="section level3">
+<h3>Matrices</h3>
+<p>t()</p>
+<p>diag()</p>
+<p>rowSums()</p>
+<p>colSums()</p>
+<p>rowMeans()</p>
+<p>colMeans()</p>
+</div>
+<div id="advanced-data-processing" class="section level3">
+<h3>Advanced Data processing</h3>
+<p>apply()</p>
+<p>aggregate()</p>
+</div>
+<div id="strings" class="section level3">
+<h3>Strings</h3>
+<p>paste()</p>
+<p>strsplit() - used to split up character strings - it’s called a string split</p>
+<pre class="r"><code>a&lt;-&quot;sdjflskdflksdjflkjs&quot;
+a[1]</code></pre>
+<pre><code>## [1] &quot;sdjflskdflksdjflkjs&quot;</code></pre>
+<pre class="r"><code>strsplit(a, split =&quot;s&quot;)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;&quot;       &quot;djfl&quot;   &quot;kdflk&quot;  &quot;djflkj&quot;</code></pre>
+<p>tolower()</p>
+<p>toupper</p>
+</div>
+<div id="plotting" class="section level3">
+<h3>Plotting</h3>
+<p>hist()</p>
+<p>plot()</p>
+</div>
+<div id="distributions" class="section level3">
+<h3>Distributions</h3>
+<p>rnorm()</p>
+<p>runif()</p>
+</div>
+<div id="programming" class="section level3">
+<h3>Programming</h3>
+<p>show that you can define a function show that you can write a for loop show that you can write a while loop show that you can write an if else statement Explain what return() does inside a function, show you can use it Explain what break() does, show you can use it</p>
+</div>
+</div>
+<div id="installing-some-packages" class="section level2">
+<h2>Installing some packages</h2>
+<p>Use the packages tab in R-studio to install these packages. You will need to be connected to the internet when you do this. If you are installing on your laptop, or on R-studio Cloud, then these packages will not need to installed again.</p>
+<p>ggplot2 dplyr shiny data.table reshape2 stringr</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
