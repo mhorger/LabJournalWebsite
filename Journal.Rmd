@@ -550,6 +550,31 @@ length(which(xdata=="switchwin"))
 
 Question: What state are the doors in after the last pass? Which are open, which are closed?
 
+```{r}
+Hallway<-c(1:100)
+Status<-c()
+for (i in 1:100){
+  Status<-c(Status, "open")
+  if (Hallway[i]%%2==0)
+    Status[i]<-c("closed")
+}
+
+table(Status,Hallway)
+#Pass 1- All doors are open
+
+for (i in 1:100)
+  if (Hallway[i]%%2==0){
+    Status[i]<-c("closed")
+  }
+for (i in 1:100)
+  if (Hallway[i]%%3==0){
+    Status[i]<-c("closed")
+  if (Hallway[i]%%3==0 & Hallway[i]%%2==0)
+    Status[i]<-c("open")
+  }
+```
+
+
 ## 10. 99 Bottles of Beer Problem In this puzzle, write code to print out the entire “99 bottles of beer on the wall”" song. For those who do not know the song, the lyrics follow this form:
 
 ## 11. Random Tic-Tac-Toe Imagine that two players make completely random choices when playing tic-tac-toe. Each game will either end in a draw or one of the two players will win. Create a monte-carlo simulation of this “random” version of tic-tac-toe. Out 10,000 simulations, what proportion of the time is the game won versus drawn?
