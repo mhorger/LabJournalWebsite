@@ -127,7 +127,12 @@ cat() - outputs the objects, concatenating the representations
 cat is useful for producing output in user-defined functions. It converts its arguments to character vectors, concatenates them to a single character vector, appends the given sep = string(s) to each element and then outputs them.
 
 
-write.table()
+write.table() - prints data into a file 
+
+```{r}
+write.table(b & d)
+```
+
 
 ###Data Creation
 c() - combine. how we can add numbers to a vector 
@@ -170,40 +175,92 @@ data.frame(x, y)
 ```
 
 
-list()
+list() - prints the data in a variable 
+```{r}
+list(a)
+```
 
-matrix()
 
-factor()
+matrix() - creates a matrix 
+matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,
+       dimnames = NULL)
+```{r}
+hundreds <- c(matrix(data = 1:100, nrow = 10, ncol = 10))
+```
 
-rbind()
 
-cbind()
+factor() - The function factor is used to encode a vector as a factor (the terms ‘category’ and ‘enumerated type’ are also used for factors). If argument ordered is TRUE, the factor levels are assumed to be ordered. For compatibility with S there is also a function ordered.
+
+rbind() - Take a sequence of vector, matrix or data-frame arguments and combine by rows, respectively. 
+
+cbind() - Same as before but combines by columns 
 
 ###Slicing and extracting data
 ####indexing vectors
-x[n] nth element
+x[n] nth element 
+
+```{r}
+b[2]
+```
+
 
 x[-n] all but nth element
 
+```{r}
+b[-2]
+```
+
+
 x[1:n] first n elements
+```{r}
+x[1:6]
+```
+
 
 x[-(1:n)] elements from n+1 to the end
+```{r}
+a[-(1:3)]
+```
+
 
 x[c(1,4,2)] specific elements
+```{r}
+AllNumbers[c(4,5, 6)]
+```
+
 
 x[“name”] elements named “name”
+```{r}
+
+hey<-c("hi", "hey", "hello")
+hey["hey"]
+```
+
 
 x[x>3] all elements greater than 3
 
+```{r}
+x[x>3]
+```
+
+
 x[x > 3 & x < 5] all elements between 3 and 5
+- such as if you want items 5-10
 
 x[x %in% c(“a”,“and”,“the”)] all elements in given set
 
 ####Indexing lists
 x[n] list with elements n
+```{r}
+y[2]
+```
+
 
 x[[n]] nt h element of the list
+```{r}
+y[[5]]
+```
+
 
 x[[“name”]] element of the list named “name”
 
@@ -212,7 +269,17 @@ x$name id.
 ####Indexing matrices
 x[i,j] element at row i, column j
 
+```{r}
+hundreds[1,2]
+```
+
+
 x[i,] row i
+
+```{r}
+hundreds[2,] 
+```
+
 
 x[,j] column j
 
@@ -226,38 +293,54 @@ x[[“name”]] column named “name”
 x$nameid.
 
 ###Variable conversion
-as.data.frame(x)
+as.data.frame(x) - Functions to check if an object is a data frame, or coerce it if possible.
 
-as.numeric(x)
+as.numeric(x) - creates or coerces objects to numeric 
 
-as.logical(x)
+as.logical(x) - Create or test for objects of type "logical", and the basic logical constants.
 
-as.character(x)
+as.character(x) - Create or test for objects of type "logical", and the basic logical constants.
 
 ###Variable information
-is.na(x)
+is.na(x) - indicates which elements are missing 
+```{r}
+is.na(a)
+```
 
-is.null(x)
 
-is.data.frame(x)
+is.null(x) - often returned by expressions and functions whose value is undefined.
+```{r}
+is.null(hey)
+```
 
-is.numeric(x)
 
-is.character(x)
+is.data.frame(x) - to check if an object is a data frame or coerse it if possible 
 
-length(x)
+is.numeric(x) - general test of an object being interpretable as number 
 
-dim(x)
+is.character(x) - is an object interpretable as characters 
 
-dimnames(x)
+length(x) - number of items in a variable 
 
-nrow(x)
+dim(x) - dimensions of a matrix 
+```{r}
+dim(hundreds)
+```
 
-ncol(x)
 
-class()
+dimnames(x) - retrieve or set the dimension of an object 
+```{r}
 
-attributes()
+```
+
+
+nrow(x) - number of rows of an array 
+
+ncol(x) - number of columns of an array 
+
+class() - classify an object 
+
+attributes() - list object's attributes 
 
 ###Data selection and manipulation
 which.max()
@@ -277,9 +360,14 @@ unique(b)
 ```
 
 
-table()
+table() - create a table 
 
-sample()
+
+sample() - generate random sample 
+```{r}
+sample(1:100, 99)
+```
+
 
 ###Math
 max() - lists the maximum number in a string 
@@ -327,7 +415,7 @@ sd() - standard deviation
 
 cor()
 
-round()
+round() - round an integar 
 
 abs() - absolute value? 
 
