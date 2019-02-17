@@ -600,20 +600,13 @@ lose<- 0
 win <- 0
 bust<-c(bust)
 
+num<-0
+dollar<-0
 
-
-
-
-
-
-if(sample %% 5 == 0){
-  fivers = fivers+1}else{gofish = gofish+1}
-while (fivers < 4){
-  lose = lose+1
+if (sample (1:6) == 3){
+  num = num+1 & dollar = dollar+1} else{num = num}
 }
-while (fivers >= 4){
- win = win+1
-}
+
 
 
 ```
