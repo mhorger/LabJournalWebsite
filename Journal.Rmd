@@ -348,7 +348,7 @@ table(unique(unlist(strsplit(paragraph,""), recursive = FALSE, use.names = TRUE)
 
 
 ## 3. Test the Random Number Generator Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.
-```{r}
+```{r, eval=F}
 distribution<-runif(10000000, min=0, max=100)
 table(unlist(distribution))
 hist(distribution)

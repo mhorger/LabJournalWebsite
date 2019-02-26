@@ -504,10 +504,9 @@ rep(x)</code></pre>
 <pre><code>## [1] 1 2 3 4</code></pre>
 <p>data.frame() - creates data frames, tightly coupled collections of variables which share many of the properties of matrices and of lists, used as the fundamental data structure by most of R’s modeling software.</p>
 <pre class="r"><code>x&lt;-c (1, 2, 3, 4)
-y&lt;-c(a, b, c, d)</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;b&#39; not found</code></pre>
-<pre class="r"><code>data.frame(x, y)</code></pre>
-<pre><code>## Error in data.frame(x, y): object &#39;y&#39; not found</code></pre>
+y&lt;-c(a, b, c, d)
+data.frame(x, y)</code></pre>
+<pre><code>## Error in (function (..., row.names = NULL, check.rows = FALSE, check.names = TRUE, : arguments imply differing number of rows: 1, 0</code></pre>
 <p>list() - prints the data in a variable</p>
 <pre class="r"><code>list(a)</code></pre>
 <pre><code>## [[1]]
@@ -524,10 +523,10 @@ y&lt;-c(a, b, c, d)</code></pre>
 <h4>indexing vectors</h4>
 <p>x[n] nth element</p>
 <pre class="r"><code>b[2]</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;b&#39; not found</code></pre>
+<pre><code>## [1] 4</code></pre>
 <p>x[-n] all but nth element</p>
 <pre class="r"><code>b[-2]</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;b&#39; not found</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
 <p>x[1:n] first n elements</p>
 <pre class="r"><code>x[1:6]</code></pre>
 <pre><code>## [1]  1  2  3  4 NA NA</code></pre>
@@ -536,7 +535,7 @@ y&lt;-c(a, b, c, d)</code></pre>
 <pre><code>## [1] 4 5</code></pre>
 <p>x[c(1,4,2)] specific elements</p>
 <pre class="r"><code>AllNumbers[c(4,5, 6)]</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;AllNumbers&#39; not found</code></pre>
+<pre><code>## [1] 4 5 6</code></pre>
 <p>x[“name”] elements named “name”</p>
 <pre class="r"><code>hey&lt;-c(&quot;hi&quot;, &quot;hey&quot;, &quot;hello&quot;)
 hey[&quot;hey&quot;]</code></pre>
@@ -551,10 +550,11 @@ hey[&quot;hey&quot;]</code></pre>
 <h4>Indexing lists</h4>
 <p>x[n] list with elements n</p>
 <pre class="r"><code>y[2]</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;y&#39; not found</code></pre>
+<pre><code>## [[1]]
+## [1] 2</code></pre>
 <p>x[[n]] nt h element of the list</p>
 <pre class="r"><code>y[[5]]</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;y&#39; not found</code></pre>
+<pre><code>## [1] 5</code></pre>
 <p>x[[“name”]] element of the list named “name”</p>
 <p>x$name id.</p>
 </div>
@@ -608,16 +608,16 @@ hey[&quot;hey&quot;]</code></pre>
 <h3>Data selection and manipulation</h3>
 <p>which.max() - Determines the location, i.e., index of the (first) maximum of a numeric (or logical) vector</p>
 <pre class="r"><code>which.max(d)</code></pre>
-<pre><code>## Error in which.max(d): object &#39;d&#39; not found</code></pre>
+<pre><code>## [1] 1</code></pre>
 <p>which.min() - same but for the minimum value</p>
 <pre class="r"><code>which.min(d)</code></pre>
-<pre><code>## Error in which.min(d): object &#39;d&#39; not found</code></pre>
+<pre><code>## [1] 4</code></pre>
 <p>which() - which indices are true</p>
 <pre class="r"><code>which(b==d)</code></pre>
-<pre><code>## Error in which(b == d): object &#39;b&#39; not found</code></pre>
+<pre><code>## integer(0)</code></pre>
 <p>sort() - Sort (or order) a vector or factor (partially) into ascending or descending order.</p>
 <pre class="r"><code>sort(d)</code></pre>
-<pre><code>## Error in sort(d): object &#39;d&#39; not found</code></pre>
+<pre><code>## [1]  1  1  9  9 25 25 49 49</code></pre>
 <p>unique() - what are the unique/nonrepeated values in a string</p>
 <pre class="r"><code>b&lt;-c(2, 2, 4, 5, 64, 8, 1, 6, 9)
 
@@ -627,12 +627,12 @@ unique(b)</code></pre>
 <p>table() - create a table</p>
 <p>sample() - generate random sample</p>
 <pre class="r"><code>sample(1:100, 99)</code></pre>
-<pre><code>##  [1]  77  26  15  93  30  94  62  20  90  34  81  95  70  41  56  98  23
-## [18]  85   2  72  53  88  54  47  51  64  16  69  61  17  86  63  43 100
-## [35]   3  12  33  32  22  66  59  31  24  11  19  42  83  10   7  87  49
-## [52]   4  44   8   5  97  75  45  55  73  21  96  57  78  71  82  65  74
-## [69]  80  39  37   1  58  60  46  13  79  68  50  89  36   9  29  48  92
-## [86]  99  76  25  28  35  40  91  14  38  84  67  52  18   6</code></pre>
+<pre><code>##  [1]  62  27  92   1  47  10  31  14  49  65  15  68  59  41  34  24  60
+## [18]  88  53  36  70  82  76  71  25   9  21  69  58  30  46  98   5  61
+## [35]  55  35  56   3  38  78  29   8  40  77  63  26  45  16  80  37  86
+## [52]  52  94  32  11  73  64  19  50  23  97  83  48  44  99  13  17   6
+## [69]  95  87  85  89  72  42  66  12 100  20  51  90  28  22  91  67  54
+## [86]  75  96  93   2  81  43  84   4  33  18  39  79  57   7</code></pre>
 </div>
 <div id="math" class="section level3">
 <h3>Math</h3>
@@ -706,10 +706,11 @@ diag(matr)</code></pre>
 ## [4,]   16   17   18   19   20
 ## [5,]   21   22   23   24   25</code></pre>
 <p>aggregate()- Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form.</p>
-<pre class="r"><code>by1&lt;- list(AllNumbers%%100==0)</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;AllNumbers&#39; not found</code></pre>
-<pre class="r"><code>aggregate(AllNumbers, by1, sum)</code></pre>
-<pre><code>## Error in aggregate(AllNumbers, by1, sum): object &#39;AllNumbers&#39; not found</code></pre>
+<pre class="r"><code>by1&lt;- list(AllNumbers%%100==0)
+aggregate(AllNumbers, by1, sum)</code></pre>
+<pre><code>##   Group.1      x
+## 1   FALSE 495000
+## 2    TRUE   5500</code></pre>
 </div>
 <div id="strings" class="section level3">
 <h3>Strings</h3>
@@ -732,23 +733,23 @@ a[1]</code></pre>
 <h3>Plotting</h3>
 <p>hist() - histogram</p>
 <pre class="r"><code>hist(d)</code></pre>
-<pre><code>## Error in hist(d): object &#39;d&#39; not found</code></pre>
+<p><img src="Dictionary_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>plot() plot.default will produce a simple scatter plot of X and Y type what type of plot should be drawn. Possible types are “p” for points, “l” for lines, “b” for both, “c” for the lines part alone of “b”, “o” for both ‘overplotted’, “h” for ‘histogram’ like (or ‘high-density’) vertical lines, “s” for stair steps, “S” for other steps, see ‘Details’ below, “n” for no plotting.</p>
 <pre class="r"><code>plot(a, d, type = &quot;p&quot;, col = &quot;red&quot;)</code></pre>
-<pre><code>## Error in xy.coords(x, y, xlabel, ylabel, log): object &#39;d&#39; not found</code></pre>
+<pre><code>## Error in xy.coords(x, y, xlabel, ylabel, log): &#39;x&#39; and &#39;y&#39; lengths differ</code></pre>
 </div>
 <div id="distributions" class="section level3">
 <h3>Distributions</h3>
 <p>rnorm() - random normal distribution rnorm(n, mean = 0, sd = 1)</p>
 <pre class="r"><code>rnorm(50, mean = 25, sd = 5)</code></pre>
-<pre><code>##  [1] 30.48005 30.76443 23.19394 24.61417 31.04520 27.56100 21.80334
-##  [8] 23.68578 29.13949 25.55602 25.76967 36.57653 27.45129 26.31926
-## [15] 32.92973 29.43224 19.05079 22.63728 30.30926 24.71139 18.69417
-## [22] 27.10374 34.39109 22.09370 20.60958 25.35790 26.78127 18.40732
-## [29] 30.46396 26.59018 25.84690 22.03114 23.88095 28.95494 27.37492
-## [36] 25.82093 23.72570 23.81889 26.49580 23.21711 22.41695 28.11606
-## [43] 33.63600 25.14041 27.47933 26.10967 24.57704 20.37897 23.91410
-## [50] 27.51246</code></pre>
+<pre><code>##  [1] 28.22758 18.47992 25.35608 23.13094 29.09671 22.01143 16.36314
+##  [8] 28.50885 22.32158 29.78441 23.73582 29.50617 19.59814 31.77741
+## [15] 31.10717 28.30626 19.06340 33.69123 30.28752 31.00223 18.77538
+## [22] 27.84756 32.70053 19.20199 29.80769 33.31418 17.17296 17.00367
+## [29] 19.55286 28.61678 21.68767 23.08478 13.24877 23.31530 14.97986
+## [36] 23.34818 27.53788 19.52059 26.77198 21.05850 23.20495 30.47259
+## [43] 36.21892 30.56358 15.89717 18.75780 32.18966 37.26521 22.01759
+## [50] 23.99731</code></pre>
 <p>runif() - random uniform distribution runif(n, min = 0, max = 1)</p>
 <pre class="r"><code>plot(runif(100, min = 0, max = 100), type = &quot;h&quot;, col = &quot;blue&quot;)</code></pre>
 <p><img src="Dictionary_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
@@ -765,15 +766,13 @@ a[1]</code></pre>
 AddFive(a)</code></pre>
 <pre><code>## Error in (x[i]) + 5: non-numeric argument to binary operator</code></pre>
 <p>show that you can write a for loop</p>
-<pre class="r"><code>AllNumbers &lt;- c(AllNumbers)</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;AllNumbers&#39; not found</code></pre>
-<pre class="r"><code>fivers &lt;- 0
+<pre class="r"><code>AllNumbers &lt;- c(AllNumbers)
+fivers &lt;- 0
 gofish &lt;-0
 for (val in AllNumbers) {
 if(val %% 5 == 0)
   fivers = fivers+1
 }</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;AllNumbers&#39; not found</code></pre>
 <p>show that you can write a while loop</p>
 <pre class="r"><code>sample &lt;- seq(20)
 fivers &lt;- 0
@@ -899,15 +898,13 @@ while (num &lt; 20){
 ## [1] 2
 ## [1] 1</code></pre>
 <p>show that you can write an if else statement</p>
-<pre class="r"><code>AllNumbers &lt;- c(AllNumbers)</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;AllNumbers&#39; not found</code></pre>
-<pre class="r"><code>fivers &lt;- 0
+<pre class="r"><code>AllNumbers &lt;- c(AllNumbers)
+fivers &lt;- 0
 gofish &lt;-0
 for (val in AllNumbers) {
 if(val %% 5 == 0){
   fivers = fivers+1}else{gofish = gofish+1}
 }</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;AllNumbers&#39; not found</code></pre>
 <p>Explain what return() does inside a function, show you can use it Many a times, we will require our functions to do some processing and return back the result. This is accomplished with the return() function in R.</p>
 <pre class="r"><code>outcome&lt;- function(x){
   if (fivers [x] &lt; 4){
