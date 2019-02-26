@@ -611,28 +611,49 @@ while (count < 100){
 ```{r}
 draw<- 0
 numgames<-0
+win<- 0
 
 tictac<- function(x){
 board<- matrix((sample(0:1, 9, replace = TRUE)), nrow=3, ncol = 3, byrow = FALSE, dimnames = NULL)
-if (
-board[1,] == 1 ||
-board[2,] == 1 ||
-board[3,] == 1 ||
-board[,1] == 1||
-board[,2] == 1 ||
-board[,3] == 1 ||
-board[diag(board)] == 1) {
-win<- win+1}
-draw<-(draw+1)-win
-table(win&draw)
+numgames<-numgames+1}
+
+game<-tictac(board)
+  
+print(game)
+
+
+if ((colSums(game) == 3||0) || (rowSums(game) == 3||0) || (diag(game) == 1||0)){
+  win<-win+1
+  }
+if ((colSums(game)==1||2) || (rowSums (game) == 1 || 2)){
+    draw<-draw+1
+}
+draw<- 0
+numgames<-0
+win<- 0
+
+while (numgames <10) {
+  repeat (
+  game<-tictac(board)
+if ((colSums(game) == 3||0) || (rowSums(game) == 3||0) || (diag(game) == 1||0)){
+  win<-win+1
+  }
+if ((colSums(game)==1||2) || (rowSums (game) == 1 || 2)){
+    draw<-draw+1
+  )
+}
 }
 
-tictac(board)
-  
-repeat (tictac(board))
-  
 
-print(board)
+
+if (
+game[1,] == 1 ||
+game[2,] == 1 ) {
+win<- win+1
+draw<-(draw+1)-win
+}
+
+
 
 board[2, 2]<-3
 
@@ -671,6 +692,8 @@ win<- win+1}else{
   lose<-lose+1
 }
 }
+
+
 
 
 ```
