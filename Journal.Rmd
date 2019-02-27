@@ -608,23 +608,10 @@ while (count < 100){
 ## 11. Random Tic-Tac-Toe Imagine that two players make completely random choices when playing tic-tac-toe. Each game will either end in a draw or one of the two players will win. Create a monte-carlo simulation of this “random” version of tic-tac-toe. Out 10,000 simulations, what proportion of the time is the game won versus drawn?
 
 
-while (numgames <10) {
-  repeat (
-  game<-tictac(board)
-if ((colSums(game) == 3||0) || (rowSums(game) == 3||0) || (diag(game) == 1||0)){
-  win<-win+1
-  }
-if ((colSums(game)==1||2) || (rowSums (game) == 1 || 2)){
-    draw<-draw+1
-  )
-}
-}
+
 
 
 ```{r}
-draw<- 0
-numgames<-0
-win<- 0
 
 tictac<- function(x){
 board<- matrix((sample(0:1, 9, replace = TRUE)), nrow=3, ncol = 3, byrow = FALSE, dimnames = NULL)
@@ -635,47 +622,35 @@ game<-tictac(board)
 print(game)
 
 
-if ((colSums(game) == 3||0) || (rowSums(game) == 3||0) || (diag(game) == 1||0)){
-  win<-win+1
-  }
-if ((colSums(game)==1||2) || (rowSums (game) == 1 || 2)){
-    draw<-draw+1
-}
 draw<- 0
 numgames<-0
 win<- 0
+line<- 0 
+d<-0
 
-repeat { 
-   commands 
-   if(condition) {
+repeat {
+   game<-tictac(board)
+   numgames<-numgames+1
+   
+   if ((colSums(game) == 3||0) ||
+       (rowSums(game) == 3||0)) {
+  line<-line+1
+   }
+     if ((game[1,3]==0) & (game[2,2] == 0) & (game[3,1] == 0)){
+     d<- d+1
+     }
+   win<-abs(line-d)
+if ((colSums(game)==1||2) || (rowSums (game) == 1 || 2)){
+    draw<-draw+1
+}
+
+   if(numgames == 10000) {
       break
    }
 }
 
-
-
-
-
-if (
-game[1,] == 1 ||
-game[2,] == 1 ) {
-win<- win+1
-draw<-(draw+1)-win
-}
-
-
-
-board[2, 2]<-3
-
-win<-0
-draw<-0
-count<- 0
-
-game <- function(x){
-     board<- as.matrix (
-       (sample(0:1, 9, replace = TRUE)), nrows = 3, ncol = 3, byrow = FALSE, dimnames = NULL)
-print(board)
-}
+print(win)
+print(draw-win)
 
 
 
