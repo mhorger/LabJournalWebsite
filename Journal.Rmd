@@ -753,8 +753,7 @@ a<- ggplot(graph5, aes(x=PersonX, y=Frequ)) +
   geom_violin() 
 
 a + stat_summary(fun.data=data_summary)
-
-a + stat_summary(fun.data="mean_sdl", mult=1, 
+ stat_summary(fun.data="mean_sdl", mult=1, 
                  geom="crossbar", width=0.2 )
 a
 
@@ -799,7 +798,66 @@ c + geom_bar(stat = "identity", position = dodge) +
 ###Graph 8 
 
 
+
+
+
 ```
 
 
+
+
+```{r}
+###Jefferies, L. N., & Lollo, V. D. (2019). Sudden Events Change Old Visual Objects Into New Ones: A Possible Role for Phasic Activation of Locus Coeruleus. Psychological Science, 30, 55–64.
+
+### Graph 9
+
+condition<- c("No transient", "Transient")
+place<-c("outside",  "outside","inside", "inside")
+all_data<-c(305, 292, 300, 280, 295, 265, 290, 250)
+vis_data<-c(305, 292, 300, 280)
+aud_data<-c(295, 265, 290, 250)
+group<- c("visual","visual", "auditory", "auditory")
+
+visual<-data.frame(condition, place, vis_data)
+
+auditory<-data.frame(condition, place, aud_data)
+
+graph9<-data.frame(visual, auditory)
+
+ggplot(graph9, aes(fill=place, y=vis_data, x=condition)) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_y_discrete(name ="Mean Median RT (ms)", 
+    limits=c(230, 260, 290, 320, 340))
+
+ggplot(graph9, aes(fill=place, y=aud_data, x=condition)) + 
+    geom_bar(position="dodge", stat="identity")+
+  scale_y_discrete(name ="Mean Median RT (ms)", 
+    limits=c(230, 260, 290, 320, 340))
+
+```
+```{r}
+### Jouravlev, O., Schwartz, R., Ayyash, D., Mineroff, Z., Gibson, E., & Fedorenko, E. (2019). Tracking Colisteners’ Knowledge States During Language Comprehension. Psychological Science, 30, 3–19.
+
+###Graph 10
+```
+
+
+
+
+```{r}
+### Kim, H., Domenico, S. I. D., & Connelly, B. S. (2019). Self–Other Agreement in Personality Reports: A Meta-Analytic Comparison of Self- and Informant-Report Means. Psychological Science, 30, 129–138.
+### Graph 11
+
+OCEAN<- c("emotional stability", "extraversion", "openness/intellect", "agreeableness", "conscientiousness")
+informants<-c("family","family","family","family","family", "friends","friends","friends","friends","friends", "colleagues","colleagues","colleagues","colleagues","colleagues", "strangers","strangers","strangers","strangers","strangers")
+mean_diff<-c(-.10,-.10,.10,-.20,-.20, -.20, -.10, .20, -.05, -.20,-.20, -.05,.10, 0,  -.10, 0, .30, .70, .30, .30)
+
+graph11<-data.frame(OCEAN, informants, mean_diff)
+print(graph11)
+
+ggplot(graph11, aes(x=OCEAN, y=mean_diff, group=informants)) +
+  geom_line(aes(linetype=informants))+
+  geom_point()+
+expand_limits(y=c(-.80, .80))
+```
 

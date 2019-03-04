@@ -611,13 +611,13 @@ hey[&quot;hey&quot;]</code></pre>
 <pre><code>## [1] 1</code></pre>
 <p>which.min() - same but for the minimum value</p>
 <pre class="r"><code>which.min(d)</code></pre>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 1</code></pre>
 <p>which() - which indices are true</p>
 <pre class="r"><code>which(b==d)</code></pre>
 <pre><code>## integer(0)</code></pre>
 <p>sort() - Sort (or order) a vector or factor (partially) into ascending or descending order.</p>
 <pre class="r"><code>sort(d)</code></pre>
-<pre><code>## [1]  1  1  9  9 25 25 49 49</code></pre>
+<pre><code>## [1] 1227</code></pre>
 <p>unique() - what are the unique/nonrepeated values in a string</p>
 <pre class="r"><code>b&lt;-c(2, 2, 4, 5, 64, 8, 1, 6, 9)
 
@@ -627,12 +627,12 @@ unique(b)</code></pre>
 <p>table() - create a table</p>
 <p>sample() - generate random sample</p>
 <pre class="r"><code>sample(1:100, 99)</code></pre>
-<pre><code>##  [1]  62  27  92   1  47  10  31  14  49  65  15  68  59  41  34  24  60
-## [18]  88  53  36  70  82  76  71  25   9  21  69  58  30  46  98   5  61
-## [35]  55  35  56   3  38  78  29   8  40  77  63  26  45  16  80  37  86
-## [52]  52  94  32  11  73  64  19  50  23  97  83  48  44  99  13  17   6
-## [69]  95  87  85  89  72  42  66  12 100  20  51  90  28  22  91  67  54
-## [86]  75  96  93   2  81  43  84   4  33  18  39  79  57   7</code></pre>
+<pre><code>##  [1]  61  30  95  36  76  47  49  50  26  97  17  52  34  94  77  87  51
+## [18]  15  25  74  80  56  66   2  79  33  82  38  42  63  90  20  96  72
+## [35]  73   8  85  70  40  10  45   5  11  39  21  89  48  54 100  62  18
+## [52]  81  35   1  60  84  24  71  14  67  29   3   9  65   7  43  44  19
+## [69]  64  22   4  59  68  93  12  41  92  98  23  69  13  88  57  37  58
+## [86]  99  53  16   6  83  75  31  78  46  28  86  32  91  55</code></pre>
 </div>
 <div id="math" class="section level3">
 <h3>Math</h3>
@@ -736,20 +736,24 @@ a[1]</code></pre>
 <p><img src="Dictionary_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>plot() plot.default will produce a simple scatter plot of X and Y type what type of plot should be drawn. Possible types are “p” for points, “l” for lines, “b” for both, “c” for the lines part alone of “b”, “o” for both ‘overplotted’, “h” for ‘histogram’ like (or ‘high-density’) vertical lines, “s” for stair steps, “S” for other steps, see ‘Details’ below, “n” for no plotting.</p>
 <pre class="r"><code>plot(a, d, type = &quot;p&quot;, col = &quot;red&quot;)</code></pre>
-<pre><code>## Error in xy.coords(x, y, xlabel, ylabel, log): &#39;x&#39; and &#39;y&#39; lengths differ</code></pre>
+<pre><code>## Warning in xy.coords(x, y, xlabel, ylabel, log): NAs introduced by coercion</code></pre>
+<pre><code>## Warning in min(x): no non-missing arguments to min; returning Inf</code></pre>
+<pre><code>## Warning in max(x): no non-missing arguments to max; returning -Inf</code></pre>
+<pre><code>## Error in plot.window(...): need finite &#39;xlim&#39; values</code></pre>
+<p><img src="Dictionary_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 </div>
 <div id="distributions" class="section level3">
 <h3>Distributions</h3>
 <p>rnorm() - random normal distribution rnorm(n, mean = 0, sd = 1)</p>
 <pre class="r"><code>rnorm(50, mean = 25, sd = 5)</code></pre>
-<pre><code>##  [1] 28.22758 18.47992 25.35608 23.13094 29.09671 22.01143 16.36314
-##  [8] 28.50885 22.32158 29.78441 23.73582 29.50617 19.59814 31.77741
-## [15] 31.10717 28.30626 19.06340 33.69123 30.28752 31.00223 18.77538
-## [22] 27.84756 32.70053 19.20199 29.80769 33.31418 17.17296 17.00367
-## [29] 19.55286 28.61678 21.68767 23.08478 13.24877 23.31530 14.97986
-## [36] 23.34818 27.53788 19.52059 26.77198 21.05850 23.20495 30.47259
-## [43] 36.21892 30.56358 15.89717 18.75780 32.18966 37.26521 22.01759
-## [50] 23.99731</code></pre>
+<pre><code>##  [1] 28.62120 31.87785 24.97010 26.76122 29.02145 20.35209 25.43828
+##  [8] 28.88711 19.93410 36.66701 23.61060 20.94751 27.54039 15.86888
+## [15] 20.81386 26.87966 33.19964 16.78076 12.54641 20.31202 35.96974
+## [22] 19.51745 30.46859 32.70635 31.35915 29.91559 27.47615 35.11472
+## [29] 30.05782 32.45899 25.75940 26.03977 19.35071 23.08460 21.92686
+## [36] 22.21662 19.17662 16.43743 18.71803 33.34933 23.49153 22.06826
+## [43] 18.79471 24.17989 17.31619 26.61552 35.09217 19.48729 20.96977
+## [50] 28.51864</code></pre>
 <p>runif() - random uniform distribution runif(n, min = 0, max = 1)</p>
 <pre class="r"><code>plot(runif(100, min = 0, max = 100), type = &quot;h&quot;, col = &quot;blue&quot;)</code></pre>
 <p><img src="Dictionary_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
