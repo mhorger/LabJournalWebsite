@@ -659,4 +659,147 @@ print(draw-win)
 ```
 
 
+# Data-vis assignment 
+
+### Calcutt, S. E., Proctor, D., & Berman, S. M. (2019). Chimpanzees (Pan troglodytes) Are More Averse to Social Than Nonsocial Risk. Psychological Science, 30, 105–115
+
+###Graph 1
+```{r}
+library(tidyverse)
+chimps<- c("Dara", "Dara","Rita", "Rita","Liza", "Liza", "Azalea","Azalea", "Barbi", "Barbi", "Rowena", "Rowena", "Katie", "Katie","Fiona", "Fiona")
+
+cond<- c("social", "nonsocial")
+FreqOfRisk<- c(59, 60, 51, 57, 49, 35, 25, 45, 0, 42, 5, 35, 3, 3, 0, 10)
+graph1<-data.frame(chimps, FreqOfRisk, cond)
+
+print(graph1)
+
+ggplot(data = graph1) +
+  geom_line (mapping = aes(x = cond, y = FreqOfRisk, linetype = chimps),
+             show.legend = TRUE)
+
+```
+### Graph 2
+
+```{r}
+AverageFreqSocialRisk<- c(5, 11, 33, 40, 46, 49, 57, 60)
+AverageFreqNonSocial<- c(3, 0, 45, 5, 1, 25, 52, 58)
+graph2<- data.frame(AverageFreqNonSocial, AverageFreqSocialRisk) 
+
+ggplot(data = graph2)+
+  geom_point (mapping = (aes (x = AverageFreqNonSocial, y = AverageFreqSocialRisk)))+
+     geom_smooth(method='lm',mapping = (aes (x = AverageFreqNonSocial, y = AverageFreqSocialRisk)))
+```
+
+###Cao, J., Kleiman-Weiner, M., & Banaji, M. R. (2019). People Make the Same Bayesian Judgment They Criticize in Others. Psychological Science, 30, 20–31.
+
+### Graph 3
+
+```{r}
+cases<- c("Doctor Study 1", "Doctor Study 1", "Doctor Study 1", "Butcher Study 2","Butcher Study 2", "Butcher Study 2", "Firefighter Study 2","Firefighter Study 2", "Firefighter Study 2", "Construction Worker Study 2", "Construction Worker Study 2", "Construction Worker Study 2" )
+options<- c("Woman more likely", "Equally likely", "Man more likely")
+totalN<-c(199, 199, 199, 199, 199, 199, 200, 200, 200, 205, 205, 205)
+responses<-c(0, 189, 10, 9, 130, 60, 0, 120, 80, 6, 124, 75 )
+
+props<-c(responses/totalN)
+
+graph3<- data.frame(cases, options, totalN, responses, props)
+
+print(graph3)
+
+
+
+ggplot(data = graph3) +
+  geom_bar(mapping = aes(x = cases, color = options, position = "fill", stat(responses / totalN)))
+
+
+```
+
+colors are wrong 
+
+### Graph 4
+
+```{r}
+evaluation<- c(1, 2, 3, 4, 5, 6, 7)
+
+cases<- c("Doctor Study 1", "Doctor Study 1", "Doctor Study 1","Doctor Study 1", "Doctor Study 1", "Doctor Study 1", "Doctor Study 1", "Butcher Study 2","Butcher Study 2", "Butcher Study 2","Butcher Study 2","Butcher Study 2", "Butcher Study 2","Butcher Study 2", "Firefighter Study 2","Firefighter Study 2", "Firefighter Study 2","Firefighter Study 2","Firefighter Study 2", "Firefighter Study 2","Firefighter Study 2", "Construction Worker Study 2", "Construction Worker Study 2", "Construction Worker Study 2", "Construction Worker Study 2", "Construction Worker Study 2", "Construction Worker Study 2", "Construction Worker Study 2" )
+
+EvalScores<- c(35, 50, 42, 35, 20, 10, 7, 19, 30, 50, 50, 30, 15, 5, 25, 25, 40, 50, 40, 15, 5, 25, 30, 30, 35, 55, 35, 20 )
+
+graph4<-data.frame(evaluation, cases, EvalScores)
+
+print(graph4)
+
+
+p <- ggplot(graph4, aes(x=cases, y=EvalScores)) + 
+  geom_violin() 
+
+p + stat_summary(fun.data=data_summary)
+
+p + stat_summary(fun.data="mean_sdl", mult=1, 
+                 geom="crossbar", width=0.2 )
+p
+```
+
+### Graph 5
+
+```{r}
+PersonX<- c("Equally likely", "Man more likely")
+MoneyTransferred<-c("$0.00","$0.00", "$0.05","$0.05", "$0.10","$0.10", "$0.15","$0.15", "$0.20", "$0.20", "$0.25", "$0.25", "$0.30", "$0.30")
+Frequ<- c(5, 110, 2, 20, 70, 30, 108, 35, 55, 5, 1, 1, 1, 1)
+graph5<-data.frame(PersonX, MoneyTransferred, Frequ)
+
+a<- ggplot(graph5, aes(x=PersonX, y=Frequ)) + 
+  geom_violin() 
+
+a + stat_summary(fun.data=data_summary)
+
+a + stat_summary(fun.data="mean_sdl", mult=1, 
+                 geom="crossbar", width=0.2 )
+a
+
+
+b<- ggplot(data = graph5)+
+geom_violin( mapping = aes(x=PersonX, y=Frequ, stats = )) 
+
+```
+### Graph 6 
+
+What kind of dat do I need to put in to do the log likelihood ratio?
+```{r}
+
+```
+
+
+### Graph 7 
+```{r}
+gender<- c("man", "woman")
+judgements<-c("prior", "model posterior", "reported posterior")
+values<- c(60, 90, 75, 30, 70, 76)
+graph7<- data.frame(gender, judgements, values)
+
+
+ggplot(graph7, aes(fill=judgements, y=values, x=gender)) + 
+    geom_bar(position="dodge", stat="identity")+
+  labs( y = "P(Target = Doctor") 
+
+
+
+
+
+
+c + geom_bar(stat = "identity", position = dodge) +
+  geom_errorbar(limits, position = dodge, width = 0.25) +
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+        axis.title.x=element_blank())
+
+```
+
+```{r}
+###Graph 8 
+
+
+```
+
+
 
