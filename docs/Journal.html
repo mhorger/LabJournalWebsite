@@ -855,22 +855,22 @@ word==Captain</code></pre>
 <div id="put-the-current-computer-time-in-milliseconds-into-a-variable" class="section level2">
 <h2>16. Put the current computer time in milliseconds into a variable</h2>
 <pre class="r"><code>print(as.numeric(Sys.time())*1000, digits=10)</code></pre>
-<pre><code>## [1] 1551663702754</code></pre>
+<pre><code>## [1] 1551665801871</code></pre>
 <pre class="r"><code>time&lt;- c(print(as.numeric(Sys.time())*1000, digits=10))</code></pre>
-<pre><code>## [1] 1551663702758</code></pre>
+<pre><code>## [1] 1551665801872</code></pre>
 <p>I can’t read milliseconds so let’s try it normally…</p>
 <pre class="r"><code>time&lt;- c(time, print(as.numeric(Sys.time())*100, digits=10))</code></pre>
-<pre><code>## [1] 155166370282</code></pre>
+<pre><code>## [1] 155166580191</code></pre>
 <pre class="r"><code>Sys.time()</code></pre>
-<pre><code>## [1] &quot;2019-03-03 20:41:42 EST&quot;</code></pre>
+<pre><code>## [1] &quot;2019-03-03 21:16:41 EST&quot;</code></pre>
 <pre class="r"><code>time&lt;-c(Sys.time())
 print (time)</code></pre>
-<pre><code>## [1] &quot;2019-03-03 20:41:42 EST&quot;</code></pre>
+<pre><code>## [1] &quot;2019-03-03 21:16:41 EST&quot;</code></pre>
 </div>
 <div id="measure-how-long-a-piece-of-code-takes-to-run-by-measuring-the-time-before-the-code-is-run-and-after-the-code-is-run-and-taking-the-difference-to-find-the-total-time" class="section level2">
 <h2>17. Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time</h2>
 <pre class="r"><code>time1&lt;- print(as.numeric(Sys.time())*1000, digits=10)</code></pre>
-<pre><code>## [1] 1551663702880</code></pre>
+<pre><code>## [1] 1551665801964</code></pre>
 <pre class="r"><code>seq(10000000)</code></pre>
 <pre><code>##     [1]     1     2     3     4     5     6     7     8     9    10    11
 ##    [12]    12    13    14    15    16    17    18    19    20    21    22
@@ -9965,9 +9965,9 @@ print (time)</code></pre>
 ## [99991] 99991 99992 99993 99994 99995 99996 99997 99998 99999
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 9900001 entries ]</code></pre>
 <pre class="r"><code>time2 &lt;- print(as.numeric(Sys.time())*1000, digits=10)</code></pre>
-<pre><code>## [1] 1551663703370</code></pre>
+<pre><code>## [1] 1551665802373</code></pre>
 <pre class="r"><code>time2-time1 </code></pre>
-<pre><code>## [1] 489.9578</code></pre>
+<pre><code>## [1] 408.4751</code></pre>
 </div>
 <div id="read-a-.txt-file-or-.csv-file-into-a-variable" class="section level2">
 <h2>18. Read a .txt file or .csv file into a variable</h2>
@@ -11305,14 +11305,14 @@ a&lt;- ggplot(graph5, aes(x=PersonX, y=Frequ)) +
 
 a + stat_summary(fun.data=data_summary)</code></pre>
 <pre><code>## Error in layer(data = data, mapping = mapping, stat = StatSummary, geom = geom, : object &#39;data_summary&#39; not found</code></pre>
-<pre class="r"><code>a + stat_summary(fun.data=&quot;mean_sdl&quot;, mult=1, 
+<pre class="r"><code> stat_summary(fun.data=&quot;mean_sdl&quot;, mult=1, 
                  geom=&quot;crossbar&quot;, width=0.2 )</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: mult</code></pre>
-<pre><code>## Warning: Computation failed in `stat_summary()`:
-## Hmisc package required for this function</code></pre>
-<p><img src="Journal_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<pre><code>## geom_crossbar: na.rm = FALSE, width = 0.2
+## stat_summary: fun.data = mean_sdl, fun.y = NULL, fun.ymax = NULL, fun.ymin = NULL, fun.args = list(), na.rm = FALSE
+## position_identity</code></pre>
 <pre class="r"><code>a</code></pre>
-<p><img src="Journal_files/figure-html/unnamed-chunk-39-2.png" width="672" /></p>
+<p><img src="Journal_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <pre class="r"><code>b&lt;- ggplot(data = graph5)+
 geom_violin( mapping = aes(x=PersonX, y=Frequ, stats = )) </code></pre>
 </div>
@@ -11368,6 +11368,41 @@ ggplot(graph9, aes(fill=place, y=vis_data, x=condition)) +
 <pre class="r"><code>### Jouravlev, O., Schwartz, R., Ayyash, D., Mineroff, Z., Gibson, E., &amp; Fedorenko, E. (2019). Tracking Colisteners’ Knowledge States During Language Comprehension. Psychological Science, 30, 3–19.
 
 ###Graph 10</code></pre>
+<pre class="r"><code>### Kim, H., Domenico, S. I. D., &amp; Connelly, B. S. (2019). Self–Other Agreement in Personality Reports: A Meta-Analytic Comparison of Self- and Informant-Report Means. Psychological Science, 30, 129–138.
+### Graph 11
+
+OCEAN&lt;- c(&quot;emotional stability&quot;, &quot;extraversion&quot;, &quot;openness/intellect&quot;, &quot;agreeableness&quot;, &quot;conscientiousness&quot;)
+informants&lt;-c(&quot;family&quot;,&quot;family&quot;,&quot;family&quot;,&quot;family&quot;,&quot;family&quot;, &quot;friends&quot;,&quot;friends&quot;,&quot;friends&quot;,&quot;friends&quot;,&quot;friends&quot;, &quot;colleagues&quot;,&quot;colleagues&quot;,&quot;colleagues&quot;,&quot;colleagues&quot;,&quot;colleagues&quot;, &quot;strangers&quot;,&quot;strangers&quot;,&quot;strangers&quot;,&quot;strangers&quot;,&quot;strangers&quot;)
+mean_diff&lt;-c(-.10,-.10,.10,-.20,-.20, -.20, -.10, .20, -.05, -.20,-.20, -.05,.10, 0,  -.10, 0, .30, .70, .30, .30)
+
+graph11&lt;-data.frame(OCEAN, informants, mean_diff)
+print(graph11)</code></pre>
+<pre><code>##                  OCEAN informants mean_diff
+## 1  emotional stability     family     -0.10
+## 2         extraversion     family     -0.10
+## 3   openness/intellect     family      0.10
+## 4        agreeableness     family     -0.20
+## 5    conscientiousness     family     -0.20
+## 6  emotional stability    friends     -0.20
+## 7         extraversion    friends     -0.10
+## 8   openness/intellect    friends      0.20
+## 9        agreeableness    friends     -0.05
+## 10   conscientiousness    friends     -0.20
+## 11 emotional stability colleagues     -0.20
+## 12        extraversion colleagues     -0.05
+## 13  openness/intellect colleagues      0.10
+## 14       agreeableness colleagues      0.00
+## 15   conscientiousness colleagues     -0.10
+## 16 emotional stability  strangers      0.00
+## 17        extraversion  strangers      0.30
+## 18  openness/intellect  strangers      0.70
+## 19       agreeableness  strangers      0.30
+## 20   conscientiousness  strangers      0.30</code></pre>
+<pre class="r"><code>ggplot(graph11, aes(x=OCEAN, y=mean_diff, group=informants)) +
+  geom_line(aes(linetype=informants))+
+  geom_point()+
+expand_limits(y=c(-.80, .80))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 </div>
 </div>
 
