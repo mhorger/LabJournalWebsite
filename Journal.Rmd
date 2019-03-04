@@ -666,16 +666,18 @@ print(draw-win)
 ###Graph 1
 ```{r}
 library(tidyverse)
-chimps<- c("Dara", "Dara","Rita", "Rita","Liza", "Liza", "Azalea","Azalea", "Barbi", "Barbi", "Rowena", "Rowena", "Katie", "Katie","Fiona", "Fiona")
 
-cond<- c("social", "nonsocial")
+
+chimps<- c("Dara", "Rita","Liza", "Azalea", "Barbi",  "Rowena", "Katie", "Fiona")
+
+cond<- c("social","social","social", "social", "social", "social", "social", "social", "nonsocial","nonsocial","nonsocial","nonsocial","nonsocial","nonsocial","nonsocial","nonsocial")
 FreqOfRisk<- c(59, 60, 51, 57, 49, 35, 25, 45, 0, 42, 5, 35, 3, 3, 0, 10)
 graph1<-data.frame(chimps, FreqOfRisk, cond)
 
 print(graph1)
 
-ggplot(data = graph1) +
-  geom_line (mapping = aes(x = cond, y = FreqOfRisk, linetype = chimps),
+ggplot(data = graph1, group = 8) +
+  geom_line (mapping = aes(x = cond, y = as.numeric(FreqOfRisk), linetype = chimps),
              show.legend = TRUE)
 
 ```
@@ -764,7 +766,7 @@ geom_violin( mapping = aes(x=PersonX, y=Frequ, stats = ))
 ```
 ### Graph 6 
 
-What kind of dat do I need to put in to do the log likelihood ratio?
+What kind of data do I need to put in to do the log likelihood ratio?
 ```{r}
 
 ```
@@ -794,8 +796,10 @@ c + geom_bar(stat = "identity", position = dodge) +
 
 ```
 
+
+###Graph 8
 ```{r}
-###Graph 8 
+ 
 
 
 
@@ -803,13 +807,13 @@ c + geom_bar(stat = "identity", position = dodge) +
 
 ```
 
-
-
-
-```{r}
 ###Jefferies, L. N., & Lollo, V. D. (2019). Sudden Events Change Old Visual Objects Into New Ones: A Possible Role for Phasic Activation of Locus Coeruleus. Psychological Science, 30, 55–64.
 
 ### Graph 9
+
+
+```{r}
+
 
 condition<- c("No transient", "Transient")
 place<-c("outside",  "outside","inside", "inside")
@@ -826,27 +830,31 @@ graph9<-data.frame(visual, auditory)
 
 ggplot(graph9, aes(fill=place, y=vis_data, x=condition)) + 
     geom_bar(position="dodge", stat="identity")+
-  scale_y_discrete(name ="Mean Median RT (ms)", 
-    limits=c(230, 260, 290, 320, 340))
+   expand_limits(y=c(230, 340))
 
 ggplot(graph9, aes(fill=place, y=aud_data, x=condition)) + 
     geom_bar(position="dodge", stat="identity")+
-  scale_y_discrete(name ="Mean Median RT (ms)", 
-    limits=c(230, 260, 290, 320, 340))
+   expand_limits(y=c(230, 340))
 
 ```
 ```{r}
+
+```
+
 ### Jouravlev, O., Schwartz, R., Ayyash, D., Mineroff, Z., Gibson, E., & Fedorenko, E. (2019). Tracking Colisteners’ Knowledge States During Language Comprehension. Psychological Science, 30, 3–19.
 
 ###Graph 10
+
+```{r}
+
 ```
 
-
+### Kim, H., Domenico, S. I. D., & Connelly, B. S. (2019). Self–Other Agreement in Personality Reports: A Meta-Analytic Comparison of Self- and Informant-Report Means. Psychological Science, 30, 129–138.
+### Graph 11
 
 
 ```{r}
-### Kim, H., Domenico, S. I. D., & Connelly, B. S. (2019). Self–Other Agreement in Personality Reports: A Meta-Analytic Comparison of Self- and Informant-Report Means. Psychological Science, 30, 129–138.
-### Graph 11
+
 
 OCEAN<- c("emotional stability", "extraversion", "openness/intellect", "agreeableness", "conscientiousness")
 informants<-c("family","family","family","family","family", "friends","friends","friends","friends","friends", "colleagues","colleagues","colleagues","colleagues","colleagues", "strangers","strangers","strangers","strangers","strangers")
