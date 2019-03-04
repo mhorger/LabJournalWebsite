@@ -676,9 +676,19 @@ graph1<-data.frame(chimps, FreqOfRisk, cond)
 
 print(graph1)
 
-ggplot(data = graph1, group = 8) +
-  geom_line (mapping = aes(x = cond, y = as.numeric(FreqOfRisk), linetype = chimps),
-             show.legend = TRUE)
+#modified code
+ggplot(data = graph1) +
+  geom_line (mapping = aes(x = cond, 
+                           y=FreqOfRisk,
+                           group=chimps,
+                           linetype=chimps) )
+
+#Crump's code
+ggplot(data = graph1, aes(x = cond, 
+                          y=FreqOfRisk, 
+                          group=chimps,
+                          linetype=chimps))+
+  geom_line()
 
 ```
 ### Graph 2
