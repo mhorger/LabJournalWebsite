@@ -840,7 +840,7 @@ graph9<-data.frame(visual, auditory)
 
 ggplot(graph9, aes(fill=place, y=vis_data, x=condition)) + 
     geom_bar(position="dodge", stat="identity")+
-   expand_limits(y=c(230, 340))
+   ylim(230, 340)
 
 ggplot(graph9, aes(fill=place, y=aud_data, x=condition)) + 
     geom_bar(position="dodge", stat="identity")+
