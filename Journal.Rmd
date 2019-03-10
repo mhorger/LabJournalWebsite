@@ -784,6 +784,7 @@ What kind of data do I need to put in to do the log likelihood ratio?
 
 ### Graph 7 
 ```{r}
+library(tidyverse)
 gender<- c("man", "woman")
 judgements<-c("prior", "model posterior", "reported posterior")
 values<- c(60, 90, 75, 30, 70, 76)
@@ -877,5 +878,14 @@ ggplot(graph11, aes(x=OCEAN, y=mean_diff, group=informants)) +
   geom_line(aes(linetype=informants))+
   geom_point()+
 expand_limits(y=c(-.80, .80))
+```
+
+
+
+
+#Data wrangling assignment
+
+```{r}
+
 ```
 
