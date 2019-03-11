@@ -886,6 +886,9 @@ expand_limits(y=c(-.80, .80))
 #Data wrangling assignment
 
 ```{r}
+df<- starwars
 
+df$name
+#within df, list all values in column "name"
 ```
 

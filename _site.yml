@@ -12,6 +12,8 @@ navbar:
       href: Journal.html
     - text: "R dictionary"
       href: Dictionary.html
+    - text: "Data wrangling"
+      href: DataWrangling.html
     - text: "Links"
       href: Links.html
 output_dir: "docs"
