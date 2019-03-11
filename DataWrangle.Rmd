@@ -16,6 +16,99 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
 ```
+## Star wars 
+
+```{r}
+df<- starwars
+
+df$name
+#within df, give me all the values in "name"
+
+df[3,]
+#what's the data in row 3
+
+df[,3]
+#what's the data in column 3
+
+dim(df)
+#what are the dimensions of our data frame 
+
+
+#you can use row and column bind as long as your dimensions are the same 
+
+favorites<- rbind(df[2:3,], df[13:14,])
+
+df$species <- as.factor(df$species)
+#convert from a string to numeric 
+
+
+df[df$homeworld == "Tatooine",]
+
+#but this returns NA which is no good 
+
+tatooine <- df[df$homeworld=="Tatooine",]
+tatooine [is.na(tatooine$name)==FALSE,]
+dim(tatooine[is.na(tatooine$name)==FALSE,])[1]
+```
+
+Common refrain
+Dataframe %>% filter %>% group_by %>% summarise
+
+
+```{r}
+newdf <- df %>%
+  
+#start new data frame that will take from original df 
+  
+  filter(height>100) %>%
+  #only select characters with height greater than 100
+  
+  group_by(homeworld) %>%
+  #now group by homeworld and we're going to do something with those groups 
+  summarise(mean_birth_year = mean(birth_year, na.rm=TRUE))
+#na.rm allows you to remove NA 
+
+
+droids<- df %>%
+  filter(species == "Droid", 
+         height < 500) %>%
+  group_by(eye_color)
+
+
+
+specs<- df %>% 
+  group_by(species, hair_color)%>%
+  summarise(mean_years = mean(birth_year, na.rm = TRUE),
+            sd_years = sd(birth_year, na.rm = TRUE),
+            counts = length(name))
+
+
+#mutate
+
+newdf <- df %>%
+  mutate(height = height - 100)
+
+#How many films has each character been in
+
+newdf<- df %>%
+  select(name, films) %>%
+  #give us a new data frame with just these 2 variables
+  group_by(name)%>%
+  summarise(films = length (unlist(films)))
+```
+
+# Inputting data 
+
+Need to be very careful with the file paths. The path is relative to where it thinks your stuff is 
+
+Files -> more -> info about the working directory including "Go to working directory "
+
+```{r}
+# you can use read.csv() to read an excel sheet 
+ getwd()
+```
+
+
 
 ## Flanker task
 
@@ -68,7 +161,19 @@ for(i in file_names){
 A correct response occurs when the letter in the response column is the same as the letter in the middle position of item in the stimulus column. Create an accuracy column that codes whether the response was correct or incorrect on each trial (coding can be TRUE/FALSE, 0/1, or some other coding scheme that identifies correct vs incorrect)
 
 ```{r}
+strsplit(all_data[1,], "")
 
+separate(all_data[1,])
+
+
+unpacked<- (strsplit(all_data$stimulus, ""))
+tolower(unpacked)
+unlist(lapply(unpacked))
+
+
+accuracy<- all_data %>%
+  select(stimulus, response) %>%
+ separate(stimulus, c("flank1", "flank2", "flank3"))
 
 ```
 
@@ -79,7 +184,8 @@ The stimulus_onset column gives a computer timestamp in milliseconds indicating 
 **tip:** notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.
 
 ```{r}
-
+all_data<- all_data %>%
+  mutate(RT = as.integar(response_time - stimulus_onset))
 ```
 
 

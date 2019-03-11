@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="mhorger" />
+
+<meta name="date" content="2019-03-11" />
+
+<title>Data Vis Assignment</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Melissa Horger</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Education.html">Education</a>
+</li>
+<li>
+  <a href="Research.html">Research</a>
+</li>
+<li>
+  <a href="Links.html">Links</a>
+</li>
+<li>
+  <a href="Journal.html">Learning R</a>
+</li>
+<li>
+  <a href="Dictionary.html">R dictionary</a>
+</li>
+<li>
+  <a href="DataVis.html">Data Vis Assignment</a>
+</li>
+<li>
+  <a href="DataWrangling.html">Data wrangling</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Data Vis Assignment</h1>
+<h4 class="author"><em>mhorger</em></h4>
+<h4 class="date"><em>March 11, 2019</em></h4>
+
+</div>
+
+
+<div id="data-vis-assignment" class="section level1">
+<h1>Data-vis assignment</h1>
+<div id="calcutt-s.-e.-proctor-d.-berman-s.-m.-2019.-chimpanzees-pan-troglodytes-are-more-averse-to-social-than-nonsocial-risk.-psychological-science-30-105115" class="section level3">
+<h3>Calcutt, S. E., Proctor, D., &amp; Berman, S. M. (2019). Chimpanzees (Pan troglodytes) Are More Averse to Social Than Nonsocial Risk. Psychological Science, 30, 105–115</h3>
+</div>
+<div id="graph-1" class="section level3">
+<h3>Graph 1</h3>
+<pre class="r"><code>library(tidyverse)
+
+
+chimps&lt;- c(&quot;Dara&quot;, &quot;Rita&quot;,&quot;Liza&quot;, &quot;Azalea&quot;, &quot;Barbi&quot;,  &quot;Rowena&quot;, &quot;Katie&quot;, &quot;Fiona&quot;)
+
+cond&lt;- c(&quot;social&quot;,&quot;social&quot;,&quot;social&quot;, &quot;social&quot;, &quot;social&quot;, &quot;social&quot;, &quot;social&quot;, &quot;social&quot;, &quot;nonsocial&quot;,&quot;nonsocial&quot;,&quot;nonsocial&quot;,&quot;nonsocial&quot;,&quot;nonsocial&quot;,&quot;nonsocial&quot;,&quot;nonsocial&quot;,&quot;nonsocial&quot;)
+FreqOfRisk&lt;- c(59, 60, 51, 57, 49, 35, 25, 45, 0, 42, 5, 35, 3, 3, 0, 10)
+graph1&lt;-data.frame(chimps, FreqOfRisk, cond)
+
+print(graph1)</code></pre>
+<pre><code>##    chimps FreqOfRisk      cond
+## 1    Dara         59    social
+## 2    Rita         60    social
+## 3    Liza         51    social
+## 4  Azalea         57    social
+## 5   Barbi         49    social
+## 6  Rowena         35    social
+## 7   Katie         25    social
+## 8   Fiona         45    social
+## 9    Dara          0 nonsocial
+## 10   Rita         42 nonsocial
+## 11   Liza          5 nonsocial
+## 12 Azalea         35 nonsocial
+## 13  Barbi          3 nonsocial
+## 14 Rowena          3 nonsocial
+## 15  Katie          0 nonsocial
+## 16  Fiona         10 nonsocial</code></pre>
+<pre class="r"><code>#modified code
+ggplot(data = graph1) +
+  geom_line (mapping = aes(x = cond, 
+                           y=FreqOfRisk,
+                           group=chimps,
+                           linetype=chimps) )</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>#Crump&#39;s code
+ggplot(data = graph1, aes(x = cond, 
+                          y=FreqOfRisk, 
+                          group=chimps,
+                          linetype=chimps))+
+  geom_line()</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-1-2.png" width="672" /> ### Graph 2</p>
+<pre class="r"><code>AverageFreqSocialRisk&lt;- c(5, 11, 33, 40, 46, 49, 57, 60)
+AverageFreqNonSocial&lt;- c(3, 0, 45, 5, 1, 25, 52, 58)
+graph2&lt;- data.frame(AverageFreqNonSocial, AverageFreqSocialRisk) 
+
+ggplot(data = graph2)+
+  geom_point (mapping = (aes (x = AverageFreqNonSocial, y = AverageFreqSocialRisk)))+
+     geom_smooth(method=&#39;lm&#39;,mapping = (aes (x = AverageFreqNonSocial, y = AverageFreqSocialRisk)))</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="cao-j.-kleiman-weiner-m.-banaji-m.-r.-2019.-people-make-the-same-bayesian-judgment-they-criticize-in-others.-psychological-science-30-2031." class="section level3">
+<h3>Cao, J., Kleiman-Weiner, M., &amp; Banaji, M. R. (2019). People Make the Same Bayesian Judgment They Criticize in Others. Psychological Science, 30, 20–31.</h3>
+</div>
+<div id="graph-3" class="section level3">
+<h3>Graph 3</h3>
+<pre class="r"><code>cases&lt;- c(&quot;Doctor Study 1&quot;, &quot;Doctor Study 1&quot;, &quot;Doctor Study 1&quot;, &quot;Butcher Study 2&quot;,&quot;Butcher Study 2&quot;, &quot;Butcher Study 2&quot;, &quot;Firefighter Study 2&quot;,&quot;Firefighter Study 2&quot;, &quot;Firefighter Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot; )
+options&lt;- c(&quot;Woman more likely&quot;, &quot;Equally likely&quot;, &quot;Man more likely&quot;)
+totalN&lt;-c(199, 199, 199, 199, 199, 199, 200, 200, 200, 205, 205, 205)
+responses&lt;-c(0, 189, 10, 9, 130, 60, 0, 120, 80, 6, 124, 75 )
+
+props&lt;-c(responses/totalN)
+
+graph3&lt;- data.frame(cases, options, totalN, responses, props)
+
+print(graph3)</code></pre>
+<pre><code>##                          cases           options totalN responses
+## 1               Doctor Study 1 Woman more likely    199         0
+## 2               Doctor Study 1    Equally likely    199       189
+## 3               Doctor Study 1   Man more likely    199        10
+## 4              Butcher Study 2 Woman more likely    199         9
+## 5              Butcher Study 2    Equally likely    199       130
+## 6              Butcher Study 2   Man more likely    199        60
+## 7          Firefighter Study 2 Woman more likely    200         0
+## 8          Firefighter Study 2    Equally likely    200       120
+## 9          Firefighter Study 2   Man more likely    200        80
+## 10 Construction Worker Study 2 Woman more likely    205         6
+## 11 Construction Worker Study 2    Equally likely    205       124
+## 12 Construction Worker Study 2   Man more likely    205        75
+##         props
+## 1  0.00000000
+## 2  0.94974874
+## 3  0.05025126
+## 4  0.04522613
+## 5  0.65326633
+## 6  0.30150754
+## 7  0.00000000
+## 8  0.60000000
+## 9  0.40000000
+## 10 0.02926829
+## 11 0.60487805
+## 12 0.36585366</code></pre>
+<pre class="r"><code>ggplot(data = graph3) +
+  geom_bar(mapping = aes(x = cases, color = options, position = &quot;fill&quot;, stat(responses / totalN)))</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>colors are wrong</p>
+</div>
+<div id="graph-4" class="section level3">
+<h3>Graph 4</h3>
+<pre class="r"><code>evaluation&lt;- c(1, 2, 3, 4, 5, 6, 7)
+
+cases&lt;- c(&quot;Doctor Study 1&quot;, &quot;Doctor Study 1&quot;, &quot;Doctor Study 1&quot;,&quot;Doctor Study 1&quot;, &quot;Doctor Study 1&quot;, &quot;Doctor Study 1&quot;, &quot;Doctor Study 1&quot;, &quot;Butcher Study 2&quot;,&quot;Butcher Study 2&quot;, &quot;Butcher Study 2&quot;,&quot;Butcher Study 2&quot;,&quot;Butcher Study 2&quot;, &quot;Butcher Study 2&quot;,&quot;Butcher Study 2&quot;, &quot;Firefighter Study 2&quot;,&quot;Firefighter Study 2&quot;, &quot;Firefighter Study 2&quot;,&quot;Firefighter Study 2&quot;,&quot;Firefighter Study 2&quot;, &quot;Firefighter Study 2&quot;,&quot;Firefighter Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot;, &quot;Construction Worker Study 2&quot; )
+
+EvalScores&lt;- c(35, 50, 42, 35, 20, 10, 7, 19, 30, 50, 50, 30, 15, 5, 25, 25, 40, 50, 40, 15, 5, 25, 30, 30, 35, 55, 35, 20 )
+
+graph4&lt;-data.frame(evaluation, cases, EvalScores)
+
+print(graph4)</code></pre>
+<pre><code>##    evaluation                       cases EvalScores
+## 1           1              Doctor Study 1         35
+## 2           2              Doctor Study 1         50
+## 3           3              Doctor Study 1         42
+## 4           4              Doctor Study 1         35
+## 5           5              Doctor Study 1         20
+## 6           6              Doctor Study 1         10
+## 7           7              Doctor Study 1          7
+## 8           1             Butcher Study 2         19
+## 9           2             Butcher Study 2         30
+## 10          3             Butcher Study 2         50
+## 11          4             Butcher Study 2         50
+## 12          5             Butcher Study 2         30
+## 13          6             Butcher Study 2         15
+## 14          7             Butcher Study 2          5
+## 15          1         Firefighter Study 2         25
+## 16          2         Firefighter Study 2         25
+## 17          3         Firefighter Study 2         40
+## 18          4         Firefighter Study 2         50
+## 19          5         Firefighter Study 2         40
+## 20          6         Firefighter Study 2         15
+## 21          7         Firefighter Study 2          5
+## 22          1 Construction Worker Study 2         25
+## 23          2 Construction Worker Study 2         30
+## 24          3 Construction Worker Study 2         30
+## 25          4 Construction Worker Study 2         35
+## 26          5 Construction Worker Study 2         55
+## 27          6 Construction Worker Study 2         35
+## 28          7 Construction Worker Study 2         20</code></pre>
+<pre class="r"><code>p &lt;- ggplot(graph4, aes(x=cases, y=EvalScores)) + 
+  geom_violin() 
+
+p + stat_summary(fun.data=data_summary)</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>p + stat_summary(fun.data=&quot;mean_sdl&quot;, mult=1, 
+                 geom=&quot;crossbar&quot;, width=0.2 )</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>p</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+</div>
+<div id="graph-5" class="section level3">
+<h3>Graph 5</h3>
+<pre class="r"><code>PersonX&lt;- c(&quot;Equally likely&quot;, &quot;Man more likely&quot;)
+MoneyTransferred&lt;-c(&quot;$0.00&quot;,&quot;$0.00&quot;, &quot;$0.05&quot;,&quot;$0.05&quot;, &quot;$0.10&quot;,&quot;$0.10&quot;, &quot;$0.15&quot;,&quot;$0.15&quot;, &quot;$0.20&quot;, &quot;$0.20&quot;, &quot;$0.25&quot;, &quot;$0.25&quot;, &quot;$0.30&quot;, &quot;$0.30&quot;)
+Frequ&lt;- c(5, 110, 2, 20, 70, 30, 108, 35, 55, 5, 1, 1, 1, 1)
+graph5&lt;-data.frame(PersonX, MoneyTransferred, Frequ)
+
+a&lt;- ggplot(graph5, aes(x=PersonX, y=Frequ)) + 
+  geom_violin() 
+
+a + stat_summary(fun.data=data_summary)</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code> stat_summary(fun.data=&quot;mean_sdl&quot;, mult=1, 
+                 geom=&quot;crossbar&quot;, width=0.2 )</code></pre>
+<pre><code>## geom_crossbar: na.rm = FALSE, width = 0.2
+## stat_summary: fun.data = mean_sdl, fun.y = NULL, fun.ymax = NULL, fun.ymin = NULL, fun.args = list(), na.rm = FALSE
+## position_identity</code></pre>
+<pre class="r"><code>a</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<pre class="r"><code>b&lt;- ggplot(data = graph5)+
+geom_violin( mapping = aes(x=PersonX, y=Frequ, stats = )) </code></pre>
+</div>
+<div id="graph-6" class="section level3">
+<h3>Graph 6</h3>
+<p>What kind of data do I need to put in to do the log likelihood ratio?</p>
+</div>
+<div id="graph-7" class="section level3">
+<h3>Graph 7</h3>
+<pre class="r"><code>library(tidyverse)
+gender&lt;- c(&quot;man&quot;, &quot;woman&quot;)
+judgements&lt;-c(&quot;prior&quot;, &quot;model posterior&quot;, &quot;reported posterior&quot;)
+values&lt;- c(60, 90, 75, 30, 70, 76)
+graph7&lt;- data.frame(gender, judgements, values)
+
+
+ggplot(graph7, aes(fill=judgements, y=values, x=gender)) + 
+    geom_bar(position=&quot;dodge&quot;, stat=&quot;identity&quot;)+
+  labs( y = &quot;P(Target = Doctor&quot;) </code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="graph-8" class="section level3">
+<h3>Graph 8</h3>
+</div>
+<div id="jefferies-l.-n.-lollo-v.-d.-2019.-sudden-events-change-old-visual-objects-into-new-ones-a-possible-role-for-phasic-activation-of-locus-coeruleus.-psychological-science-30-5564." class="section level3">
+<h3>Jefferies, L. N., &amp; Lollo, V. D. (2019). Sudden Events Change Old Visual Objects Into New Ones: A Possible Role for Phasic Activation of Locus Coeruleus. Psychological Science, 30, 55–64.</h3>
+</div>
+<div id="graph-9" class="section level3">
+<h3>Graph 9</h3>
+<pre class="r"><code>condition&lt;- c(&quot;No transient&quot;, &quot;Transient&quot;)
+place&lt;-c(&quot;outside&quot;,  &quot;outside&quot;,&quot;inside&quot;, &quot;inside&quot;)
+all_data&lt;-c(305, 292, 300, 280, 295, 265, 290, 250)
+vis_data&lt;-c(305, 292, 300, 280)
+aud_data&lt;-c(295, 265, 290, 250)
+group&lt;- c(&quot;visual&quot;,&quot;visual&quot;, &quot;auditory&quot;, &quot;auditory&quot;)
+
+visual&lt;-data.frame(condition, place, vis_data)
+
+auditory&lt;-data.frame(condition, place, aud_data)
+
+graph9&lt;-data.frame(visual, auditory)
+
+ggplot(graph9, aes(fill=place, y=vis_data, x=condition)) + 
+    geom_bar(position=&quot;dodge&quot;, stat=&quot;identity&quot;)+
+   ylim(230, 340)</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(graph9, aes(fill=place, y=aud_data, x=condition)) + 
+    geom_bar(position=&quot;dodge&quot;, stat=&quot;identity&quot;)+
+   expand_limits(y=c(230, 340))</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+</div>
+<div id="jouravlev-o.-schwartz-r.-ayyash-d.-mineroff-z.-gibson-e.-fedorenko-e.-2019.-tracking-colisteners-knowledge-states-during-language-comprehension.-psychological-science-30-319." class="section level3">
+<h3>Jouravlev, O., Schwartz, R., Ayyash, D., Mineroff, Z., Gibson, E., &amp; Fedorenko, E. (2019). Tracking Colisteners’ Knowledge States During Language Comprehension. Psychological Science, 30, 3–19.</h3>
+</div>
+<div id="graph-10" class="section level3">
+<h3>Graph 10</h3>
+</div>
+<div id="kim-h.-domenico-s.-i.-d.-connelly-b.-s.-2019.-selfother-agreement-in-personality-reports-a-meta-analytic-comparison-of-self--and-informant-report-means.-psychological-science-30-129138." class="section level3">
+<h3>Kim, H., Domenico, S. I. D., &amp; Connelly, B. S. (2019). Self–Other Agreement in Personality Reports: A Meta-Analytic Comparison of Self- and Informant-Report Means. Psychological Science, 30, 129–138.</h3>
+</div>
+<div id="graph-11" class="section level3">
+<h3>Graph 11</h3>
+<pre class="r"><code>OCEAN&lt;- c(&quot;emotional stability&quot;, &quot;extraversion&quot;, &quot;openness/intellect&quot;, &quot;agreeableness&quot;, &quot;conscientiousness&quot;)
+informants&lt;-c(&quot;family&quot;,&quot;family&quot;,&quot;family&quot;,&quot;family&quot;,&quot;family&quot;, &quot;friends&quot;,&quot;friends&quot;,&quot;friends&quot;,&quot;friends&quot;,&quot;friends&quot;, &quot;colleagues&quot;,&quot;colleagues&quot;,&quot;colleagues&quot;,&quot;colleagues&quot;,&quot;colleagues&quot;, &quot;strangers&quot;,&quot;strangers&quot;,&quot;strangers&quot;,&quot;strangers&quot;,&quot;strangers&quot;)
+mean_diff&lt;-c(-.10,-.10,.10,-.20,-.20, -.20, -.10, .20, -.05, -.20,-.20, -.05,.10, 0,  -.10, 0, .30, .70, .30, .30)
+
+graph11&lt;-data.frame(OCEAN, informants, mean_diff)
+print(graph11)</code></pre>
+<pre><code>##                  OCEAN informants mean_diff
+## 1  emotional stability     family     -0.10
+## 2         extraversion     family     -0.10
+## 3   openness/intellect     family      0.10
+## 4        agreeableness     family     -0.20
+## 5    conscientiousness     family     -0.20
+## 6  emotional stability    friends     -0.20
+## 7         extraversion    friends     -0.10
+## 8   openness/intellect    friends      0.20
+## 9        agreeableness    friends     -0.05
+## 10   conscientiousness    friends     -0.20
+## 11 emotional stability colleagues     -0.20
+## 12        extraversion colleagues     -0.05
+## 13  openness/intellect colleagues      0.10
+## 14       agreeableness colleagues      0.00
+## 15   conscientiousness colleagues     -0.10
+## 16 emotional stability  strangers      0.00
+## 17        extraversion  strangers      0.30
+## 18  openness/intellect  strangers      0.70
+## 19       agreeableness  strangers      0.30
+## 20   conscientiousness  strangers      0.30</code></pre>
+<pre class="r"><code>ggplot(graph11, aes(x=OCEAN, y=mean_diff, group=informants)) +
+  geom_line(aes(linetype=informants))+
+  geom_point()+
+expand_limits(y=c(-.80, .80))</code></pre>
+<p><img src="DataVis_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
