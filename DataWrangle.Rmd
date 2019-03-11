@@ -161,17 +161,18 @@ for(i in file_names){
 A correct response occurs when the letter in the response column is the same as the letter in the middle position of item in the stimulus column. Create an accuracy column that codes whether the response was correct or incorrect on each trial (coding can be TRUE/FALSE, 0/1, or some other coding scheme that identifies correct vs incorrect)
 
 ```{r}
-strsplit(all_data[1,], "")
-
-separate(all_data[1,])
 
 
-unpacked<- (strsplit(all_data$stimulus, ""))
-tolower(unpacked)
-unlist(lapply(unpacked))
 
+
+center_letter<- unlist(lapply(strsplit(all_data$stimulus, ""),
+           FUN = function(x)unlist(x)[2]))
+center_letter<-tolower(center_letter)
 
 accuracy<- all_data %>%
+ cbind(center_letter)
+
+
   select(stimulus, response) %>%
  separate(stimulus, c("flank1", "flank2", "flank3"))
 
