@@ -162,19 +162,30 @@ A correct response occurs when the letter in the response column is the same as 
 
 ```{r}
 
-
-
-
-center_letter<- unlist(lapply(strsplit(all_data$stimulus, ""),
-           FUN = function(x)unlist(x)[2]))
+center_letter<- unlist(lapply(strsplit(all_data$stimulus, ""), FUN = function(x)unlist(x)[2]))
 center_letter<-tolower(center_letter)
 
+center_letter<- as.character(center_letter)
+
 accuracy<- all_data %>%
- cbind(center_letter)
+ cbind(center_letter) %>%
+  cbind(accurate = 0)
 
 
-  select(stimulus, response) %>%
- separate(stimulus, c("flank1", "flank2", "flank3"))
+all_data%%response_time
+
+
+accuracy[i, 10]
+
+
+
+
+
+for (i in accuracy){
+    if (accuracy[i, 10] == accuracy[i, 14])
+    accurate = 1} 
+    
+
 
 ```
 
