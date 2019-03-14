@@ -169,22 +169,20 @@ center_letter<- as.character(center_letter)
 
 accuracy<- all_data %>%
  cbind(center_letter) %>%
-  cbind(accurate = 0)
-
-
-all_data%%response_time
-
-
-accuracy[i, 10]
+  cbind(accurate = 0) 
 
 
 
 
-
+accuracy %>%  
+cbind(accuracy, accurate = 0) %>%
 for (i in accuracy){
-    if (accuracy[i, 10] == accuracy[i, 14])
-    accurate = 1} 
-    
+  if ((accuracy$response) == (accuracy$center_letter)){
+      accurate <- 1} 
+  }
+
+
+
 
 
 ```
@@ -196,8 +194,27 @@ The stimulus_onset column gives a computer timestamp in milliseconds indicating 
 **tip:** notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.
 
 ```{r}
-all_data<- all_data %>%
-  mutate(RT = as.integar(response_time - stimulus_onset))
+accuracy<- accuracy %>%
+  mutate()
+  as.numeric(accuracy$stimulus_onset)
+
+class(accuracy$stimulus_onset)
+
+
+
+accuracy$stimulus_onset<- as.numeric(accuracy$stimulus_onset)
+accuracy$response_time<- as.numeric(accuracy$response_time)
+
+
+for (i in accuracy){
+    RT <- accuracy$response_time - accuracy$stimulus_onset
+  }
+  
+
+  accuracy <- cbind(accuracy, RT)
+  
+  
+ 
 ```
 
 
@@ -206,8 +223,21 @@ all_data<- all_data %>%
 Check how many trials each subject completed in the congruent and incongruent conditions, the mean accuracy for each subject in each congruency condition, and the mean RT for each subject in each congruency condition.
 
 ```{r}
+condcheck <- accuracy %>%
+  group_by(subject)
+print(condcheck)
 
 
+congrucheck<- accuracy %>%
+  filter(congruency == "C") %>%
+  group_by(subject)
+
+congrucheck %>%
+  summarise(subject)
+
+incongrucheck<- accuracy %>%
+  filter(congruency == "I") %>%
+  group_by(subject)
 ```
 
 
