@@ -173,14 +173,11 @@ accuracy<- all_data %>%
 
 
 
+accuracy <- accuracy %>%
+  mutate(accurate = response==center_letter)
 
-accuracy %>%  
-cbind(accuracy, accurate = 0) %>%
-for (i in accuracy){
-  if ((accuracy$response) == (accuracy$center_letter)){
-      accurate <- 1} 
-  }
-
+if (accuracy$accurate == TRUE){
+  accuracy$accurate = 1} else {accuracy$accurate=0 }
 
 
 
@@ -230,14 +227,21 @@ print(condcheck)
 
 congrucheck<- accuracy %>%
   filter(congruency == "C") %>%
-  group_by(subject)
-
-congrucheck %>%
-  summarise(subject)
+  group_by(subject) %>%
+  summarise(mean_RTC = mean(RT)) 
 
 incongrucheck<- accuracy %>%
   filter(congruency == "I") %>%
-  group_by(subject)
+  group_by(subject) %>%
+  summarise(mean_RTC = mean(RT))
+
+ic = table(incongrucheck$subject)
+print(ic)
+
+cc = table(congrucheck$subject)
+print (cc)
+
+
 ```
 
 
@@ -247,6 +251,9 @@ incongrucheck<- accuracy %>%
 It is common to exclude Reaction times that are very slow. There are many methods and procedures for excluding outlying reaction times. To keep it simple, exclude all RTs that are longer than 2000 ms
 
 ```{r}
+
+accuracy %>%
+  filter(RT < 2000)
 
 ```
 
