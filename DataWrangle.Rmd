@@ -169,16 +169,19 @@ center_letter<- as.character(center_letter)
 
 accuracy<- all_data %>%
  cbind(center_letter) %>%
-  cbind(accurate = 0) 
+  cbind(accurate = 0) %>%
+  
 
 
 
 accuracy <- accuracy %>%
   mutate(accurate = response==center_letter)
 
-if (accuracy$accurate == TRUE){
-  accuracy$accurate = 1} else {accuracy$accurate=0 }
 
+  accuracy_scores<-  as.integer(as.logical(accuracy$accurate))
+  
+  accuracy <- accuracy %>%
+    cbind(accuracy_scores)
 
 
 
@@ -265,13 +268,51 @@ accuracy %>%
 
 ```{r}
 
+correctcongrRT <- accuracy %>%
+  filter( congruency == "C",
+    accuracy_scores == 1) %>%
+  group_by(subject) %>%
+  summarise(mean_cong_RT <- mean(RT)) 
+
+correctincongrRT <- accuracy %>%
+  filter( congruency == "I",
+    accuracy_scores == 1) %>%
+  group_by(subject) %>%
+  summarise(mean_incong_RT <- mean(RT)) 
+
+
 ```
 
 2. Get the overall mean RTs and SEMs (standard errors of the mean) for the congruent and incongruent condition. Make a table and graph.
 
 ```{r}
 
-  
+std <- function(x) sd(x)/sqrt(length(x))
+
+overall_mean_cong <- accuracy %>%
+  filter(congruency == "C") %>%
+  summarise(mean_cong<- mean(RT),
+            SEM_cong<- std(RT))
+
+overall_mean_incong <- accuracy %>%
+  filter(congruency == "I") %>%
+  summarise(mean_incong<- mean(RT),
+            SEM_incong<- std(RT))
+
+overall_means<- data.frame(overall_mean_cong)
+
+
+table(overall_mean_cong, overall_mean_incong)
+
+library(knitr)
+
+kable(overall_means)
+
+
+
+
+
+
   
 ```
 
