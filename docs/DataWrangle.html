@@ -645,18 +645,67 @@ overall_mean_incong &lt;- accuracy %&gt;%
   summarise(mean_incong&lt;- mean(RT),
             SEM_incong&lt;- std(RT))
 
-overall_means&lt;- data.frame(overall_mean_cong)
+overall_means&lt;- data.frame(overall_mean_cong, overall_mean_incong)
+
+overall_means [2,1] &lt;- 
+overall_means [1, 3]
+
+overall_means [2,2] &lt;- 
+overall_means [1, 4]
+
+overall_means [1,3] &lt;- c(&quot;congruent&quot;)
+overall_means [2, 3] &lt;- c(&quot;incongruent&quot;)
+
+overall_means$SEM_incong....std.RT. = NULL
+names(overall_means)[1]&lt;-&quot;Mean&quot;
+names(overall_means)[2]&lt;-&quot;Standard error of the mean&quot;
+names(overall_means)[3]&lt;-&quot;Condition&quot;
+
+knitr::kable(overall_means)
 
 
-table(overall_mean_cong, overall_mean_incong)
 
-library(knitr)
 
-kable(overall_means)</code></pre>
+
+ggplot(overall_means, aes(x=Condition, y=Mean, fill = Condition)) + 
+    geom_bar(position=position_dodge(), stat=&quot;identity&quot;,
+             colour=&quot;black&quot;, # Use black outlines,
+             size=.3) +      # Thinner lines
+    geom_errorbar(aes(ymin=overall_means$Mean- overall_means$`Standard error of the mean`, ymax=overall_means$Mean+ overall_means$`Standard error of the mean`),
+                  size=.3,    # Thinner lines
+                  width=.2,
+                  position=position_dodge(.9)) +
+    xlab(&quot;Condition&quot;) +
+    ylab(&quot;Mean RT&quot;) +
+       ggtitle(&quot;The Effect of Congruency on the Flanker Task&quot;) 
+
+  
+#when I try to rescale the Y axis, I lose the bars   </code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect</li>
 </ol>
 <p>**<a href="tip:**" class="uri">tip:**</a> Not all problems have an easy solution in dplyr, this is one them. You may have an easier time using logical indexing of the dataframe to solve this part.</p>
+<pre class="r"><code>congrRT &lt;- accuracy %&gt;%
+  filter( congruency == &quot;C&quot;) %&gt;%
+  group_by(subject) %&gt;%
+  summarise(mean_cong_RT &lt;- mean(RT)) 
+
+incongrRT &lt;- accuracy %&gt;%
+  filter( congruency == &quot;I&quot;) %&gt;%
+  group_by(subject) %&gt;%
+  summarise(mean_incong_RT &lt;- mean(RT)) 
+
+flanker_effect&lt;- cbind(congrRT, incongrRT)
+
+flanker_effect[,3] = NULL
+
+names(flanker_effect)[2]&lt;-&quot;CongruentMean&quot;
+names(flanker_effect)[3]&lt;-&quot;IncongruentMean&quot;
+
+
+flanker &lt;- flanker_effect %&gt;%
+  mutate (IncongruentMean = IncongruentMean - CongruentMean) %&gt;%
+  cbind(flanker, flanker_effect)</code></pre>
 </div>
 <div id="exploratory-analysis" class="section level3">
 <h3>Exploratory analysis</h3>
