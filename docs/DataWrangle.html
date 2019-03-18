@@ -702,10 +702,30 @@ flanker_effect[,3] = NULL
 names(flanker_effect)[2]&lt;-&quot;CongruentMean&quot;
 names(flanker_effect)[3]&lt;-&quot;IncongruentMean&quot;
 
+cond&lt;- c(&quot;flanker effect&quot;)
+
+graph1 &lt;- data.frame(graph1, cond)
 
 flanker &lt;- flanker_effect %&gt;%
-  mutate (IncongruentMean = IncongruentMean - CongruentMean) %&gt;%
-  cbind(flanker, flanker_effect)</code></pre>
+  mutate (IncongruentMean = IncongruentMean - CongruentMean) 
+
+
+  SEM &lt;- std(flanker$IncongruentMean)
+  averagelag &lt;- mean(flanker$IncongruentMean)
+  graph1 &lt;- data.frame(SEM, averagelag)
+
+
+ggplot(graph1, mapping = aes(x = cond, y = averagelag)) + 
+  geom_bar(stat = &quot;identity&quot;)+
+  theme_classic(base_size = 12)+
+  ylab(&quot;Mean Flanker Effect&quot;)
+   geom_errorbar(aes(ymin= averagelag - SEM, ymax=averagelag + SEM), 
+                 position=position_dodge(width = 0.9),
+                 width = .2,
+                 color = &quot;black&quot;)
+
+
+#How do you know when you need to calculate the summary stats and when R will just do it for you? </code></pre>
 </div>
 <div id="exploratory-analysis" class="section level3">
 <h3>Exploratory analysis</h3>
