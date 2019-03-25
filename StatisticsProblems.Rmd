@@ -199,8 +199,9 @@ sum_out<-summary(aov(DV~conds, df))
 return(sum_out[[1]]$`F value`[1])
 }
 
-save_fs <- replicate(1000, run_anova())
+save_fs <- replicate(100000, run_anova())
 hist(save_fs)
+sort(save_fs)[99500]
 
 ```
 
