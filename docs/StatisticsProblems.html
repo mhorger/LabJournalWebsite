@@ -72,9 +72,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -192,8 +190,6 @@ $(document).ready(function () {
   menuAnchor.closest('li.dropdown').addClass('active');
 });
 </script>
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -352,6 +348,16 @@ div.tocify {
 
 </style>
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
 <div class="col-xs-12 col-sm-4 col-md-3">
@@ -425,8 +431,122 @@ div.tocify {
 <div id="null-distribution-of-mean-differences" class="section level3">
 <h3>Null distribution of mean differences</h3>
 <p>If you take two random samples from the same distribution they can be different because of random sampling. This question asks you to construct a null-distribution using simulation.</p>
-<p>Assume your samples come from a normal distribution with mean =0, sd =1. (use rnorm) Assume sample size for each sample is n =10 (e.g., rnorm(10,0,1)) Create the null-distribution: Run a simulation 10,000 times that finds the difference between means of sample A and B. You should have a vector of 10,000 difference scores Assume an alpha criteria of p&lt;.05 for a directional test. What is the critical value for a positive mean difference? In other words, how large must a positive mean difference be in order to occur less than 5% of the time under the null? Assume an alpha criteria of p&lt;.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?</p>
+<p>Assume your samples come from a normal distribution with mean =0, sd =1. (use rnorm) Assume sample size for each sample is n =10 (e.g., rnorm(10,0,1))</p>
+<pre class="r"><code>for(i in 10000)
+
+sample1&lt;- rnorm(10000,0,1)
+
+sample2&lt;- rnorm(10000,0,1)
+
+diff&lt;- sample1 - sample2</code></pre>
+<p>Create the null-distribution: Run a simulation 10,000 times that finds the difference between means of sample A and B.</p>
+<pre class="r"><code>counter&lt;-c(0)
+
+for(i in 1:10000){
+  sample1&lt;- rnorm(10000,0,1)
+  sample2&lt;- rnorm(10000,0,1)
+diff[i]&lt;- mean(sample1) - mean(sample2)}
+
+hist(diff)</code></pre>
+<p>You should have a vector of 10,000 difference scores Assume an alpha criteria of p&lt;.05 for a directional test. What is the critical value for a positive mean difference? In other words, how large must a positive mean difference be in order to occur less than 5% of the time under the null?</p>
+<p>-What does this mean? Our null hypothesis is that the 2 samples are not sig different. The alternative, in this case, is that sample1 is bigger than sample2 thus creating a positive mean difference.</p>
+<pre class="r"><code>hist(diff, freq = FALSE)
+
+sort(diff) [9500]
+
+diff[9500]</code></pre>
+<p>Assume an alpha criteria of p&lt;.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?</p>
+<pre class="r"><code>t.test(diff, mu = 0, alternative = &quot;two.sided&quot;)
+
+qt(c(.025, .975), df=9999) 
+
+
+sort(diff)[2500]
+sort(diff)[9750]</code></pre>
 </div>
+<div id="t-distribution" class="section level3">
+<h3>t-distribution</h3>
+<p>Show that the properties of a simulated t-distribution are the same as the properties of the analytic t-distribution. Assume df = 9.</p>
+<p>-The t distribution has the following properties: The mean of the distribution is equal to 0 . The variance is equal to v / ( v - 2 )</p>
+<p>-rt is a random sample of numbers from t dist -qt function lets us put in the quartiles - getting t value of a p value -pt function lets us asssess by p values - getting p value of a t value</p>
+<pre class="r"><code>?qt
+
+pt(q = 2, df = 9)
+
+
+
+ts &lt;- replicate(10000, t.test(rnorm(10, 0, 1), mu = 0)$statistic)
+hist(ts)
+
+
+
+length(ts[ts &lt; .5])/10000
+length(ts[ts &lt; 1])/10000
+
+tdist_analytic &lt;- rnorm(n = 100000, 0, 1)
+hist(tdist_analytic)</code></pre>
+<p>For example, what are the probabilities of t(9) &gt;= .5, 1, 1.5, 2, and 2.5? These p-values can be obtained using the pt() function.</p>
+<p>Create a simulated t-distribution for the null hypothesis with df=9. Here, the model situation involves taking samples of size n=10 from a normal distribution. The t-value is computed for each sample (sample mean - 0)/SEM. The process is repeated 10,000 times, and each t-value is saved. The resulting 10,000 t-values are the simulated t-distribution.</p>
+<pre class="r"><code>pt(q = c(.5, 1, 1.5, 2, 2.5), df = 9)</code></pre>
+<p>Using the simulated t-distribution, find the probability of t(9) &gt;= .5, 1, 1.5, 2, and 2.5</p>
+<p>Compare the two sets of probabilities to show that the difference is small. What happens to the difference if the simulation is repeated fewer times (e.g., 100) vs. more times (e.g., 100,000)</p>
+<pre class="r"><code>tsLESS &lt;- replicate(100, t.test(rnorm(10, 0, 1), mu = 0)$statistic)
+hist(tsLESS)
+
+tsMORE &lt;- replicate(100000, t.test(rnorm(10, 0, 1), mu = 0)$statistic)
+hist(tsMORE)</code></pre>
+</div>
+</div>
+<div id="correlation" class="section level2">
+<h2>Correlation</h2>
+<p>Sample A and Sample B both have 10 observations randomly sampled from the same normal distribution with mean = 0, and sd =1. The expected correlation between A and B is 0, because both samples are taken randomly.</p>
+<p>Generate the distribution of correlations (Pearson r values) that could be obtained by chance (simulate 10,000 times)</p>
+<p>Find the critical value such that the absolute value of the correlation occurs less than 5% of the time by chance.</p>
+<p>Find the critical value when the sample-size is increased to 100</p>
+<pre class="r"><code>correy&lt;- replicate(100000, cor(rnorm(10, 0, 1), rnorm(10, 0, 1)))
+hist(correy)
+sort(abs(correy))[95000]
+
+
+correy100&lt;- replicate(100000, cor(rnorm(100, 0, 1), rnorm(100, 0, 1)))
+hist(correy100)
+sort(abs(correy100))[95000]</code></pre>
+<p>You need a correlation of .63 to reject with 10. You need a correlation of .196 to reject with 100</p>
+</div>
+<div id="f-values" class="section level2">
+<h2>F-values</h2>
+<p>There are three groups of different subjects. The means for each subject in each group are below. Calculate the F-value for the main effect of group.</p>
+<pre class="r"><code>A &lt;- c(1,2,3,4)
+B &lt;- c(3,4,5,6)
+C &lt;- c(5,6,7,8)
+
+
+conds &lt;- rep(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), each = 4)
+DV &lt;- c(A, B, C)
+df &lt;- data.frame(conds, DV)
+summary(aov(DV~conds, df))</code></pre>
+</div>
+<div id="f-simulation" class="section level2">
+<h2>F simulation</h2>
+<p>Assume that there are three groups of different subjects. Each group has four subjects. The subject means for all subjects are sampled randomly from normal distribution with mean =0 and sd =1.</p>
+<p>Run a simulation 10,000 times to construct the simulated F-distribution. On each run, sample new numbers into the three groups, then compute F and save it.</p>
+<p>Using the simulated F-distribution, what is the critical value of F for alpha set at, p&lt;.05</p>
+<p>Compare your answer from above to the answer obtained using qf, that can compute the critical value directly.</p>
+<pre class="r"><code>run_anova &lt;- function (){
+Arandom &lt;- rnorm(4, 0, 1)
+Brandom &lt;- rnorm(4, 0, 1)
+Crandom &lt;-  rnorm(4, 0, 1)
+
+conds &lt;- rep(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), each = 4)
+DV &lt;- c(Arandom, Brandom, Crandom)
+df &lt;- data.frame(conds, DV)
+sum_out&lt;-summary(aov(DV~conds, df))
+
+return(sum_out[[1]]$`F value`[1])
+}
+
+save_fs &lt;- replicate(1000, run_anova())
+hist(save_fs)</code></pre>
 </div>
 
 
