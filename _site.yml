@@ -18,5 +18,7 @@ navbar:
       href: DataVis.html
     - text: "Data wrangling"
       href: DataWrangle.html
+    - text: "Statistics Problems"
+      href: StatisticsProblems.html
 
 output_dir: "docs"
