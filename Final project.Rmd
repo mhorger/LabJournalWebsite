@@ -1,0 +1,35 @@
+---
+title: "Presentation about nlme"
+subtitle: "Linear and Nonlinear Mixed Effects Models"
+author: "Melissa Horger"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, duke-blue, middlebury-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+class: center, middle
+
+# nlme
+
+### Fit and compare Gaussian linear and nonlinear mixed-effects models
+
+---
+class: inverse, center, middle
+
+# Get Started
+
+---
+

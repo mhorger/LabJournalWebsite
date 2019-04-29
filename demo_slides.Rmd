@@ -1,0 +1,121 @@
+---
+title: "Welcome to my TED talk"
+subtitle: "about stuff"
+author: "Melissa Noel Rose Horger"
+date: "`r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+Class: inverse, center, middle
+# Opening slide 
+
+---
+
+# Primary headers are indicated by 1 hashtag
+
+## Secondary by two, etc
+
+- we make bullet points by adding dashes 
+- just like this 
+- the code here doesn't include a class delineation so it goes to the default 
+
+
+---
+
+#slide number 3
+
+
+add R code blocks 
+
+```{r}
+HP <- c("harry", "ron", "hermione")
+
+```
+
+If we type echo = FALSE, it will hide the code but show the answer 
+
+
+```{r, echo=FALSE, fig.align='center'}
+
+hist(rnorm(1000, 1, 100))
+
+```
+
+---
+# How do we figure out the height of our figures?
+
+```{r, fig.align= 'left', fig.height=5}
+
+hist(rnorm(1000, 1, 100))
+
+```
+
+---
+
+```{r, fig.align='right', out.width="200px"}
+hist(rnorm(1000, 1, 100))
+```
+
+---
+
+# Adding pictures 
+
+```{r, echo=FALSE}
+
+
+imag1_path <- "images/hpmeme.PNG"
+
+
+knitr::include_graphics(imag1_path)
+
+```
+
+---
+#Adding columns 
+
+.pull-left[
+
+-pros of Gryffindor. 
+- cons of Gryffindor. 
+
+]
+
+.pull-right[
+
+-pros of Ravenclaw.
+- cons of Ravenclaw.
+]
+
+
+
+---
+
+#Displaying one line at a time 
+
+
+Type your first line 
+
+--
+
+DOUBLE DASH
+
+--
+
+Then the next line 
+
+--
+
+Et cetera 
