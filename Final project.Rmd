@@ -1,6 +1,6 @@
 ---
-title: "Presentation about nlme"
-subtitle: "Linear and Nonlinear Mixed Effects Models"
+title: "nlme"
+subtitle: "Fits and Compares Linear and Nonlinear Mixed Effects Models"
 author: "Melissa Horger"
 date: "`r Sys.Date()`"
 output:
@@ -20,16 +20,144 @@ options(htmltools.dir.version = FALSE)
 ```
 
 
+
 class: center, middle
 
-# nlme
+# Let's consider the competition 
 
-### Fit and compare Gaussian linear and nonlinear mixed-effects models
+.pull-left[
+
+##nlme. 
+- Let's you specify variance-covariance structures for the residuals.
+- Well suited for repeated measure or longitudinal designs. 
+
+]
+
+.pull-right[
+
+##lme4.
+- Allows you to fit outcomes whose distribution is not Gaussian and allows for crossed random effects.
+- Stores data more effiently due to the use of sparse matrices.
+- More suited for clustered data sets.
+]
+
 
 ---
-class: inverse, center, middle
 
-# Get Started
+
+#What's inside? 
+
+--
+
+### A whole lot...
+
+--
+1. Sample data
+
+--
+
+2. Lattice
+
+--
+
+3. Statistics
+
+--
+
+4. Matrices
+
+
+--
+
+```{r, echo=FALSE, out.height="50%", out.width="50%", fig.align='center'}
+imag1_path <- "images/obama.PNG"
+
+
+knitr::include_graphics(imag1_path)
+```
 
 ---
+
+# The nlme function within the nlme package
+
+This generic function fits a nonlinear mixed-effects model in the formulation described in Lindstrom and Bates (1990) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.
+
+### What did Lindstrom and Bates do for us? 
+
+--
+
+.pull-left[
+```{r, echo=FALSE, out.height="80%", out.width="80%"}
+imag2_path <- "images/equation1.PNG"
+
+
+knitr::include_graphics(imag2_path)
+
+```
+
+]
+
+.pull-right[
+```{r, echo=FALSE, out.height="120%", out.width="120%"}
+imag3_path <- "images/equation.PNG"
+
+
+knitr::include_graphics(imag3_path)
+
+```
+]
+
+--
+
+A lot of math
+
+---
+# Some important considerations  
+
+1. Need repeated measures from a single subject
+  - May be longitudinal, but may not
+  
+2. Can account for correlations within individuals
+  - within the random effects 
+  
+3. Uses maximum likelihood estimates 
+
+---
+
+#Using nlme
+
+## Begin by installing the nlme package
+
+Found on the CRAN repository 
+
+
+Website: https://svn.r-project.org/R-packages/trunk/nlme
+
+```{r, eval=FALSE}
+install.packages("nlme")
+```
+
+
+## Load the package 
+```{r, eval=FALSE}
+library("nlme")
+```
+
+---
+
+#Now we can view the specific nlme function
+
+
+
+##The arguments for this function
+
+nlme(model, data, fixed, random, groups, start, correlation, weights,
+subset, method, na.action, naPattern, control, verbose)
+
+
+
+
+
+
+
 
