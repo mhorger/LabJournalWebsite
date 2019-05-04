@@ -352,43 +352,115 @@ $(document).ready(function () {
 </div>
 <div id="load-the-package" class="section level2">
 <h2>Load the package</h2>
-<pre class="r"><code>library(&quot;nlme&quot;)</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(nlme)</code></pre>
 </div>
-<div id="try-the-nlme-function" class="section level2">
-<h2>Try the nlme function</h2>
-<p>“This generic function fits a nonlinear mixed-effects model in the formulation described in Lindstrom and Bates (1990) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.” - RDocumentation</p>
+<div id="try-the-lme-function" class="section level2">
+<h2>Try the lme function</h2>
+<p>This generic function fits a linear mixed-effects model in the formulation described in Laird and Ware (1982) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.</p>
 <div id="some-important-considerations" class="section level3">
 <h3>Some important considerations</h3>
 <ol style="list-style-type: decimal">
-<li>Need repeated measures from a single subject</li>
-</ol>
-<ul>
-<li>May be longitudinal, but may not</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Can account for correlations within individuals</li>
-</ol>
-<ul>
-<li>within the random effects</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>Uses maximum likelihood estimates</li>
+<li><p>Need repeated measures from a single subject The data may be longitudinal, but they also may not.</p></li>
+<li><p>Can account for correlations within individuals within the random effects</p></li>
+<li><p>Uses maximum likelihood estimates</p></li>
 </ol>
 </div>
 <div id="the-arguments-for-this-function" class="section level3">
 <h3>The arguments for this function</h3>
-<p>nlme(model, data, fixed, random, groups, start, correlation, weights, subset, method, na.action, naPattern, control, verbose)</p>
-<pre class="r"><code># NOT RUN {
-fm1 &lt;- nlme(height ~ SSasymp(age, Asym, R0, lrc),
-            data = Loblolly,
-            fixed = Asym + R0 + lrc ~ 1,
-            random = Asym ~ 1,
-            start = c(Asym = 103, R0 = -8.5, lrc = -3.3))
-summary(fm1)
-fm2 &lt;- update(fm1, random = pdDiag(Asym + lrc ~ 1))
-summary(fm2)
-# }</code></pre>
+<p>lme(model, data, fixed, random, groups, start, correlation, weights, subset, method, na.action, naPattern, control, verbose)</p>
 </div>
+</div>
+<div id="an-example-does-the-number-of-daily-naps-impact-infant-performance-on-a-thing" class="section level2">
+<h2>An example: Does the number of daily naps impact infant performance on a thing?</h2>
+<pre class="r"><code>#creating a data set 
+
+Subs &lt;- rep(c(seq(1:10)), 4)
+
+Month &lt;- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps &lt;- c(rep(c(3), 10), 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 2, 2, 2 ,2, 3, 3, 2, 2, 1, 2, 3, 1, 2, 2, 1, 1, 2, 1, 2, 1 )
+
+scores &lt;- c(runif(10, 1, 15), runif(10, 5, 20), runif(10, 10, 25), runif(10, 15, 30))
+
+dataset &lt;- data.frame(Subs, Month, Naps, scores)</code></pre>
+<p>This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps</p>
+<pre class="r"><code>#Conditional growth model
+tutorial&lt;-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
+
+#model = we expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. Random error comes from the fact that this is a within subjects design 
+
+#The inclusion of predictors in the model results in what is often called a conditional growth model because the fixed and random effects are now “conditioned on” the predictors. 
+
+summary(tutorial)</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: dataset 
+##        AIC      BIC    logLik
+##   237.8553 250.5234 -110.9276
+## 
+## Random effects:
+##  Formula: ~Month | Subs
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev       Corr  
+## (Intercept) 8.378913e-01 (Intr)
+## Month       3.839736e-05 0     
+## Residual    3.951022e+00       
+## 
+## Fixed effects: scores ~ Month * Naps 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 21.732649  5.882959 27  3.694170  0.0010
+## Month       -0.223261  0.475878 27 -0.469155  0.6427
+## Naps        -5.299397  2.101362 27 -2.521887  0.0179
+## Month:Naps   0.423541  0.186675 27  2.268874  0.0315
+##  Correlation: 
+##            (Intr) Month  Naps  
+## Month      -0.915              
+## Naps       -0.980  0.911       
+## Month:Naps  0.792 -0.942 -0.838
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.1224729 -0.6269678 -0.2288842  0.4464757  1.8387814 
+## 
+## Number of Observations: 40
+## Number of Groups: 10</code></pre>
+<pre class="r"><code>print(summary(tutorial))</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: dataset 
+##        AIC      BIC    logLik
+##   237.8553 250.5234 -110.9276
+## 
+## Random effects:
+##  Formula: ~Month | Subs
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev       Corr  
+## (Intercept) 8.378913e-01 (Intr)
+## Month       3.839736e-05 0     
+## Residual    3.951022e+00       
+## 
+## Fixed effects: scores ~ Month * Naps 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 21.732649  5.882959 27  3.694170  0.0010
+## Month       -0.223261  0.475878 27 -0.469155  0.6427
+## Naps        -5.299397  2.101362 27 -2.521887  0.0179
+## Month:Naps   0.423541  0.186675 27  2.268874  0.0315
+##  Correlation: 
+##            (Intr) Month  Naps  
+## Month      -0.915              
+## Naps       -0.980  0.911       
+## Month:Naps  0.792 -0.942 -0.838
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.1224729 -0.6269678 -0.2288842  0.4464757  1.8387814 
+## 
+## Number of Observations: 40
+## Number of Groups: 10</code></pre>
+<p>From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope.</p>
+<pre class="r"><code>ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps)) + 
+  geom_point()+
+  geom_smooth(method=lm)</code></pre>
+<p><img src="tutorial_Horger_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 </div>
 

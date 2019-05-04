@@ -40,8 +40,9 @@ install.packages("nlme")
 
 
 ## Load the package 
-```{r, eval=FALSE}
-library("nlme")
+```{r}
+library(ggplot2)
+library(nlme)
 ```
 
 
@@ -61,8 +62,54 @@ This generic function fits a linear mixed-effects model in the formulation descr
 lme(model, data, fixed, random, groups, start, correlation, weights,
 subset, method, na.action, naPattern, control, verbose)
 
+## An example: Does the number of daily naps impact infant performance on a thing? 
 
 ```{r}
 
+#creating a data set 
+
+Subs <- rep(c(seq(1:10)), 4)
+
+Month <- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps <- c(rep(c(3), 10), 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 2, 2, 2 ,2, 3, 3, 2, 2, 1, 2, 3, 1, 2, 2, 1, 1, 2, 1, 2, 1 )
+
+scores <- c(runif(10, 1, 15), runif(10, 5, 20), runif(10, 10, 25), runif(10, 15, 30))
+
+dataset <- data.frame(Subs, Month, Naps, scores)
+
+```
+
+This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps 
+```{r}
+#Conditional growth model
+tutorial<-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
+
+#model = we expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. Random error comes from the fact that this is a within subjects design 
+
+#The inclusion of predictors in the model results in what is often called a conditional growth model because the fixed and random effects are now “conditioned on” the predictors. 
+
+
+```
+
+We can move the results to a nicer table 
+
+```{r}
+
+tut<- summary(tutorial)
+tabl = tut$tTable 
+tabl 
+
+```
+
+
+
+
+From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope. 
+
+```{r}
+ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps)) + 
+  geom_point()+
+  geom_smooth(method=lm)
 ```
 
