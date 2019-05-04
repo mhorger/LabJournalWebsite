@@ -1,0 +1,134 @@
+---
+title: "nlme"
+subtitle: "Fits and Compares Linear and Nonlinear Mixed Effects Models"
+author: "Melissa Horger"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, duke-blue, middlebury-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+
+class: center, middle
+
+# Let's consider the competition 
+
+.pull-left[
+
+##nlme. 
+- Let's you specify variance-covariance structures for the residuals.
+- Well suited for repeated measure or longitudinal designs. 
+
+]
+
+.pull-right[
+
+##lme4.
+- Allows you to fit outcomes whose distribution is not Gaussian and allows for crossed random effects.
+- Stores data more effiently due to the use of sparse matrices.
+- More suited for clustered data sets.
+]
+
+
+---
+
+
+#What's inside? 
+
+--
+
+### A whole lot...
+
+--
+1. Sample data
+
+--
+
+2. Lattice
+
+--
+
+3. Statistics
+
+--
+
+4. Matrices
+
+
+--
+
+```{r, echo=FALSE, out.height="50%", out.width="50%", fig.align='center'}
+imag1_path <- "images/obama.PNG"
+
+
+knitr::include_graphics(imag1_path)
+```
+
+---
+
+# The lme function within the nlme package
+
+This generic function fits a linear mixed-effects model in the formulation described in Laird and Ware (1982) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.
+
+
+---
+# Some important considerations  
+
+1. Need repeated measures from a single subject
+  - May be longitudinal, but may not
+  
+2. Can account for correlations within individuals
+  - within the random effects 
+  
+3. Uses maximum likelihood estimates 
+
+---
+
+#Using nlme
+
+## Begin by installing the nlme package
+
+Found on the CRAN repository 
+
+
+Website: https://svn.r-project.org/R-packages/trunk/nlme
+
+```{r, eval=FALSE}
+install.packages("nlme")
+```
+
+
+## Load the package 
+```{r, eval=FALSE}
+library("nlme")
+```
+
+---
+
+#Now we can view the lme function
+
+
+
+##The arguments for this function
+
+lme(fixed, data, random, correlation, weights, subset, method, na.action, control, contrasts = NULL, keep.data = TRUE)
+
+
+
+
+
+
+
+
