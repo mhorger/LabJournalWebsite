@@ -370,9 +370,8 @@ library(nlme)</code></pre>
 <h3>The arguments for this function</h3>
 <p>lme(model, data, fixed, random, groups, start, correlation, weights, subset, method, na.action, naPattern, control, verbose)</p>
 </div>
-</div>
-<div id="an-example-does-the-number-of-daily-naps-impact-infant-performance-on-a-thing" class="section level2">
-<h2>An example: Does the number of daily naps impact infant performance on a thing?</h2>
+<div id="an-example-does-the-number-of-daily-naps-impact-infant-performance-on-a-thing" class="section level3">
+<h3><strong>An example: Does the number of daily naps impact infant performance on a thing?</strong></h3>
 <pre class="r"><code>#creating a data set 
 
 Subs &lt;- rep(c(seq(1:10)), 4)
@@ -381,86 +380,63 @@ Month &lt;- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
 
 Naps &lt;- c(rep(c(3), 10), 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 2, 2, 2 ,2, 3, 3, 2, 2, 1, 2, 3, 1, 2, 2, 1, 1, 2, 1, 2, 1 )
 
+Naps &lt;- as.factor(Naps)
+
+
+
 scores &lt;- c(runif(10, 1, 15), runif(10, 5, 20), runif(10, 10, 25), runif(10, 15, 30))
 
 dataset &lt;- data.frame(Subs, Month, Naps, scores)</code></pre>
-<p>This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps</p>
+<div id="this-is-a-longitudinal-three-level-model-with-repeated-measures-of-individuals-with-different-3-levels-of-naps-1-2-or-3-per-day." class="section level4">
+<h4>This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps (1, 2, or 3 per day).</h4>
+</div>
+<div id="we-will-run-a-conditional-growth-model-because-we-are-including-predictors.-subsequent-fixed-and-random-effects-are-now-conditioned-on-the-predictors." class="section level4">
+<h4>We will run a conditional growth model because we are including predictors. Subsequent fixed and random effects are now “conditioned on” the predictors.</h4>
 <pre class="r"><code>#Conditional growth model
-tutorial&lt;-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
-
-#model = we expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. Random error comes from the fact that this is a within subjects design 
-
-#The inclusion of predictors in the model results in what is often called a conditional growth model because the fixed and random effects are now “conditioned on” the predictors. 
-
-summary(tutorial)</code></pre>
-<pre><code>## Linear mixed-effects model fit by REML
-##  Data: dataset 
-##        AIC      BIC    logLik
-##   237.8553 250.5234 -110.9276
-## 
-## Random effects:
-##  Formula: ~Month | Subs
-##  Structure: General positive-definite, Log-Cholesky parametrization
-##             StdDev       Corr  
-## (Intercept) 8.378913e-01 (Intr)
-## Month       3.839736e-05 0     
-## Residual    3.951022e+00       
-## 
-## Fixed effects: scores ~ Month * Naps 
-##                 Value Std.Error DF   t-value p-value
-## (Intercept) 21.732649  5.882959 27  3.694170  0.0010
-## Month       -0.223261  0.475878 27 -0.469155  0.6427
-## Naps        -5.299397  2.101362 27 -2.521887  0.0179
-## Month:Naps   0.423541  0.186675 27  2.268874  0.0315
-##  Correlation: 
-##            (Intr) Month  Naps  
-## Month      -0.915              
-## Naps       -0.980  0.911       
-## Month:Naps  0.792 -0.942 -0.838
-## 
-## Standardized Within-Group Residuals:
-##        Min         Q1        Med         Q3        Max 
-## -2.1224729 -0.6269678 -0.2288842  0.4464757  1.8387814 
-## 
-## Number of Observations: 40
-## Number of Groups: 10</code></pre>
-<pre class="r"><code>print(summary(tutorial))</code></pre>
-<pre><code>## Linear mixed-effects model fit by REML
-##  Data: dataset 
-##        AIC      BIC    logLik
-##   237.8553 250.5234 -110.9276
-## 
-## Random effects:
-##  Formula: ~Month | Subs
-##  Structure: General positive-definite, Log-Cholesky parametrization
-##             StdDev       Corr  
-## (Intercept) 8.378913e-01 (Intr)
-## Month       3.839736e-05 0     
-## Residual    3.951022e+00       
-## 
-## Fixed effects: scores ~ Month * Naps 
-##                 Value Std.Error DF   t-value p-value
-## (Intercept) 21.732649  5.882959 27  3.694170  0.0010
-## Month       -0.223261  0.475878 27 -0.469155  0.6427
-## Naps        -5.299397  2.101362 27 -2.521887  0.0179
-## Month:Naps   0.423541  0.186675 27  2.268874  0.0315
-##  Correlation: 
-##            (Intr) Month  Naps  
-## Month      -0.915              
-## Naps       -0.980  0.911       
-## Month:Naps  0.792 -0.942 -0.838
-## 
-## Standardized Within-Group Residuals:
-##        Min         Q1        Med         Q3        Max 
-## -2.1224729 -0.6269678 -0.2288842  0.4464757  1.8387814 
-## 
-## Number of Observations: 40
-## Number of Groups: 10</code></pre>
+tutorial&lt;-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)</code></pre>
+<p><strong>lme(model, random, data)</strong></p>
+<p><strong>model</strong> - scores ~ Month * Naps</p>
+<p>We expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. There may be an interaction between these predictors.</p>
+<p><strong>random</strong> - random = ~ Month | Subs</p>
+<p>Random error comes from the fact that this is a within subjects design. The same infants are assessed at 1 month, 5 months, 10 months, and 15 months.</p>
+<p><strong>data</strong> - data=dataset</p>
+<p>Using the data set we created previously.</p>
+</div>
+<div id="we-can-move-the-results-to-a-nicer-table-using-the-summary-function" class="section level4">
+<h4>We can move the results to a nicer table using the summary function</h4>
+<pre class="r"><code>#summarize an lme object - our solution
+tut&lt;- summary(tutorial)
+tabl = tut$tTable 
+tabl </code></pre>
+<pre><code>##                  Value Std.Error DF    t-value    p-value
+## (Intercept)  4.5581755 5.8197476 25  0.7832256 0.44085175
+## Month        1.1727985 0.4399407 25  2.6658107 0.01326523
+## Naps2        5.8454034 6.5415686 25  0.8935782 0.38006944
+## Naps3        2.9249381 5.9819197 25  0.4889631 0.62913010
+## Month:Naps2 -0.5271529 0.5286370 25 -0.9971925 0.32822570
+## Month:Naps3 -0.4994257 0.5037190 25 -0.9914768 0.33095272</code></pre>
 <p>From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope.</p>
-<pre class="r"><code>ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps)) + 
+</div>
+<div id="we-can-also-graph-our-results." class="section level4">
+<h4>We can also graph our results.</h4>
+<pre class="r"><code>plot&lt;- 
+ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps, shape = Naps), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
   geom_point()+
-  geom_smooth(method=lm)</code></pre>
+
+  geom_line(group=Subs, color=&quot;grey&quot;)
+
+plot + scale_x_continuous(name=&quot;Age (in months)&quot;, limits=c(1, 15), breaks = Month) +
+  scale_y_continuous(name=&quot;Scores&quot;, limits=c(0, 30))</code></pre>
 <p><img src="tutorial_Horger_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>This kind of graph makes it more clear that there are 2 developmental trends occuring here- Infants’ performance on the assessment is improving with time and the average number of naps they take is decreasing with time.</p>
+</div>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Curran, P. J., Obeidat, K., &amp; Losardo, D. (2010). Twelve Frequently Asked Questions About Growth Curve Modeling. Journal of cognition and development : official journal of the Cognitive Development Society, 11(2), 121–136. <a href="doi:10.1080/15248371003699969" class="uri">doi:10.1080/15248371003699969</a></p>
+<p>Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald &amp; J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.</p>
+<p><a href="https://cran.r-project.org/web/packages/nlme/nlme.pdf" class="uri">https://cran.r-project.org/web/packages/nlme/nlme.pdf</a></p>
 </div>
 </div>
 

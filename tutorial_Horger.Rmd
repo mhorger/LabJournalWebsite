@@ -46,6 +46,14 @@ library(nlme)
 ```
 
 
+
+
+
+
+
+
+
+
 ## Try the lme function
 This generic function fits a linear mixed-effects model in the formulation described in Laird and Ware (1982) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.
 
@@ -62,7 +70,7 @@ This generic function fits a linear mixed-effects model in the formulation descr
 lme(model, data, fixed, random, groups, start, correlation, weights,
 subset, method, na.action, naPattern, control, verbose)
 
-## An example: Does the number of daily naps impact infant performance on a thing? 
+### **An example: Does the number of daily naps impact infant performance on a thing?** 
 
 ```{r}
 
@@ -74,28 +82,51 @@ Month <- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
 
 Naps <- c(rep(c(3), 10), 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 2, 2, 2 ,2, 3, 3, 2, 2, 1, 2, 3, 1, 2, 2, 1, 1, 2, 1, 2, 1 )
 
+Naps <- as.factor(Naps)
+
+
+
 scores <- c(runif(10, 1, 15), runif(10, 5, 20), runif(10, 10, 25), runif(10, 15, 30))
 
 dataset <- data.frame(Subs, Month, Naps, scores)
 
 ```
 
-This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps 
+####This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps (1, 2, or 3 per day). 
+
+#### We will run a conditional growth model because we are including predictors. Subsequent fixed and random effects are now “conditioned on” the predictors.
+
 ```{r}
 #Conditional growth model
 tutorial<-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
 
-#model = we expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. Random error comes from the fact that this is a within subjects design 
-
-#The inclusion of predictors in the model results in what is often called a conditional growth model because the fixed and random effects are now “conditioned on” the predictors. 
-
-
 ```
 
-We can move the results to a nicer table 
+**lme(model, random, data)**
+
+
+
+**model** - scores ~ Month * Naps
+
+We expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. There may be an interaction between these predictors. 
+
+
+**random** - random = ~ Month | Subs
+
+Random error comes from the fact that this is a within subjects design. The same infants are assessed at 1 month, 5 months, 10 months, and 15 months. 
+
+
+
+**data** - data=dataset
+
+Using the data set we created previously. 
+
+
+
+####We can move the results to a nicer table using the summary function 
 
 ```{r}
-
+#summarize an lme object - our solution
 tut<- summary(tutorial)
 tabl = tut$tTable 
 tabl 
@@ -103,13 +134,30 @@ tabl
 ```
 
 
-
-
 From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope. 
 
+#### We can also graph our results. 
+
 ```{r}
-ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps)) + 
+
+plot<- 
+ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps, shape = Naps), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
   geom_point()+
-  geom_smooth(method=lm)
+  geom_line(group=Subs, color="grey")
+
+plot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks = Month) +
+  scale_y_continuous(name="Scores", limits=c(0, 30))
+
 ```
 
+
+This kind of graph makes it more clear that there are 2 developmental trends occuring here- Infants' performance on the assessment is improving with time and the average number of naps they take is decreasing with time. 
+
+
+
+##References 
+Curran, P. J., Obeidat, K., & Losardo, D. (2010). Twelve Frequently Asked Questions About Growth Curve Modeling. Journal of cognition and development : official journal of the Cognitive Development Society, 11(2), 121–136. doi:10.1080/15248371003699969
+
+Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald & J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.
+
+https://cran.r-project.org/web/packages/nlme/nlme.pdf 
