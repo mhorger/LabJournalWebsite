@@ -12,7 +12,7 @@
 <meta name="author" content="mhorger" />
 
 
-<title>nlme Tutorial</title>
+<title>Using the lme function from the nlme package: A brief tutorial</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -323,7 +323,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">nlme Tutorial</h1>
+<h1 class="title toc-ignore">Using the lme function from the nlme package: A brief tutorial</h1>
 <h4 class="author">mhorger</h4>
 <h4 class="date">May 4, 2019</h4>
 
@@ -353,7 +353,21 @@ $(document).ready(function () {
 <div id="load-the-package" class="section level2">
 <h2>Load the package</h2>
 <pre class="r"><code>library(ggplot2)
-library(nlme)</code></pre>
+library(nlme)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:nlme&#39;:
+## 
+##     collapse</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(knitr)</code></pre>
+<pre><code>## Warning: package &#39;knitr&#39; was built under R version 3.5.3</code></pre>
 </div>
 <div id="try-the-lme-function" class="section level2">
 <h2>Try the lme function</h2>
@@ -380,20 +394,71 @@ Month &lt;- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
 
 Naps &lt;- c(rep(c(3), 10), 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 2, 2, 2 ,2, 3, 3, 2, 2, 1, 2, 3, 1, 2, 2, 1, 1, 2, 1, 2, 1 )
 
-Naps &lt;- as.factor(Naps)
+Napsfactor &lt;- as.factor(Naps)
+
+#Let&#39;s assume that infants&#39; performance will get better with time. I altered the possible sampling distributions to reflect this. 
+
+scores &lt;- c(runif(10, 1, 7), runif(10, 8, 15), runif(10, 16, 22), runif(10, 23, 30))
 
 
+dataset &lt;- data.frame(Subs, Month, Naps, scores, Napsfactor)
 
-scores &lt;- c(runif(10, 1, 15), runif(10, 5, 20), runif(10, 10, 25), runif(10, 15, 30))
-
-dataset &lt;- data.frame(Subs, Month, Naps, scores)</code></pre>
+#Data should be set up in long format and look similar to this. 
+print(dataset)</code></pre>
+<pre><code>##    Subs Month Naps    scores Napsfactor
+## 1     1     1    3  2.019870          3
+## 2     2     1    3  2.992850          3
+## 3     3     1    3  6.332282          3
+## 4     4     1    3  4.663238          3
+## 5     5     1    3  4.324386          3
+## 6     6     1    3  2.958888          3
+## 7     7     1    3  1.141883          3
+## 8     8     1    3  2.613526          3
+## 9     9     1    3  6.551983          3
+## 10   10     1    3  6.988533          3
+## 11    1     5    2 12.176890          2
+## 12    2     5    3  8.787651          3
+## 13    3     5    2  9.902380          2
+## 14    4     5    1  8.664020          1
+## 15    5     5    2 11.213740          2
+## 16    6     5    3 13.588646          3
+## 17    7     5    2 14.949873          2
+## 18    8     5    3 14.853920          3
+## 19    9     5    2 10.050598          2
+## 20   10     5    3  9.016636          3
+## 21    1    10    2 17.181183          2
+## 22    2    10    2 16.348284          2
+## 23    3    10    2 16.272719          2
+## 24    4    10    2 16.708106          2
+## 25    5    10    3 19.005464          3
+## 26    6    10    3 19.824947          3
+## 27    7    10    2 19.237244          2
+## 28    8    10    2 18.788536          2
+## 29    9    10    1 17.481989          1
+## 30   10    10    2 18.515150          2
+## 31    1    15    3 28.266533          3
+## 32    2    15    1 23.384451          1
+## 33    3    15    2 27.038530          2
+## 34    4    15    2 23.697672          2
+## 35    5    15    1 27.154598          1
+## 36    6    15    1 24.406893          1
+## 37    7    15    2 24.804519          2
+## 38    8    15    1 28.661944          1
+## 39    9    15    2 26.528601          2
+## 40   10    15    1 27.008137          1</code></pre>
+<pre class="r"><code>demos &lt;- dataset %&gt;%
+    group_by(Month, Naps) %&gt;%
+  summarise(mean_score = mean(scores, na.rm=TRUE))</code></pre>
 <div id="this-is-a-longitudinal-three-level-model-with-repeated-measures-of-individuals-with-different-3-levels-of-naps-1-2-or-3-per-day." class="section level4">
 <h4>This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps (1, 2, or 3 per day).</h4>
 </div>
 <div id="we-will-run-a-conditional-growth-model-because-we-are-including-predictors.-subsequent-fixed-and-random-effects-are-now-conditioned-on-the-predictors." class="section level4">
 <h4>We will run a conditional growth model because we are including predictors. Subsequent fixed and random effects are now “conditioned on” the predictors.</h4>
 <pre class="r"><code>#Conditional growth model
-tutorial&lt;-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)</code></pre>
+tutorial&lt;-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
+
+
+#Because we are using a random sample, may need to rerun the scores several times for this piece of code to run effectively</code></pre>
 <p><strong>lme(model, random, data)</strong></p>
 <p><strong>model</strong> - scores ~ Month * Naps</p>
 <p>We expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. There may be an interaction between these predictors.</p>
@@ -408,35 +473,161 @@ tutorial&lt;-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)</
 tut&lt;- summary(tutorial)
 tabl = tut$tTable 
 tabl </code></pre>
-<pre><code>##                  Value Std.Error DF    t-value    p-value
-## (Intercept)  4.5581755 5.8197476 25  0.7832256 0.44085175
-## Month        1.1727985 0.4399407 25  2.6658107 0.01326523
-## Naps2        5.8454034 6.5415686 25  0.8935782 0.38006944
-## Naps3        2.9249381 5.9819197 25  0.4889631 0.62913010
-## Month:Naps2 -0.5271529 0.5286370 25 -0.9971925 0.32822570
-## Month:Naps3 -0.4994257 0.5037190 25 -0.9914768 0.33095272</code></pre>
+<pre><code>##                  Value  Std.Error DF   t-value      p-value
+## (Intercept) 2.34368912 2.84943832 27 0.8225092 4.179923e-01
+## Month       1.48575907 0.23362325 27 6.3596370 8.248181e-07
+## Naps        0.13523784 1.01968576 27 0.1326270 8.954719e-01
+## Month:Naps  0.04639161 0.09215364 27 0.5034159 6.187545e-01</code></pre>
 <p>From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope.</p>
 </div>
 <div id="we-can-also-graph-our-results." class="section level4">
 <h4>We can also graph our results.</h4>
 <pre class="r"><code>plot&lt;- 
-ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps, shape = Naps), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Napsfactor, shape = Napsfactor, group = Subs), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
   geom_point()+
-
-  geom_line(group=Subs, color=&quot;grey&quot;)
+  geom_line(color=&quot;grey&quot;)
 
 plot + scale_x_continuous(name=&quot;Age (in months)&quot;, limits=c(1, 15), breaks = Month) +
   scale_y_continuous(name=&quot;Scores&quot;, limits=c(0, 30))</code></pre>
 <p><img src="tutorial_Horger_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>This kind of graph makes it more clear that there are 2 developmental trends occuring here- Infants’ performance on the assessment is improving with time and the average number of naps they take is decreasing with time.</p>
+<p>This kind of graph allows us to see the developmental trajectory of individual infants. It highlights the fact that there are 2 developmental trends occuring here- Infants’ performance on the assessment is improving with time and the average number of naps they take is decreasing with time.</p>
 </div>
 </div>
+</div>
+<div id="single-main-effect-versus-two-main-effects-or-an-interaction" class="section level2">
+<h2>Single main effect versus two main effects or an interaction</h2>
+<p>When making the original data set, I intentionally biased the data to show a developmental curve by increasing the sampling distribution for each age range. I could do something similar to bias our data to support the impact of taking fewer naps</p>
+<pre class="r"><code>#Create a new data set 
+Subs &lt;- rep(c(seq(1:10)), 4)
+
+Month &lt;- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps &lt;- c(rep(c(3), 10), 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3 ,2,2,  2, 2,2,1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1)
+Napsfactor &lt;- as.factor(Naps)
+
+secondscores &lt;- c(runif(10, 1, 10), runif(5, 5, 10),runif(5, 9, 17), runif(3, 10, 15), runif(5, 14, 22), runif(2, 20, 25), runif(5, 18, 23), runif(4,22, 27), runif(1, 27, 30) )</code></pre>
+<pre class="r"><code>seconddataset &lt;- data.frame(Subs, Month, Naps, secondscores, Napsfactor)
+
+print(seconddataset)</code></pre>
+<pre><code>##    Subs Month Naps secondscores Napsfactor
+## 1     1     1    3     2.764917          3
+## 2     2     1    3     7.771601          3
+## 3     3     1    3     1.122045          3
+## 4     4     1    3     2.305308          3
+## 5     5     1    3     4.807005          3
+## 6     6     1    3     2.709317          3
+## 7     7     1    3     1.453591          3
+## 8     8     1    3     3.859756          3
+## 9     9     1    3     1.294685          3
+## 10   10     1    3     5.907144          3
+## 11    1     5    3     8.650358          3
+## 12    2     5    3     6.088148          3
+## 13    3     5    3     7.152489          3
+## 14    4     5    3     8.006218          3
+## 15    5     5    3     8.700504          3
+## 16    6     5    2    16.281572          2
+## 17    7     5    2    10.356676          2
+## 18    8     5    2    13.121036          2
+## 19    9     5    2    14.422127          2
+## 20   10     5    2    15.104370          2
+## 21    1    10    3    10.182431          3
+## 22    2    10    3    10.573003          3
+## 23    3    10    3    10.332614          3
+## 24    4    10    2    18.643717          2
+## 25    5    10    2    17.988473          2
+## 26    6    10    2    17.186963          2
+## 27    7    10    2    15.114900          2
+## 28    8    10    2    19.464502          2
+## 29    9    10    1    22.047718          1
+## 30   10    10    1    23.560535          1
+## 31    1    15    2    20.185092          2
+## 32    2    15    2    20.770340          2
+## 33    3    15    2    22.810734          2
+## 34    4    15    2    20.980333          2
+## 35    5    15    2    19.221955          2
+## 36    6    15    1    26.919935          1
+## 37    7    15    1    22.699747          1
+## 38    8    15    1    24.526734          1
+## 39    9    15    1    22.755446          1
+## 40   10    15    1    28.200004          1</code></pre>
+</div>
+<div id="did-the-manipulation-work" class="section level2">
+<h2>Did the manipulation work?</h2>
+<pre class="r"><code>#Summary stats from our first dataset
+demos &lt;- dataset %&gt;%
+    group_by(Month, Naps) %&gt;%
+  summarise(mean_score = mean(scores, na.rm=TRUE))
+
+
+
+#Summary stats from our second dataset
+seconddemos &lt;- seconddataset %&gt;%
+    group_by(Month, Naps) %&gt;%
+  summarise(mean_secondscore = mean(secondscores, na.rm=TRUE))
+
+
+print(demos)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+## # Groups:   Month [4]
+##    Month  Naps mean_score
+##    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+##  1     1     3       4.06
+##  2     5     1       8.66
+##  3     5     2      11.7 
+##  4     5     3      11.6 
+##  5    10     1      17.5 
+##  6    10     2      17.6 
+##  7    10     3      19.4 
+##  8    15     1      26.1 
+##  9    15     2      25.5 
+## 10    15     3      28.3</code></pre>
+<pre class="r"><code>print(seconddemos)</code></pre>
+<pre><code>## # A tibble: 8 x 3
+## # Groups:   Month [4]
+##   Month  Naps mean_secondscore
+##   &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;
+## 1     1     3             3.40
+## 2     5     2            13.9 
+## 3     5     3             7.72
+## 4    10     1            22.8 
+## 5    10     2            17.7 
+## 6    10     3            10.4 
+## 7    15     1            25.0 
+## 8    15     2            20.8</code></pre>
+<p>It may or may not because we’re still drawing a random sample, but the trend should be clearer than during the first example.</p>
+</div>
+<div id="now-run-the-analysis-again" class="section level2">
+<h2>Now run the analysis again</h2>
+<pre class="r"><code>#Run the analysis again 
+
+secondtutorial&lt;-lme(secondscores ~ Month * Naps, random = ~ Month | Subs, data=seconddataset)</code></pre>
+<pre class="r"><code>#Create a table 
+
+secondtut&lt;- summary(secondtutorial)
+secondtabl = secondtut$tTable 
+secondtabl </code></pre>
+<pre><code>##                  Value Std.Error DF    t-value      p-value
+## (Intercept) 27.3538800 3.0046731 27  9.1037791 1.022795e-09
+## Month        0.1848987 0.2190328 27  0.8441602 4.059976e-01
+## Naps        -8.2310523 1.0402381 27 -7.9126615 1.661227e-08
+## Month:Naps   0.2264339 0.0832243 27  2.7207664 1.125638e-02</code></pre>
+<pre class="r"><code>#Graph the results 
+
+secondplot&lt;-
+ggplot2::ggplot(seconddataset, aes(x=Month, y=secondscores,  color=Napsfactor, shape = Napsfactor, group=Subs), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+  geom_point()+
+  geom_line( color=&quot;grey&quot;)
+
+secondplot + scale_x_continuous(name=&quot;Age (in months)&quot;, limits=c(1, 15), breaks = Month) +
+  scale_y_continuous(name=&quot;Scores&quot;, limits=c(0, 30))</code></pre>
+<p><img src="tutorial_Horger_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
 <p>Curran, P. J., Obeidat, K., &amp; Losardo, D. (2010). Twelve Frequently Asked Questions About Growth Curve Modeling. Journal of cognition and development : official journal of the Cognitive Development Society, 11(2), 121–136. <a href="doi:10.1080/15248371003699969" class="uri">doi:10.1080/15248371003699969</a></p>
 <p>Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald &amp; J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.</p>
 <p><a href="https://cran.r-project.org/web/packages/nlme/nlme.pdf" class="uri">https://cran.r-project.org/web/packages/nlme/nlme.pdf</a></p>
+<p><a href="https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model" class="uri">https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model</a></p>
 </div>
 </div>
 

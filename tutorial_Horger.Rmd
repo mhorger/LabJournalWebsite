@@ -1,5 +1,5 @@
 ---
-title: "nlme Tutorial"
+title: "Using the lme function from the nlme package: A brief tutorial"
 author: "mhorger"
 date: "May 4, 2019"
 output: html_document
@@ -39,17 +39,13 @@ install.packages("nlme")
 ```
 
 
-## Load the package 
+## Load the package (and other relevant packages)
 ```{r}
 library(ggplot2)
 library(nlme)
+library(dplyr)
+library(knitr)
 ```
-
-
-
-
-
-
 
 
 
@@ -82,24 +78,40 @@ Month <- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
 
 Naps <- c(rep(c(3), 10), 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 2, 2, 2 ,2, 3, 3, 2, 2, 1, 2, 3, 1, 2, 2, 1, 1, 2, 1, 2, 1 )
 
-Naps <- as.factor(Naps)
+Napsfactor <- as.factor(Naps)
+
+#Let's assume that infants' performance will get better with time. I altered the possible sampling distributions to reflect this. 
+
+scores <- c(runif(10, 1, 7), runif(10, 8, 15), runif(10, 16, 22), runif(10, 23, 30))
+
+
+dataset <- data.frame(Subs, Month, Naps, scores, Napsfactor)
+
+#Data should be set up in long format and look similar to this. 
+print(dataset)
 
 
 
-scores <- c(runif(10, 1, 15), runif(10, 5, 20), runif(10, 10, 25), runif(10, 15, 30))
-
-dataset <- data.frame(Subs, Month, Naps, scores)
+demos <- dataset %>%
+    group_by(Month, Naps) %>%
+  summarise(mean_score = mean(scores, na.rm=TRUE))
 
 ```
 
-####This is a longitudinal three level model with repeated measures of individuals with different 3 levels of naps (1, 2, or 3 per day). 
 
-#### We will run a conditional growth model because we are including predictors. Subsequent fixed and random effects are now “conditioned on” the predictors.
+####This is a 4x3 within subject design. 
+Infants are assessed at 4 time points - 1 month, 5 months, 10 months, and 15 months. 
+There are 3 levels of napping - 1, 2, or 3 naps per day. 
+
+
+#### We will run a conditional growth model because we are including predictors. Subsequent fixed and random effects are now “conditioned on” the predictors (age and number of naps).
 
 ```{r}
 #Conditional growth model
 tutorial<-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
 
+
+#Because we are using a random sample, may need to rerun the scores several times for this piece of code to run effectively
 ```
 
 **lme(model, random, data)**
@@ -141,9 +153,9 @@ From this analysis, we would conclude that there is a main effect of age, infant
 ```{r}
 
 plot<- 
-ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Naps, shape = Naps), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+ggplot2::ggplot(dataset, aes(x=Month, y=scores,  color=Napsfactor, shape = Napsfactor, group = Subs), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
   geom_point()+
-  geom_line(group=Subs, color="grey")
+  geom_line(color="grey")
 
 plot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks = Month) +
   scale_y_continuous(name="Scores", limits=c(0, 30))
@@ -151,7 +163,93 @@ plot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks = Mont
 ```
 
 
-This kind of graph makes it more clear that there are 2 developmental trends occuring here- Infants' performance on the assessment is improving with time and the average number of naps they take is decreasing with time. 
+This kind of graph allows us to see the developmental trajectory of individual infants. It highlights the fact that there are 2 developmental trends occuring here- Infants' performance on the assessment is improving with time and the average number of naps they take is decreasing with time. 
+
+##Single main effect versus two main effects or an interaction
+
+When making the original data set, I intentionally biased the data to show a developmental curve by increasing the sampling distribution for each age range. I could do something similar to bias our data to support the impact of taking fewer naps 
+
+```{r}
+
+#Create a new data set 
+Subs <- rep(c(seq(1:10)), 4)
+
+Month <- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps <- c(rep(c(3), 10), 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3 ,2,2,  2, 2,2,1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1)
+Napsfactor <- as.factor(Naps)
+
+secondscores <- c(runif(10, 1, 10), runif(5, 5, 10),runif(5, 9, 17), runif(3, 10, 15), runif(5, 14, 22), runif(2, 20, 25), runif(5, 18, 23), runif(4,22, 27), runif(1, 27, 30) )
+
+
+
+```
+
+
+```{r}
+seconddataset <- data.frame(Subs, Month, Naps, secondscores, Napsfactor)
+
+print(seconddataset)
+```
+
+
+
+## Did the manipulation work? 
+
+```{r}
+#Summary stats from our first dataset
+demos <- dataset %>%
+    group_by(Month, Naps) %>%
+  summarise(mean_score = mean(scores, na.rm=TRUE))
+
+
+
+#Summary stats from our second dataset
+seconddemos <- seconddataset %>%
+    group_by(Month, Naps) %>%
+  summarise(mean_secondscore = mean(secondscores, na.rm=TRUE))
+
+
+print(demos)
+print(seconddemos)
+
+```
+
+It may or may not because we're still drawing a random sample, but the trend should be clearer than during the first example. 
+
+
+##Now run the analysis again 
+
+```{r}
+#Run the analysis again 
+
+secondtutorial<-lme(secondscores ~ Month * Naps, random = ~ Month | Subs, data=seconddataset)
+```
+
+
+
+```{r}
+#Create a table 
+
+secondtut<- summary(secondtutorial)
+secondtabl = secondtut$tTable 
+secondtabl 
+```
+
+
+
+```{r}
+
+#Graph the results 
+
+secondplot<-
+ggplot2::ggplot(seconddataset, aes(x=Month, y=secondscores,  color=Napsfactor, shape = Napsfactor, group=Subs), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+  geom_point()+
+  geom_line( color="grey")
+
+secondplot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks = Month) +
+  scale_y_continuous(name="Scores", limits=c(0, 30))
+```
 
 
 
@@ -161,3 +259,5 @@ Curran, P. J., Obeidat, K., & Losardo, D. (2010). Twelve Frequently Asked Questi
 Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald & J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.
 
 https://cran.r-project.org/web/packages/nlme/nlme.pdf 
+
+https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model

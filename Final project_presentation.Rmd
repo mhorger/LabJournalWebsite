@@ -1,6 +1,6 @@
 ---
-title: "nlme"
-subtitle: "Fits and Compares Linear and Nonlinear Mixed Effects Models"
+title: "Using the lme function from the nlme package"
+subtitle: "A brief tutorial"
 author: "Melissa Horger"
 date: "`r Sys.Date()`"
 output:
@@ -83,16 +83,17 @@ knitr::include_graphics(imag1_path)
 This generic function fits a linear mixed-effects model in the formulation described in Laird and Ware (1982) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.
 
 
----
-# Some important considerations  
 
-1. Need repeated measures from a single subject
-  - May be longitudinal, but may not
-  
-2. Can account for correlations within individuals
-  - within the random effects 
-  
-3. Uses maximum likelihood estimates 
+--
+
+This function allows us to answer research questions about how individuals change over time and variables that may influence development. 
+
+
+--
+
+
+**An example: Does the number of daily naps impact infant performance on a thing from 1 to 15 months?**
+
 
 ---
 
@@ -110,23 +111,141 @@ install.packages("nlme")
 ```
 
 
-## Load the package 
-```{r, eval=FALSE}
-library("nlme")
+## Load the nlme package (and other useful packages)
+```{r}
+library(nlme)
+library(ggplot2)
+library(knitr)
+library(dplyr)
+
 ```
+
 
 ---
 
-#Now we can view the lme function
+
+
+#Create a data set
+
+##I created a data set based on the hypothesis that scores will improve with infant age and with less fragmented sleep(fewer naps). 
+
+```{r}
+Subs <- rep(c(seq(1:10)), 4)
+
+Month <- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps <- c(rep(c(3), 10), 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3 ,2,2,  2, 2,2,1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1)
+Napsfactor <- as.factor(Naps)
+
+secondscores <- c(runif(10, 1, 10), runif(5, 5, 10),runif(5, 9, 17), runif(3, 10, 15), runif(5, 14, 22), runif(2, 20, 25), runif(5, 18, 23), runif(4,22, 27), runif(1, 27, 30) )
+
+seconddataset <- data.frame(Subs, Month, Naps, secondscores, Napsfactor)
+
+
+```
+
+
+---
+
+##Data should be in long format for our analysis 
+
+```{r}
+print(seconddataset)
+
+#Napsfactor is a variable we will use when graphing our results. We do not use it for the analysis
+```
+
+
+---
+
+#Summary statistics from our data set 
+### One way to check our manipulation  
+
+Remember our hypothesis was that there will be a positive relationship between age and scores and a negative relationship between naps and scores. 
+```{r}
+seconddemos <- seconddataset %>%
+    group_by(Month, Naps) %>%
+  summarise(mean_secondscore = mean(secondscores, na.rm=TRUE))
+
+
+print(seconddemos)
+```
 
 
 
-##The arguments for this function
 
-lme(fixed, data, random, correlation, weights, subset, method, na.action, control, contrasts = NULL, keep.data = TRUE)
-
+---
 
 
+#Run a conditional growth curve analysis 
+
+```{r}
+secondtutorial<-nlme::lme(secondscores ~ Month * Naps, random = ~ Month | Subs, data=seconddataset)
+```
+
+**lme(model, random, data)**
+
+
+**model** - secondscores ~ Month * Naps
+- We expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. 
+- There may be an interaction between these predictors. 
+
+
+**random** - random = ~ Month | Subs
+- Random error comes from the fact that this is a within subjects design. The same infants are assessed at 1 month, 5 months, 10 months, and 15 months. 
+
+
+**data** - data=seconddataset
+
+
+---
+
+#Put the results of the model in a nicer table 
+
+
+
+
+```{r}
+secondtut<- summary(secondtutorial)
+secondtabl = secondtut$tTable 
+print(secondtabl) 
+```
+
+
+
+
+
+---
+
+#Graphing the results 
+
+### We want to look at individual subjects' trajectories of performance and average number of naps across time. 
+
+```{r}
+secondplot<-
+ggplot2::ggplot(seconddataset, aes(x=Month, 
+                                   y=secondscores, 
+                                   color=Napsfactor, 
+                                   shape = Napsfactor, 
+                                   group=Subs), 
+                xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+  geom_point()+
+  geom_line( color="grey")
+secondplot<- secondplot + scale_x_continuous(name="Age (in months)",                                                limits=c(1, 15), 
+                                             breaks = Month) +
+  scale_y_continuous(name="Scores", limits=c(0, 30))
+
+
+```
+
+
+---
+
+#Our results 
+
+```{r}
+print(secondplot)
+```
 
 
 

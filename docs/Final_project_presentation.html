@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Using the lme function from the nlme package</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Melissa Horger" />
+    <meta name="date" content="2019-05-06" />
+    <link href="site_libs/remark-css/default.css" rel="stylesheet" />
+    <link href="site_libs/remark-css/duke-blue.css" rel="stylesheet" />
+    <link href="site_libs/remark-css/middlebury-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Using the lme function from the nlme package
+## A brief tutorial
+### Melissa Horger
+### 2019-05-06
+
+---
+
+
+
+
+
+
+
+
+class: center, middle
+
+# Let's consider the competition 
+
+.pull-left[
+
+##nlme. 
+- Let's you specify variance-covariance structures for the residuals.
+- Well suited for repeated measure or longitudinal designs. 
+
+]
+
+.pull-right[
+
+##lme4.
+- Allows you to fit outcomes whose distribution is not Gaussian and allows for crossed random effects.
+- Stores data more effiently due to the use of sparse matrices.
+- More suited for clustered data sets.
+]
+
+
+---
+
+
+#What's inside? 
+
+--
+
+### A whole lot...
+
+--
+1. Sample data
+
+--
+
+2. Lattice
+
+--
+
+3. Statistics
+
+--
+
+4. Matrices
+
+
+--
+
+&lt;img src="images/obama.PNG" width="50%" height="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# The lme function within the nlme package
+
+This generic function fits a linear mixed-effects model in the formulation described in Laird and Ware (1982) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.
+
+
+
+--
+
+This function allows us to answer research questions about how individuals change over time and variables that may influence development. 
+
+
+--
+
+
+**An example: Does the number of daily naps impact infant performance on a thing from 1 to 15 months?**
+
+
+---
+
+#Using nlme
+
+## Begin by installing the nlme package
+
+Found on the CRAN repository 
+
+
+Website: https://svn.r-project.org/R-packages/trunk/nlme
+
+
+```r
+install.packages("nlme")
+```
+
+
+## Load the nlme package (and other useful packages)
+
+```r
+library(nlme)
+library(ggplot2)
+library(knitr)
+```
+
+```
+## Warning: package 'knitr' was built under R version 3.5.3
+```
+
+```r
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following object is masked from 'package:nlme':
+## 
+##     collapse
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+
+---
+
+
+
+#Create a data set
+
+##I created a data set based on the hypothesis that scores will improve with infant age and with less fragmented sleep(fewer naps). 
+
+
+```r
+Subs &lt;- rep(c(seq(1:10)), 4)
+
+Month &lt;- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps &lt;- c(rep(c(3), 10), 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3 ,2,2,  2, 2,2,1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1)
+Napsfactor &lt;- as.factor(Naps)
+
+secondscores &lt;- c(runif(10, 1, 10), runif(5, 5, 10),runif(5, 9, 17), runif(3, 10, 15), runif(5, 14, 22), runif(2, 20, 25), runif(5, 18, 23), runif(4,22, 27), runif(1, 27, 30) )
+
+seconddataset &lt;- data.frame(Subs, Month, Naps, secondscores, Napsfactor)
+```
+
+
+---
+
+##Data should be in long format for our analysis 
+
+
+```r
+print(seconddataset)
+```
+
+```
+##    Subs Month Naps secondscores Napsfactor
+## 1     1     1    3     8.619429          3
+## 2     2     1    3     5.201012          3
+## 3     3     1    3     5.955537          3
+## 4     4     1    3     8.609001          3
+## 5     5     1    3     2.316326          3
+## 6     6     1    3     2.438634          3
+## 7     7     1    3     5.028030          3
+## 8     8     1    3     4.262062          3
+## 9     9     1    3     2.045846          3
+## 10   10     1    3     7.285432          3
+## 11    1     5    3     7.081954          3
+## 12    2     5    3     7.612048          3
+## 13    3     5    3     5.286344          3
+## 14    4     5    3     7.871184          3
+## 15    5     5    3     8.687618          3
+## 16    6     5    2    13.811932          2
+## 17    7     5    2    15.459991          2
+## 18    8     5    2    10.218339          2
+## 19    9     5    2     9.212470          2
+## 20   10     5    2    11.562010          2
+## 21    1    10    3    14.019674          3
+## 22    2    10    3    13.639817          3
+## 23    3    10    3    11.907569          3
+## 24    4    10    2    18.611958          2
+## 25    5    10    2    16.607053          2
+## 26    6    10    2    17.326768          2
+## 27    7    10    2    17.538109          2
+## 28    8    10    2    18.998071          2
+## 29    9    10    1    23.974015          1
+## 30   10    10    1    24.336994          1
+## 31    1    15    2    21.453412          2
+## 32    2    15    2    18.620102          2
+## 33    3    15    2    22.989694          2
+## 34    4    15    2    19.242043          2
+## 35    5    15    2    18.395509          2
+## 36    6    15    1    22.240820          1
+## 37    7    15    1    22.209921          1
+## 38    8    15    1    23.431475          1
+## 39    9    15    1    23.827499          1
+## 40   10    15    1    29.205321          1
+```
+
+```r
+#Napsfactor is a variable we will use when graphing our results. We do not use it for the analysis
+```
+
+
+---
+
+#Summary statistics from our data set 
+### One way to check our manipulation  
+
+Remember our hypothesis was that there will be a positive relationship between age and scores and a negative relationship between naps and scores. 
+
+```r
+seconddemos &lt;- seconddataset %&gt;%
+    group_by(Month, Naps) %&gt;%
+  summarise(mean_secondscore = mean(secondscores, na.rm=TRUE))
+
+
+print(seconddemos)
+```
+
+```
+## # A tibble: 8 x 3
+## # Groups:   Month [4]
+##   Month  Naps mean_secondscore
+##   &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;
+## 1     1     3             5.18
+## 2     5     2            12.1 
+## 3     5     3             7.31
+## 4    10     1            24.2 
+## 5    10     2            17.8 
+## 6    10     3            13.2 
+## 7    15     1            24.2 
+## 8    15     2            20.1
+```
+
+
+
+
+---
+
+
+#Run a conditional growth curve analysis 
+
+
+```r
+secondtutorial&lt;-nlme::lme(secondscores ~ Month * Naps, random = ~ Month | Subs, data=seconddataset)
+```
+
+**lme(model, random, data)**
+
+
+**model** - secondscores ~ Month * Naps
+- We expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. 
+- There may be an interaction between these predictors. 
+
+
+**random** - random = ~ Month | Subs
+- Random error comes from the fact that this is a within subjects design. The same infants are assessed at 1 month, 5 months, 10 months, and 15 months. 
+
+
+**data** - data=seconddataset
+
+
+---
+
+#Put the results of the model in a nicer table 
+
+
+
+
+
+```r
+secondtut&lt;- summary(secondtutorial)
+secondtabl = secondtut$tTable 
+print(secondtabl) 
+```
+
+```
+##                  Value Std.Error DF   t-value      p-value
+## (Intercept) 21.8382353 3.9137782 27  5.579835 6.444537e-06
+## Month        0.4700106 0.3036642 27  1.547797 1.333138e-01
+## Naps        -5.9497372 1.3759955 27 -4.323951 1.869506e-04
+## Month:Naps   0.1175160 0.1172068 27  1.002637 3.249375e-01
+```
+
+
+
+
+
+---
+
+#Graphing the results 
+
+### We want to look at individual subjects' trajectories of performance and average number of naps across time. 
+
+
+```r
+secondplot&lt;-
+ggplot2::ggplot(seconddataset, aes(x=Month, 
+                                   y=secondscores, 
+                                   color=Napsfactor, 
+                                   shape = Napsfactor, 
+                                   group=Subs), 
+                xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+  geom_point()+
+  geom_line( color="grey")
+secondplot&lt;- secondplot + scale_x_continuous(name="Age (in months)",                                                limits=c(1, 15), 
+                                             breaks = Month) +
+  scale_y_continuous(name="Scores", limits=c(0, 30))
+```
+
+
+---
+
+#Our results 
+
+
+```r
+print(secondplot)
+```
+
+![](Final_project_presentation_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
