@@ -1,5 +1,5 @@
 ---
-title: "Using the lme function from the nlme package: A brief tutorial"
+title: "lme tutorial"
 author: "mhorger"
 date: "May 4, 2019"
 output: html_document
