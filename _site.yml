@@ -10,6 +10,9 @@ navbar:
       href: Research.html
     - text: "Links"
       href: Links.html
+    - text: "lme tutorial"
+      href: Final_project_presentation.html
+
     - text: "Learning R"
       href: Journal.html
     - text: "R dictionary"
@@ -20,7 +23,5 @@ navbar:
       href: DataWrangle.html
     - text: "Statistics Problems"
       href: StatisticsProblems.html
-    - text: "lme tutorial"
-      href: Final_project_presentation.html
 
 output_dir: "docs"
