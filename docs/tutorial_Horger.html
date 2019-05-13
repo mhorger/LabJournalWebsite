@@ -297,7 +297,7 @@ $(document).ready(function () {
   <a href="Links.html">Links</a>
 </li>
 <li>
-  <a href="Final_project_presentation.html">Using the lme function from the nlme package</a>
+  <a href="Final_project_presentation.html">Presentation</a>
 </li>
 <li>
   <a href="Journal.html">Learning R</a>
@@ -409,46 +409,46 @@ dataset &lt;- data.frame(Subs, Month, Naps, scores, Napsfactor)
 #Data should be set up in long format and look similar to this. 
 print(dataset)</code></pre>
 <pre><code>##    Subs Month Naps    scores Napsfactor
-## 1     1     1    3  2.262463          3
-## 2     2     1    3  3.061979          3
-## 3     3     1    3  6.607356          3
-## 4     4     1    3  4.044503          3
-## 5     5     1    3  4.839399          3
-## 6     6     1    3  2.278209          3
-## 7     7     1    3  1.644478          3
-## 8     8     1    3  2.450664          3
-## 9     9     1    3  5.560538          3
-## 10   10     1    3  3.541192          3
-## 11    1     5    2 10.105562          2
-## 12    2     5    3 14.780695          3
-## 13    3     5    2 12.777268          2
-## 14    4     5    1  8.162465          1
-## 15    5     5    2  8.763403          2
-## 16    6     5    3 12.480354          3
-## 17    7     5    2  8.858371          2
-## 18    8     5    3  8.603099          3
-## 19    9     5    2 12.095990          2
-## 20   10     5    3  8.258746          3
-## 21    1    10    2 21.095096          2
-## 22    2    10    2 18.447079          2
-## 23    3    10    2 18.396839          2
-## 24    4    10    2 20.874908          2
-## 25    5    10    3 19.723994          3
-## 26    6    10    3 19.673862          3
-## 27    7    10    2 19.121366          2
-## 28    8    10    2 16.501773          2
-## 29    9    10    1 20.054365          1
-## 30   10    10    2 19.629637          2
-## 31    1    15    3 28.583327          3
-## 32    2    15    1 26.315289          1
-## 33    3    15    2 27.678589          2
-## 34    4    15    2 29.175277          2
-## 35    5    15    1 27.346919          1
-## 36    6    15    1 25.114132          1
-## 37    7    15    2 26.657320          2
-## 38    8    15    1 23.010820          1
-## 39    9    15    2 28.946161          2
-## 40   10    15    1 29.465885          1</code></pre>
+## 1     1     1    3  5.012471          3
+## 2     2     1    3  3.728277          3
+## 3     3     1    3  4.836864          3
+## 4     4     1    3  5.350799          3
+## 5     5     1    3  6.119787          3
+## 6     6     1    3  4.579498          3
+## 7     7     1    3  1.911471          3
+## 8     8     1    3  6.370590          3
+## 9     9     1    3  4.640062          3
+## 10   10     1    3  6.330756          3
+## 11    1     5    2 12.259589          2
+## 12    2     5    3 10.367657          3
+## 13    3     5    2 11.767330          2
+## 14    4     5    1 10.188316          1
+## 15    5     5    2 13.130350          2
+## 16    6     5    3 11.723635          3
+## 17    7     5    2  8.402674          2
+## 18    8     5    3 12.395687          3
+## 19    9     5    2 14.896658          2
+## 20   10     5    3  8.739635          3
+## 21    1    10    2 18.632502          2
+## 22    2    10    2 17.024271          2
+## 23    3    10    2 21.550878          2
+## 24    4    10    2 17.870619          2
+## 25    5    10    3 17.824484          3
+## 26    6    10    3 16.456856          3
+## 27    7    10    2 18.529254          2
+## 28    8    10    2 16.554211          2
+## 29    9    10    1 17.915643          1
+## 30   10    10    2 18.268762          2
+## 31    1    15    3 29.575072          3
+## 32    2    15    1 25.997781          1
+## 33    3    15    2 24.380238          2
+## 34    4    15    2 26.757553          2
+## 35    5    15    1 25.365274          1
+## 36    6    15    1 25.289557          1
+## 37    7    15    2 27.086058          2
+## 38    8    15    1 28.583414          1
+## 39    9    15    2 25.274196          2
+## 40   10    15    1 28.205099          1</code></pre>
 <pre class="r"><code>demos &lt;- dataset %&gt;%
     group_by(Month, Naps) %&gt;%
   summarise(mean_score = mean(scores, na.rm=TRUE))</code></pre>
@@ -477,11 +477,11 @@ tutorial&lt;-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
 tut&lt;- summary(tutorial)
 tabl = tut$tTable 
 tabl </code></pre>
-<pre><code>##                   Value  Std.Error DF     t-value      p-value
-## (Intercept) -0.16345735 2.39586280 27 -0.06822484 9.461094e-01
-## Month        1.70924561 0.19406365 27  8.80765487 2.009846e-09
-## Naps         0.71089361 0.85052789 27  0.83582633 4.105886e-01
-## Month:Naps   0.03307748 0.07616575 27  0.43428294 6.675339e-01</code></pre>
+<pre><code>##                  Value Std.Error DF    t-value      p-value
+## (Intercept)  4.1784602 2.4796637 27  1.6850915 1.034968e-01
+## Month        1.4724190 0.2006021 27  7.3399976 6.777998e-08
+## Naps        -0.2894603 0.8859015 27 -0.3267409 7.463833e-01
+## Month:Naps   0.0207680 0.0786542 27  0.2640419 7.937526e-01</code></pre>
 <p>From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope.</p>
 </div>
 <div id="we-can-also-graph-our-results." class="section level4">
@@ -514,46 +514,46 @@ secondscores &lt;- c(runif(10, 1, 10), runif(5, 5, 10),runif(5, 9, 17), runif(3,
 
 print(seconddataset)</code></pre>
 <pre><code>##    Subs Month Naps secondscores Napsfactor
-## 1     1     1    3     8.239987          3
-## 2     2     1    3     4.907552          3
-## 3     3     1    3     2.333915          3
-## 4     4     1    3     7.606319          3
-## 5     5     1    3     9.110861          3
-## 6     6     1    3     5.353081          3
-## 7     7     1    3     6.173748          3
-## 8     8     1    3     8.503920          3
-## 9     9     1    3     6.625810          3
-## 10   10     1    3     6.413353          3
-## 11    1     5    3     8.094305          3
-## 12    2     5    3     6.094911          3
-## 13    3     5    3     9.901855          3
-## 14    4     5    3     6.008819          3
-## 15    5     5    3     9.074301          3
-## 16    6     5    2    14.925718          2
-## 17    7     5    2    10.827906          2
-## 18    8     5    2    11.897829          2
-## 19    9     5    2     9.986637          2
-## 20   10     5    2    14.871218          2
-## 21    1    10    3    10.871814          3
-## 22    2    10    3    10.594048          3
-## 23    3    10    3    11.546502          3
-## 24    4    10    2    16.233968          2
-## 25    5    10    2    17.995184          2
-## 26    6    10    2    14.214316          2
-## 27    7    10    2    19.992695          2
-## 28    8    10    2    18.544056          2
-## 29    9    10    1    23.505801          1
-## 30   10    10    1    24.162160          1
-## 31    1    15    2    18.075286          2
-## 32    2    15    2    19.167822          2
-## 33    3    15    2    18.149181          2
-## 34    4    15    2    19.075481          2
-## 35    5    15    2    21.121785          2
-## 36    6    15    1    26.530585          1
-## 37    7    15    1    23.547459          1
-## 38    8    15    1    23.535168          1
-## 39    9    15    1    24.033626          1
-## 40   10    15    1    29.038463          1</code></pre>
+## 1     1     1    3     7.861858          3
+## 2     2     1    3     2.366022          3
+## 3     3     1    3     6.496238          3
+## 4     4     1    3     5.705806          3
+## 5     5     1    3     5.520452          3
+## 6     6     1    3     5.266769          3
+## 7     7     1    3     3.142999          3
+## 8     8     1    3     4.337759          3
+## 9     9     1    3     1.833027          3
+## 10   10     1    3     8.029062          3
+## 11    1     5    3     5.203142          3
+## 12    2     5    3     9.818167          3
+## 13    3     5    3     5.341076          3
+## 14    4     5    3     9.060879          3
+## 15    5     5    3     6.539782          3
+## 16    6     5    2    13.640522          2
+## 17    7     5    2    12.773927          2
+## 18    8     5    2    16.651285          2
+## 19    9     5    2    15.585846          2
+## 20   10     5    2    16.474559          2
+## 21    1    10    3    14.275338          3
+## 22    2    10    3    12.021286          3
+## 23    3    10    3    12.120721          3
+## 24    4    10    2    16.727300          2
+## 25    5    10    2    20.600407          2
+## 26    6    10    2    17.618591          2
+## 27    7    10    2    16.663928          2
+## 28    8    10    2    16.205953          2
+## 29    9    10    1    21.937198          1
+## 30   10    10    1    20.664665          1
+## 31    1    15    2    21.520442          2
+## 32    2    15    2    19.615958          2
+## 33    3    15    2    21.358975          2
+## 34    4    15    2    20.857741          2
+## 35    5    15    2    19.945875          2
+## 36    6    15    1    22.229952          1
+## 37    7    15    1    22.657044          1
+## 38    8    15    1    25.157451          1
+## 39    9    15    1    24.035568          1
+## 40   10    15    1    29.451106          1</code></pre>
 </div>
 <div id="did-the-manipulation-work" class="section level2">
 <h2>Did the manipulation work?</h2>
@@ -575,29 +575,29 @@ print(demos)</code></pre>
 ## # Groups:   Month [4]
 ##    Month  Naps mean_score
 ##    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-##  1     1     3       3.63
-##  2     5     1       8.16
-##  3     5     2      10.5 
-##  4     5     3      11.0 
-##  5    10     1      20.1 
-##  6    10     2      19.2 
-##  7    10     3      19.7 
-##  8    15     1      26.3 
-##  9    15     2      28.1 
-## 10    15     3      28.6</code></pre>
+##  1     1     3       4.89
+##  2     5     1      10.2 
+##  3     5     2      12.1 
+##  4     5     3      10.8 
+##  5    10     1      17.9 
+##  6    10     2      18.3 
+##  7    10     3      17.1 
+##  8    15     1      26.7 
+##  9    15     2      25.9 
+## 10    15     3      29.6</code></pre>
 <pre class="r"><code>print(seconddemos)</code></pre>
 <pre><code>## # A tibble: 8 x 3
 ## # Groups:   Month [4]
 ##   Month  Naps mean_secondscore
 ##   &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;
-## 1     1     3             6.53
-## 2     5     2            12.5 
-## 3     5     3             7.83
-## 4    10     1            23.8 
-## 5    10     2            17.4 
-## 6    10     3            11.0 
-## 7    15     1            25.3 
-## 8    15     2            19.1</code></pre>
+## 1     1     3             5.06
+## 2     5     2            15.0 
+## 3     5     3             7.19
+## 4    10     1            21.3 
+## 5    10     2            17.6 
+## 6    10     3            12.8 
+## 7    15     1            24.7 
+## 8    15     2            20.7</code></pre>
 <p>It may or may not because we’re still drawing a random sample, but the trend should be clearer than during the first example.</p>
 </div>
 <div id="now-run-the-analysis-again" class="section level2">
@@ -610,11 +610,11 @@ secondtutorial&lt;-lme(secondscores ~ Month * Naps, random = ~ Month | Subs, dat
 secondtut&lt;- summary(secondtutorial)
 secondtabl = secondtut$tTable 
 secondtabl </code></pre>
-<pre><code>##                   Value Std.Error DF   t-value      p-value
-## (Intercept) 20.24626401 3.4374963 27  5.889829 2.829701e-06
-## Month        0.78412570 0.2682578 27  2.923030 6.932861e-03
-## Naps        -4.80930158 1.2101330 27 -3.974193 4.738203e-04
-## Month:Naps  -0.09897567 0.1036728 27 -0.954693 3.482030e-01</code></pre>
+<pre><code>##                  Value Std.Error DF   t-value      p-value
+## (Intercept) 26.4417109 3.4201860 27  7.731074 2.582852e-08
+## Month        0.1328537 0.2657208 27  0.499975 6.211432e-01
+## Naps        -7.4831142 1.2028232 27 -6.221292 1.183353e-06
+## Month:Naps   0.2363135 0.1025918 27  2.303435 2.918686e-02</code></pre>
 <pre class="r"><code>#Graph the results 
 
 secondplot&lt;-
@@ -628,10 +628,10 @@ secondplot + scale_x_continuous(name=&quot;Age (in months)&quot;, limits=c(1, 15
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
-<p>Curran, P. J., Obeidat, K., &amp; Losardo, D. (2010). Twelve Frequently Asked Questions About Growth Curve Modeling. Journal of cognition and development : official journal of the Cognitive Development Society, 11(2), 121–136. <a href="doi:10.1080/15248371003699969" class="uri">doi:10.1080/15248371003699969</a></p>
+<p>Curran, P. J., Obeidat, K., &amp; Losardo, D. (2010). Twelve frequently asked questions about growth curve modeling. Journal of Cognition and Development : Official Journal of the Cognitive Development Society, 11(2), 121–136. <a href="doi:10.1080/15248371003699969" class="uri">doi:10.1080/15248371003699969</a></p>
+<p>Magnusson, K. (2015). Uing R and lme/lmer to fit different two- and three- level longitudinal models. R Psychologist. Retrieved from <a href="https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model" class="uri">https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model</a></p>
 <p>Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald &amp; J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.</p>
-<p><a href="https://cran.r-project.org/web/packages/nlme/nlme.pdf" class="uri">https://cran.r-project.org/web/packages/nlme/nlme.pdf</a></p>
-<p><a href="https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model" class="uri">https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model</a></p>
+<p>Pinheiro, J. &amp; Bates, D. (2019). Package ‘nlme’. Retrieved from <a href="https://cran.r-project.org/web/packages/nlme/nlme.pdf" class="uri">https://cran.r-project.org/web/packages/nlme/nlme.pdf</a></p>
 </div>
 </div>
 

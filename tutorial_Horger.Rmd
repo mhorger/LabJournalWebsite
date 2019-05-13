@@ -165,7 +165,7 @@ plot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks = Mont
 
 This kind of graph allows us to see the developmental trajectory of individual infants. It highlights the fact that there are 2 developmental trends occuring here- Infants' performance on the assessment is improving with time and the average number of naps they take is decreasing with time. 
 
-##Single main effect versus two main effects or an interaction
+### **Single main effect VS. two main effects or an interaction**
 
 When making the original data set, I intentionally biased the data to show a developmental curve by increasing the sampling distribution for each age range. I could do something similar to bias our data to support the impact of taking fewer naps 
 
@@ -194,7 +194,7 @@ print(seconddataset)
 
 
 
-## Did the manipulation work? 
+### Did the manipulation work? 
 
 ```{r}
 #Summary stats from our first dataset
@@ -218,7 +218,7 @@ print(seconddemos)
 It may or may not because we're still drawing a random sample, but the trend should be clearer than during the first example. 
 
 
-##Now run the analysis again 
+###Now run the analysis again 
 
 ```{r}
 #Run the analysis again 
@@ -256,8 +256,8 @@ secondplot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks 
 ##References 
 Curran, P. J., Obeidat, K., & Losardo, D. (2010). Twelve frequently asked questions about growth curve modeling. Journal of Cognition and Development : Official Journal of the Cognitive Development Society, 11(2), 121–136. doi:10.1080/15248371003699969
 
+Magnusson, K. (2015). Uing R and lme/lmer to fit different two- and three- level longitudinal models. R Psychologist. Retrieved from https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model
+
 Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald & J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.
 
-https://cran.r-project.org/web/packages/nlme/nlme.pdf 
-
-https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model
+Pinheiro, J. & Bates, D. (2019). Package 'nlme'. Retrieved from https://cran.r-project.org/web/packages/nlme/nlme.pdf 

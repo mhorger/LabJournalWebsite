@@ -159,7 +159,7 @@ library(dplyr)
 
 #Create a data set
 
-##I created a data set based on the hypothesis that scores will improve with infant age and with less fragmented sleep(fewer naps). 
+I created a data set based on the hypothesis that scores will improve with infant age and with less fragmented sleep(fewer naps). 
 
 
 ```r
@@ -187,46 +187,46 @@ print(seconddataset)
 
 ```
 ##    Subs Month Naps secondscores Napsfactor
-## 1     1     1    3     2.134571          3
-## 2     2     1    3     7.186423          3
-## 3     3     1    3     5.868173          3
-## 4     4     1    3     7.750088          3
-## 5     5     1    3     3.592211          3
-## 6     6     1    3     9.442160          3
-## 7     7     1    3     9.167988          3
-## 8     8     1    3     7.300996          3
-## 9     9     1    3     8.799234          3
-## 10   10     1    3     1.646022          3
-## 11    1     5    3     9.996833          3
-## 12    2     5    3     8.316719          3
-## 13    3     5    3     7.399769          3
-## 14    4     5    3     5.388578          3
-## 15    5     5    3     6.497455          3
-## 16    6     5    2     9.419795          2
-## 17    7     5    2    16.218660          2
-## 18    8     5    2    15.491120          2
-## 19    9     5    2    10.877074          2
-## 20   10     5    2    14.665973          2
-## 21    1    10    3    13.272139          3
-## 22    2    10    3    11.255234          3
-## 23    3    10    3    12.822707          3
-## 24    4    10    2    14.140726          2
-## 25    5    10    2    17.009429          2
-## 26    6    10    2    15.210590          2
-## 27    7    10    2    18.342941          2
-## 28    8    10    2    18.907537          2
-## 29    9    10    1    21.929598          1
-## 30   10    10    1    24.168342          1
-## 31    1    15    2    22.116217          2
-## 32    2    15    2    20.643016          2
-## 33    3    15    2    22.212778          2
-## 34    4    15    2    20.680885          2
-## 35    5    15    2    21.066924          2
-## 36    6    15    1    24.159368          1
-## 37    7    15    1    26.916338          1
-## 38    8    15    1    26.734051          1
-## 39    9    15    1    23.284040          1
-## 40   10    15    1    29.429740          1
+## 1     1     1    3     7.170586          3
+## 2     2     1    3     3.583052          3
+## 3     3     1    3     7.465170          3
+## 4     4     1    3     3.127882          3
+## 5     5     1    3     8.791892          3
+## 6     6     1    3     9.634068          3
+## 7     7     1    3     6.218591          3
+## 8     8     1    3     2.528422          3
+## 9     9     1    3     5.472659          3
+## 10   10     1    3     7.614653          3
+## 11    1     5    3     7.820417          3
+## 12    2     5    3     5.475113          3
+## 13    3     5    3     8.525551          3
+## 14    4     5    3     5.773981          3
+## 15    5     5    3     5.111542          3
+## 16    6     5    2    10.533653          2
+## 17    7     5    2    12.691162          2
+## 18    8     5    2    10.145693          2
+## 19    9     5    2    13.683709          2
+## 20   10     5    2     9.849143          2
+## 21    1    10    3    11.767944          3
+## 22    2    10    3    14.643520          3
+## 23    3    10    3    14.857483          3
+## 24    4    10    2    17.073752          2
+## 25    5    10    2    15.713771          2
+## 26    6    10    2    21.444597          2
+## 27    7    10    2    20.472899          2
+## 28    8    10    2    18.189461          2
+## 29    9    10    1    22.650703          1
+## 30   10    10    1    24.388868          1
+## 31    1    15    2    21.725434          2
+## 32    2    15    2    21.640731          2
+## 33    3    15    2    22.338675          2
+## 34    4    15    2    21.218527          2
+## 35    5    15    2    19.875106          2
+## 36    6    15    1    22.783912          1
+## 37    7    15    1    26.045694          1
+## 38    8    15    1    23.795259          1
+## 39    9    15    1    22.187484          1
+## 40   10    15    1    29.353559          1
 ```
 
 ```r
@@ -255,14 +255,14 @@ print(seconddemos)
 ## # Groups:   Month [4]
 ##   Month  Naps mean_secondscore
 ##   &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;
-## 1     1     3             6.29
-## 2     5     2            13.3 
-## 3     5     3             7.52
-## 4    10     1            23.0 
-## 5    10     2            16.7 
-## 6    10     3            12.5 
-## 7    15     1            26.1 
-## 8    15     2            21.3
+## 1     1     3             6.16
+## 2     5     2            11.4 
+## 3     5     3             6.54
+## 4    10     1            23.5 
+## 5    10     2            18.6 
+## 6    10     3            13.8 
+## 7    15     1            24.8 
+## 8    15     2            21.4
 ```
 
 
@@ -308,11 +308,11 @@ print(secondtabl)
 ```
 
 ```
-##                  Value Std.Error DF   t-value      p-value
-## (Intercept) 18.1127040 3.5070865 27  5.164601 1.957417e-05
-## Month        0.9633010 0.2801759 27  3.438200 1.914098e-03
-## Naps        -4.2482094 1.2221466 27 -3.476023 1.737268e-03
-## Month:Naps  -0.1103084 0.1081081 27 -1.020353 3.166171e-01
+##                    Value Std.Error DF     t-value      p-value
+## (Intercept) 17.237304865 4.2471269 27  4.05858018 0.0003789696
+## Month        0.846997543 0.3330320 27  2.54329150 0.0170215990
+## Naps        -4.241979753 1.4967791 27 -2.83407193 0.0085941323
+## Month:Naps  -0.004503319 0.1288402 27 -0.03495274 0.9723745537
 ```
 
 
@@ -323,7 +323,7 @@ print(secondtabl)
 
 #Graphing the results 
 
-### We want to look at individual subjects' trajectories of performance and average number of naps across time. 
+We want to look at individual subjects' trajectories of performance and average number of naps across time. 
 
 
 ```r
@@ -359,11 +359,11 @@ print(secondplot)
 #References
 Curran, P. J., Obeidat, K., &amp; Losardo, D. (2010). Twelve frequently asked questions about growth curve modeling. Journal of Cognition and Development : Official Journal of the Cognitive Development Society, 11(2), 121–136. doi:10.1080/15248371003699969
 
+Magnusson, K. (2015). Uing R and lme/lmer to fit different two- and three- level longitudinal models. R Psychologist. Retrieved from https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model
+
 Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald &amp; J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.
 
-https://cran.r-project.org/web/packages/nlme/nlme.pdf 
-
-https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model
+Pinheiro, J. &amp; Bates, D. (2019). Package 'nlme'. Retrieved from https://cran.r-project.org/web/packages/nlme/nlme.pdf
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
