@@ -10,7 +10,7 @@ navbar:
       href: Research.html
     - text: "Links"
       href: Links.html
-    - text: "Using the lme function from the nlme package"
+    - text: "Presentation"
       href: Final_project_presentation.html
     - text: "Learning R"
       href: Journal.html
