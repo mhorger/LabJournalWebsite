@@ -56,7 +56,7 @@ class: center, middle
 
 --
 
-2. Lattice
+2. Matrices
 
 --
 
@@ -64,7 +64,7 @@ class: center, middle
 
 --
 
-4. Matrices
+4. Lattice framework
 
 
 --
@@ -127,7 +127,7 @@ library(dplyr)
 
 #Create a data set
 
-##I created a data set based on the hypothesis that scores will improve with infant age and with less fragmented sleep(fewer naps). 
+I created a data set based on the hypothesis that scores will improve with infant age and with less fragmented sleep(fewer naps). 
 
 ```{r}
 Subs <- rep(c(seq(1:10)), 4)
@@ -219,7 +219,7 @@ print(secondtabl)
 
 #Graphing the results 
 
-### We want to look at individual subjects' trajectories of performance and average number of naps across time. 
+We want to look at individual subjects' trajectories of performance and average number of naps across time. 
 
 ```{r}
 secondplot<-
@@ -247,6 +247,17 @@ secondplot<- secondplot + scale_x_continuous(name="Age (in months)",            
 print(secondplot)
 ```
 
+
+---
+
+#References
+Curran, P. J., Obeidat, K., & Losardo, D. (2010). Twelve frequently asked questions about growth curve modeling. Journal of Cognition and Development : Official Journal of the Cognitive Development Society, 11(2), 121–136. doi:10.1080/15248371003699969
+
+Magnusson, K. (2015). Uing R and lme/lmer to fit different two- and three- level longitudinal models. R Psychologist. Retrieved from https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model
+
+Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald & J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.
+
+Pinheiro, J. & Bates, D. (2019). Package 'nlme'. Retrieved from https://cran.r-project.org/web/packages/nlme/nlme.pdf 
 
 
 

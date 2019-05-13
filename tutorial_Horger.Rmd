@@ -254,7 +254,7 @@ secondplot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks 
 
 
 ##References 
-Curran, P. J., Obeidat, K., & Losardo, D. (2010). Twelve Frequently Asked Questions About Growth Curve Modeling. Journal of cognition and development : official journal of the Cognitive Development Society, 11(2), 121–136. doi:10.1080/15248371003699969
+Curran, P. J., Obeidat, K., & Losardo, D. (2010). Twelve frequently asked questions about growth curve modeling. Journal of Cognition and Development : Official Journal of the Cognitive Development Society, 11(2), 121–136. doi:10.1080/15248371003699969
 
 Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald & J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.
 

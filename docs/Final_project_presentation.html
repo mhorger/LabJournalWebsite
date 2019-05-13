@@ -4,7 +4,7 @@
     <title>Using the lme function from the nlme package</title>
     <meta charset="utf-8" />
     <meta name="author" content="Melissa Horger" />
-    <meta name="date" content="2019-05-06" />
+    <meta name="date" content="2019-05-13" />
     <link href="site_libs/remark-css/default.css" rel="stylesheet" />
     <link href="site_libs/remark-css/duke-blue.css" rel="stylesheet" />
     <link href="site_libs/remark-css/middlebury-fonts.css" rel="stylesheet" />
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Using the lme function from the nlme package
 ## A brief tutorial
 ### Melissa Horger
-### 2019-05-06
+### 2019-05-13
 
 ---
 
@@ -62,7 +62,7 @@ class: center, middle
 
 --
 
-2. Lattice
+2. Matrices
 
 --
 
@@ -70,7 +70,7 @@ class: center, middle
 
 --
 
-4. Matrices
+4. Lattice framework
 
 
 --
@@ -187,46 +187,46 @@ print(seconddataset)
 
 ```
 ##    Subs Month Naps secondscores Napsfactor
-## 1     1     1    3     8.888813          3
-## 2     2     1    3     4.624647          3
-## 3     3     1    3     8.456600          3
-## 4     4     1    3     1.924105          3
-## 5     5     1    3     4.094884          3
-## 6     6     1    3     1.145132          3
-## 7     7     1    3     5.129467          3
-## 8     8     1    3     6.146995          3
-## 9     9     1    3     9.244344          3
-## 10   10     1    3     8.625919          3
-## 11    1     5    3     7.900340          3
-## 12    2     5    3     9.975296          3
-## 13    3     5    3     5.581707          3
-## 14    4     5    3     9.391561          3
-## 15    5     5    3     9.744077          3
-## 16    6     5    2    14.366616          2
-## 17    7     5    2    10.314851          2
-## 18    8     5    2     9.696769          2
-## 19    9     5    2    12.854179          2
-## 20   10     5    2    15.204778          2
-## 21    1    10    3    10.659572          3
-## 22    2    10    3    10.349110          3
-## 23    3    10    3    10.455686          3
-## 24    4    10    2    14.340720          2
-## 25    5    10    2    14.605671          2
-## 26    6    10    2    19.940273          2
-## 27    7    10    2    20.517523          2
-## 28    8    10    2    16.485121          2
-## 29    9    10    1    21.528862          1
-## 30   10    10    1    24.077182          1
-## 31    1    15    2    21.174551          2
-## 32    2    15    2    22.244231          2
-## 33    3    15    2    22.505160          2
-## 34    4    15    2    22.064418          2
-## 35    5    15    2    19.153619          2
-## 36    6    15    1    23.158080          1
-## 37    7    15    1    23.823183          1
-## 38    8    15    1    23.934640          1
-## 39    9    15    1    25.403315          1
-## 40   10    15    1    29.329948          1
+## 1     1     1    3     2.134571          3
+## 2     2     1    3     7.186423          3
+## 3     3     1    3     5.868173          3
+## 4     4     1    3     7.750088          3
+## 5     5     1    3     3.592211          3
+## 6     6     1    3     9.442160          3
+## 7     7     1    3     9.167988          3
+## 8     8     1    3     7.300996          3
+## 9     9     1    3     8.799234          3
+## 10   10     1    3     1.646022          3
+## 11    1     5    3     9.996833          3
+## 12    2     5    3     8.316719          3
+## 13    3     5    3     7.399769          3
+## 14    4     5    3     5.388578          3
+## 15    5     5    3     6.497455          3
+## 16    6     5    2     9.419795          2
+## 17    7     5    2    16.218660          2
+## 18    8     5    2    15.491120          2
+## 19    9     5    2    10.877074          2
+## 20   10     5    2    14.665973          2
+## 21    1    10    3    13.272139          3
+## 22    2    10    3    11.255234          3
+## 23    3    10    3    12.822707          3
+## 24    4    10    2    14.140726          2
+## 25    5    10    2    17.009429          2
+## 26    6    10    2    15.210590          2
+## 27    7    10    2    18.342941          2
+## 28    8    10    2    18.907537          2
+## 29    9    10    1    21.929598          1
+## 30   10    10    1    24.168342          1
+## 31    1    15    2    22.116217          2
+## 32    2    15    2    20.643016          2
+## 33    3    15    2    22.212778          2
+## 34    4    15    2    20.680885          2
+## 35    5    15    2    21.066924          2
+## 36    6    15    1    24.159368          1
+## 37    7    15    1    26.916338          1
+## 38    8    15    1    26.734051          1
+## 39    9    15    1    23.284040          1
+## 40   10    15    1    29.429740          1
 ```
 
 ```r
@@ -255,14 +255,14 @@ print(seconddemos)
 ## # Groups:   Month [4]
 ##   Month  Naps mean_secondscore
 ##   &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt;
-## 1     1     3             5.83
-## 2     5     2            12.5 
-## 3     5     3             8.52
-## 4    10     1            22.8 
-## 5    10     2            17.2 
-## 6    10     3            10.5 
-## 7    15     1            25.1 
-## 8    15     2            21.4
+## 1     1     3             6.29
+## 2     5     2            13.3 
+## 3     5     3             7.52
+## 4    10     1            23.0 
+## 5    10     2            16.7 
+## 6    10     3            12.5 
+## 7    15     1            26.1 
+## 8    15     2            21.3
 ```
 
 
@@ -308,11 +308,11 @@ print(secondtabl)
 ```
 
 ```
-##                   Value Std.Error DF    t-value      p-value
-## (Intercept) 17.96414516 4.1653762 27  4.3127306 0.0001926407
-## Month        0.87810509 0.3250063 27  2.7018092 0.0117711968
-## Naps        -4.33033194 1.4663195 27 -2.9531981 0.0064421894
-## Month:Naps  -0.06382412 0.1255996 27 -0.5081555 0.6154710277
+##                  Value Std.Error DF   t-value      p-value
+## (Intercept) 18.1127040 3.5070865 27  5.164601 1.957417e-05
+## Month        0.9633010 0.2801759 27  3.438200 1.914098e-03
+## Naps        -4.2482094 1.2221466 27 -3.476023 1.737268e-03
+## Month:Naps  -0.1103084 0.1081081 27 -1.020353 3.166171e-01
 ```
 
 
@@ -352,6 +352,18 @@ print(secondplot)
 ```
 
 ![](Final_project_presentation_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+
+---
+
+#References
+Curran, P. J., Obeidat, K., &amp; Losardo, D. (2010). Twelve frequently asked questions about growth curve modeling. Journal of Cognition and Development : Official Journal of the Cognitive Development Society, 11(2), 121–136. doi:10.1080/15248371003699969
+
+Maindonald, J. (2007). Chapter 10: Multi-level models and repeated measures. In J. Maindonald &amp; J. Braun (Eds.), Data analysis and graphics using R: An example-based approach. Cambridge: Cambridge University Press.
+
+https://cran.r-project.org/web/packages/nlme/nlme.pdf 
+
+https://rpsychologist.com/r-guide-longitudinal-lme-lmer#longitudinal-two-level-model
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
