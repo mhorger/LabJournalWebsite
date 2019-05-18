@@ -445,7 +445,7 @@ all<- rbind(onlycongruent, onlyincongruent)
 all<- data.frame(TrialCondition, all)
 
 
-ggplot(all, aes(x=TrialCondition, y=meanerRT, fill = previous)) + 
+thirdgraph <- ggplot(all, aes(x=TrialCondition, y=meanerRT, fill = previous)) + 
     geom_bar(position=position_dodge(), stat="identity",
              colour="black", # Use black outlines,
              size=.3) +      # Thinner lines
@@ -456,6 +456,8 @@ ggplot(all, aes(x=TrialCondition, y=meanerRT, fill = previous)) +
     xlab("Condition") +
     ylab("Mean RT") +
        ggtitle("The other thing") 
+
+print(thirdgraph)
 ```
 
 
