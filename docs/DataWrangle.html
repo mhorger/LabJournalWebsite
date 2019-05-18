@@ -781,7 +781,9 @@ TrialCondition &lt;- c(&quot;C&quot;, &quot;C&quot;, &quot;I&quot;, &quot;I&quot
 all&lt;- rbind(onlycongruent, onlyincongruent)
 
 all&lt;- data.frame(TrialCondition, all)
+print(all)
 
+#it&#39;s not a table, but it&#39;s a good looking data frame 
 
 thirdgraph &lt;- ggplot(all, aes(x=TrialCondition, y=meanerRT, fill = previous)) + 
     geom_bar(position=position_dodge(), stat=&quot;identity&quot;,

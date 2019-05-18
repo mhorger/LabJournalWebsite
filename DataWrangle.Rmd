@@ -311,10 +311,10 @@ Overalls1 <- RTS %>%
 
 Overalls <- data.frame(Overalls, Overalls1[,2])
 
+table1 <- table(Overalls)
 
 
-
-ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency)) + 
+firstgraph <- ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency ), ymin = 400, ymax = 800) + 
     geom_bar(position=position_dodge(), stat="identity",
              colour="black", # Use black outlines,
              size=.3) +      # Thinner lines
@@ -325,6 +325,8 @@ ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency)) +
     xlab("Condition") +
     ylab("Mean RT") +
        ggtitle("The Effect of Congruency on the Flanker Task") 
+
+print(firstgraph)
 
 ```
 
@@ -354,7 +356,7 @@ for (i in transformers$subject) {
 }
 
 
-ggplot(transformers, aes(x=subject, y=flanker)) + 
+theprettygraph <- ggplot(transformers, aes(x=subject, y=flanker)) + 
     geom_bar(position=position_dodge(), stat="identity",
              colour="black", # Use black outlines,
              size=.3) +      # Thinner lines
@@ -364,7 +366,9 @@ ggplot(transformers, aes(x=subject, y=flanker)) +
                   position=position_dodge(.9)) +
     xlab("Subject") +
     ylab("Mean RT") +
-       ggtitle("Average Flanker Effect Across Subjects") 
+       ggtitle("Average Flanker Effect Across Subjects")
+
+print(theprettygraph)
 
 
 ```
@@ -443,7 +447,9 @@ TrialCondition <- c("C", "C", "I", "I")
 all<- rbind(onlycongruent, onlyincongruent)
 
 all<- data.frame(TrialCondition, all)
+print(all)
 
+#it's not a table, but it's a good looking data frame 
 
 thirdgraph <- ggplot(all, aes(x=TrialCondition, y=meanerRT, fill = previous)) + 
     geom_bar(position=position_dodge(), stat="identity",
