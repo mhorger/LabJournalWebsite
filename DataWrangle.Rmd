@@ -354,17 +354,18 @@ for (i in transformers$subject) {
 }
 
 
-ggplot(transformers, mapping = aes(x = congruency, y = flanker)) + 
-  geom_bar(stat = "identity")+
-  theme_classic(base_size = 12)+
-  ylab("Mean Flanker Effect")
-   geom_errorbar(aes(ymin= flanker - flankerSEM, ymax=flanker + flankerSEM), 
-                 position=position_dodge(width = 0.9),
-                 width = .2,
-                 color = "black")
+ggplot(transformers, aes(x=subject, y=flanker)) + 
+    geom_bar(position=position_dodge(), stat="identity",
+             colour="black", # Use black outlines,
+             size=.3) +      # Thinner lines
+    geom_errorbar(aes(ymin=(transformers$flanker - transformers$flankerSEM), ymax=transformers$flanker + transformers$flankerSEM),
+                  size=.3,    # Thinner lines
+                  width=.2,
+                  position=position_dodge(.9)) +
+    xlab("Subject") +
+    ylab("Mean RT") +
+       ggtitle("Average Flanker Effect Across Subjects") 
 
-
-#How do you know when you need to calculate the summary stats and when R will just do it for you? 
 
 ```
 
@@ -396,13 +397,27 @@ onlycongruent <- RTS %>%
   group_by(previous) %>%
   summarise(meanerRT = mean(Overreaction))
 
+onlycongruentSEM <- RTS %>%
+  filter(congruency == "C", previous != "O") %>%
+  group_by(previous) %>%
+  summarise(congruentSEM = std(Overreaction))
+
+onlycongruent <- data.frame(onlycongruent, onlycongruentSEM[,2])
+
 onlyincongruent <- RTS %>%
   filter(congruency == "I") %>%
   group_by(previous) %>%
-  summarise(ImeanerRT = mean(Overreaction))
+  summarise(meanerRT = mean(Overreaction))
+
+onlyincongruentSEM <- RTS %>%
+  filter(congruency == "I") %>%
+  group_by(previous) %>%
+  summarise(congruentSEM = std(Overreaction))
+
+onlyincongruent <- data.frame(onlyincongruent, onlyincongruentSEM[,2])
 
 onlycongruentSEM <- c(std(onlycongruent$meanerRT))
-onlyincongruentSEM <- c(std(onlyincongruent$ImeanerRT))
+onlyincongruentSEM <- c(std(onlyincongruent$meanerRT))
 
 ```
 
@@ -417,7 +432,30 @@ First get the subject means for each condition, then create a table and plot for
 **tip:** be careful, note that the first trial in each experiment can not be includled, because it had no preceding trial
 
 ```{r}
-tab <- as.table(onlycongruent, onlyincongruent)
+
+print(onlycongruent)
+print(onlyincongruent)
+
+#need to combine them into one table 
+
+TrialCondition <- c("C", "C", "I", "I")
+
+all<- rbind(onlycongruent, onlyincongruent)
+
+all<- data.frame(TrialCondition, all)
+
+
+ggplot(all, aes(x=TrialCondition, y=meanerRT, fill = previous)) + 
+    geom_bar(position=position_dodge(), stat="identity",
+             colour="black", # Use black outlines,
+             size=.3) +      # Thinner lines
+    geom_errorbar(aes(ymin=(all$meanerRT - all$congruentSEM), ymax=all$meanerRT+ all$congruentSEM),
+                  size=.3,    # Thinner lines
+                  width=.2,
+                  position=position_dodge(.9)) +
+    xlab("Condition") +
+    ylab("Mean RT") +
+       ggtitle("The other thing") 
 ```
 
 
