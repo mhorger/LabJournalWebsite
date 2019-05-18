@@ -1,0 +1,119 @@
+---
+title: "SLEEP19"
+author: "mhorger"
+date: "May 15, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Inputting the data
+
+```{r}
+my_data <- read.table(file = "clipboard", 
+                      sep = "\t", header=TRUE)
+```
+
+##Reorganize the data into long format 
+
+```{r}
+Subs <- rep(my_data$sub, 3)
+Condit<-rep(my_data$cond, 3)
+Tunnel<- as.factor(rep(my_data$texp, 3))
+Time <- rep(c("training", "test", "followup"), 44)
+Steps<- c(my_data$training, my_data$test, my_data$follow)
+
+SLEEP<- data.frame(Subs, Condit, Tunnel, Steps, Time)
+
+immgroup <- SLEEP %>%
+  group_by(Condit = "imm")
+```
+
+##By condition
+```{r}
+#Immediate
+
+ImmSubs <- as.factor(rep(c(4, 12, 13, 14, 19, 514, 519, 705, 11, 27, 202), 3))
+ImmTun<- as.factor(rep(c(0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1), 3))
+ImmScores <- c(0, 15, 13, 13, 12, 0, 15, 0, 16, 12, 1, 0, 15, 6, 15, 2, 0, 2,0,2, 6, 0, 0, 15, 1, 12, 1, 0, 7, 0, 7, 1, 0)
+ImmSession <- c(rep(c("1. training"), 11, rep(c("2. test"),11, rep(c( "3. follow"), 11))
+
+ImmAll <- data.frame(ImmSubs, ImmTun, ImmScores, ImmSession)
+
+#Nap
+NapSubs <- as.factor(rep(c(2, 5, 10, 17, 26, 203, 207, 801, 802, 1, 16, 502, 504, 522, 804, 805), 3))
+NapTun<- as.factor(rep(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1), 3))
+NapScores <- c(14, 2, 0, 15, 10, 15, 6, 6, 3, 14, 0, 0, 2, 1, 9, 9, 10, 6, 0, 7, 8, 14, 6, 5, 0, 5, 0, 0, 5, 11, 1, 13, 0, 0, 0, 7, 3, 17, 0, 0, 0, 0, 0, 0, 1, 10, 15, 15 )
+NapSession <- c(rep(c("1. training"), 16, rep(c("2. test"),16, rep(c( "3. follow"), 16))
+NapAll<- data.frame(NapSubs, NapTun, NapScores, NapSession)
+
+#NoNap
+NoNapSubs <- as.factor(rep(c(23, 25, 208, 520, 706, 807, 6, 8, 9, 15, 18, 22, 24, 201, 301, 803, 806), 3))
+NoNapTun<- as.factor(rep(c(0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), 3))
+NoNapScores <- c(15, 15, 2, 5, 0, 1, 1, 0, 1, 13, 0, 0, 0, 0, 12, 15, 7, 6, 0, 0, 0, 0, 2, 0, 0, 15, 6, 0, 0, 0, 0, 5, 7, 1, 0, 0, 15, 10, 0, 1, 0, 0, 15, 6, 0, 0, 0, 1, 6, 2, 1 )
+
+NoNapSession<-rep("1. training", 17)
+NoNapSession <- c(NoNapSession, rep("2. test", 17))
+NoNapSession<- c(NoNapSession, rep("3. follow", 17))
+  
+NoNapAll<- data.frame(NoNapSubs, NoNapTun, NoNapScores, NoNapSession)
+```
+
+
+##Load packages
+
+```{r, message=FALSE}
+library(ggplot2)
+library(nlme)
+library(dplyr)
+library(knitr)
+```
+
+##Plot
+```{r}
+#Immediate
+immediate<- 
+ggplot2::ggplot(ImmAll, aes(x=ImmSession, y=ImmScores,color = ImmSubs, linetype = ImmTun, group = ImmSubs), xlim(1, 15), ylim(0, 25), xlab(Time) ) + 
+  geom_point()+
+  geom_line()
+
+#Nap
+nap<- 
+ggplot2::ggplot(NapAll, aes(x=NapSession, y=NapScores,color = NapSubs, linetype = NapTun, group = NapSubs), xlim(1, 15), ylim(0, 25), xlab(Time) ) + 
+  geom_point()+
+  geom_line()
+
+#NoNap
+nonap<- 
+ggplot2::ggplot(NoNapAll, aes(x=NoNapSession, y=NoNapScores,color = NoNapSubs, linetype = NoNapTun, group = NoNapSubs), xlim(1, 15), ylim(0, 25), xlab(Time) ) + 
+  geom_point()+
+  geom_line()
+```
+
+
+
+```{r}
+#Immediate
+immediate<- 
+ggplot2::ggplot(ImmAll, aes(x=ImmSession, y=ImmScores, linetype = ImmTun, group = ImmSubs), xlim(1, 15), ylim(0, 25), xlab(Time) ) + 
+  geom_point()+
+  geom_line() +
+  theme_classic()
+
+#Nap
+nap<- 
+ggplot2::ggplot(NapAll, aes(x=NapSession, y=NapScores, linetype = NapTun, group = NapSubs), xlim(1, 15), ylim(0, 25), xlab(Time) ) + 
+  geom_point()+
+  geom_line()+
+  theme_classic()
+
+#NoNap
+nonap<- 
+ggplot2::ggplot(NoNapAll, aes(x=NoNapSession, y=NoNapScores, linetype = NoNapTun, group = NoNapSubs), xlim(1, 15), ylim(0, 25), xlab(Time) ) + 
+  geom_point()+
+  geom_line()+
+  theme_classic()
+```
+

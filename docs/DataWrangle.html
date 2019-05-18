@@ -72,9 +72,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -192,8 +190,6 @@ $(document).ready(function () {
   menuAnchor.closest('li.dropdown').addClass('active');
 });
 </script>
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -352,6 +348,16 @@ div.tocify {
 
 </style>
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
 <div class="col-xs-12 col-sm-4 col-md-3">
@@ -389,6 +395,9 @@ div.tocify {
   <a href="Links.html">Links</a>
 </li>
 <li>
+  <a href="Final_project_presentation.html">Presentation</a>
+</li>
+<li>
   <a href="Journal.html">Learning R</a>
 </li>
 <li>
@@ -399,6 +408,9 @@ div.tocify {
 </li>
 <li>
   <a href="DataWrangle.html">Data wrangling</a>
+</li>
+<li>
+  <a href="StatisticsProblems.html">Statistics Problems</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -419,7 +431,11 @@ div.tocify {
 
 <div id="star-wars" class="section level2">
 <h2>Star wars</h2>
-<pre class="r"><code>df&lt;- starwars
+<pre class="r"><code>library(knitr)
+library(ggplot2)
+library(dplyr)
+
+df&lt;- starwars
 
 df$name
 #within df, give me all the values in &quot;name&quot;
@@ -542,74 +558,90 @@ center_letter&lt;-tolower(center_letter)
 
 center_letter&lt;- as.character(center_letter)
 
-accuracy&lt;- all_data %&gt;%
- cbind(center_letter) %&gt;%
-  cbind(accurate = 0) %&gt;%
-  
+#row 10 in the full data set is participant responses
+
+response&lt;- all_data[,10]
+
+scores&lt;-c(rep (0,4224))
+
+accuracy &lt;- data.frame(center_letter,response, scores)
 
 
-
-accuracy &lt;- accuracy %&gt;%
-  mutate(accurate = response==center_letter)
-
-
-  accuracy_scores&lt;-  as.integer(as.logical(accuracy$accurate))
-  
-  accuracy &lt;- accuracy %&gt;%
-    cbind(accuracy_scores)</code></pre>
+for (i in 1:4224){
+  if (accuracy[i,1]==accuracy[i,2]) {
+    accuracy[i,3]=1
+  } 
+}</code></pre>
 </div>
 <div id="get-reaction-time-on-each-trial" class="section level3">
 <h3>Get Reaction time on each trial</h3>
 <p>The stimulus_onset column gives a computer timestamp in milliseconds indicating when the stimulus was presented. The response_time column is a timestamp in milliseconds for the response. The difference between the two (response_time - stimulus_onset) is the reaction time in milliseconds. Add a column that calculates the reaction time on each trial.</p>
 <p>**<a href="tip:**" class="uri">tip:**</a> notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.</p>
-<pre class="r"><code>accuracy&lt;- accuracy %&gt;%
+<pre class="r"><code>RTS&lt;- all_data %&gt;%
   mutate()
-  as.numeric(accuracy$stimulus_onset)
+  as.numeric(all_data$stimulus_onset, all_data$response_time)
 
-class(accuracy$stimulus_onset)
-
-
-
-accuracy$stimulus_onset&lt;- as.numeric(accuracy$stimulus_onset)
-accuracy$response_time&lt;- as.numeric(accuracy$response_time)
-
-
-for (i in accuracy){
-    RT &lt;- accuracy$response_time - accuracy$stimulus_onset
-  }
   
+Overreaction &lt;- c(rep(0, 4224))
+RTS&lt;- cbind(RTS, Overreaction)
 
-  accuracy &lt;- cbind(accuracy, RT)</code></pre>
+RTS$Overreaction&lt;-c(RTS$response_time - RTS$stimulus_onset)
+
+RTS$Overreaction&lt;-as.numeric(RTS$Overreaction)
+
+scores&lt;- c(accuracy$scores)
+
+RTS&lt;- cbind(RTS, scores)  </code></pre>
 </div>
 </div>
 <div id="checks" class="section level2">
 <h2>Checks</h2>
 <p>Check how many trials each subject completed in the congruent and incongruent conditions, the mean accuracy for each subject in each congruency condition, and the mean RT for each subject in each congruency condition.</p>
-<pre class="r"><code>condcheck &lt;- accuracy %&gt;%
-  group_by(subject)
-print(condcheck)
-
-
-congrucheck&lt;- accuracy %&gt;%
+<pre class="r"><code>#The number of trials each sub completed in congruent and incongruent conditions 
+congruent &lt;- RTS %&gt;%
   filter(congruency == &quot;C&quot;) %&gt;%
+  group_by(subject)
+
+totalconpersub &lt;-count(congruent$subject)
+print(totalconpersub)
+
+incongruent &lt;- RTS %&gt;%
+  filter(congruency == &quot;I&quot;)
+totalinconpersub &lt;-count(incongruent$subject)
+print(totalinconpersub)
+
+#Mean accuracy per sub per condition  
+
+ConAccuracy &lt;- RTS %&gt;%
   group_by(subject) %&gt;%
-  summarise(mean_RTC = mean(RT)) 
+ summarize (averagecongacc = (mean(scores)))
 
-incongrucheck&lt;- accuracy %&gt;%
-  filter(congruency == &quot;I&quot;) %&gt;%
+
+InconAccuracy &lt;- incongruent %&gt;%
   group_by(subject) %&gt;%
-  summarise(mean_RTC = mean(RT))
+  summarize (IAccuracy = mean(scores))
 
-ic = table(incongrucheck$subject)
-print(ic)
+#Mean RT per sub per condition 
 
-cc = table(congrucheck$subject)
-print (cc)</code></pre>
+conpersub &lt;- c()
+inconpersub &lt;- c()
+
+
+conpersub &lt;- RTS %&gt;%
+  group_by(subject, congruency) %&gt;%
+  summarize (averageRT = (mean(Overreaction)))
+ 
+
+accpersub &lt;- RTS %&gt;%
+  group_by(subject, congruency) %&gt;%
+  summarize (averageaccuracy = (mean(scores)))
+
+checks &lt;- data.frame(conpersub, accpersub)</code></pre>
 <div id="exclusion" class="section level3">
 <h3>Exclusion</h3>
 <p>It is common to exclude Reaction times that are very slow. There are many methods and procedures for excluding outlying reaction times. To keep it simple, exclude all RTs that are longer than 2000 ms</p>
-<pre class="r"><code>accuracy %&gt;%
-  filter(RT &lt; 2000)</code></pre>
+<pre class="r"><code>checks %&gt;%
+  filter(averageRT &lt; 2000)</code></pre>
 </div>
 </div>
 <div id="analysis" class="section level2">
@@ -619,107 +651,68 @@ print (cc)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Get the individual subject mean reaction times for <strong>correct</strong> congruent and incongruent trials.</li>
 </ol>
-<pre class="r"><code>correctcongrRT &lt;- accuracy %&gt;%
-  filter( congruency == &quot;C&quot;,
-    accuracy_scores == 1) %&gt;%
-  group_by(subject) %&gt;%
-  summarise(mean_cong_RT &lt;- mean(RT)) 
-
-correctincongrRT &lt;- accuracy %&gt;%
-  filter( congruency == &quot;I&quot;,
-    accuracy_scores == 1) %&gt;%
-  group_by(subject) %&gt;%
-  summarise(mean_incong_RT &lt;- mean(RT)) </code></pre>
+<pre class="r"><code>RTanalysis &lt;- RTS %&gt;%
+  filter(scores ==1)%&gt;%
+  group_by(subject, congruency) %&gt;%
+  summarise(meanRT = mean(Overreaction))</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Get the overall mean RTs and SEMs (standard errors of the mean) for the congruent and incongruent condition. Make a table and graph.</li>
 </ol>
 <pre class="r"><code>std &lt;- function(x) sd(x)/sqrt(length(x))
 
-overall_mean_cong &lt;- accuracy %&gt;%
-  filter(congruency == &quot;C&quot;) %&gt;%
-  summarise(mean_cong&lt;- mean(RT),
-            SEM_cong&lt;- std(RT))
+Overalls &lt;- RTS %&gt;%
+  group_by(congruency) %&gt;%
+  summarise(meanRT = mean(Overreaction))
 
-overall_mean_incong &lt;- accuracy %&gt;%
-  filter(congruency == &quot;I&quot;) %&gt;%
-  summarise(mean_incong&lt;- mean(RT),
-            SEM_incong&lt;- std(RT))
+Overalls1 &lt;- RTS %&gt;%
+  group_by(congruency) %&gt;%
+  summarise(SEMrt = std(Overreaction))
 
-overall_means&lt;- data.frame(overall_mean_cong, overall_mean_incong)
-
-overall_means [2,1] &lt;- 
-overall_means [1, 3]
-
-overall_means [2,2] &lt;- 
-overall_means [1, 4]
-
-overall_means [1,3] &lt;- c(&quot;congruent&quot;)
-overall_means [2, 3] &lt;- c(&quot;incongruent&quot;)
-
-overall_means$SEM_incong....std.RT. = NULL
-names(overall_means)[1]&lt;-&quot;Mean&quot;
-names(overall_means)[2]&lt;-&quot;Standard error of the mean&quot;
-names(overall_means)[3]&lt;-&quot;Condition&quot;
-
-knitr::kable(overall_means)
+Overalls &lt;- data.frame(Overalls, Overalls1[,2])
 
 
 
 
-
-ggplot(overall_means, aes(x=Condition, y=Mean, fill = Condition)) + 
+ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency)) + 
     geom_bar(position=position_dodge(), stat=&quot;identity&quot;,
              colour=&quot;black&quot;, # Use black outlines,
              size=.3) +      # Thinner lines
-    geom_errorbar(aes(ymin=overall_means$Mean- overall_means$`Standard error of the mean`, ymax=overall_means$Mean+ overall_means$`Standard error of the mean`),
+    geom_errorbar(aes(ymin=(Overalls$meanRT - Overalls$SEMrt), ymax=Overalls$meanRT+ Overalls$SEMrt),
                   size=.3,    # Thinner lines
                   width=.2,
                   position=position_dodge(.9)) +
     xlab(&quot;Condition&quot;) +
     ylab(&quot;Mean RT&quot;) +
-       ggtitle(&quot;The Effect of Congruency on the Flanker Task&quot;) 
-
-  
-#when I try to rescale the Y axis, I lose the bars   </code></pre>
+       ggtitle(&quot;The Effect of Congruency on the Flanker Task&quot;) </code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect</li>
 </ol>
 <p>**<a href="tip:**" class="uri">tip:**</a> Not all problems have an easy solution in dplyr, this is one them. You may have an easier time using logical indexing of the dataframe to solve this part.</p>
-<pre class="r"><code>congrRT &lt;- accuracy %&gt;%
-  filter( congruency == &quot;C&quot;) %&gt;%
-  group_by(subject) %&gt;%
-  summarise(mean_cong_RT &lt;- mean(RT)) 
+<pre class="r"><code>transformers &lt;- RTanalysis %&gt;%
+  filter(congruency == &quot;C&quot;)
+transformers2 &lt;- RTanalysis %&gt;%
+  filter(congruency == &quot;I&quot;)
+flanker &lt;- rep(0,22)
+flankerSEM &lt;- rep(0,22)
+transformers &lt;- data.frame(transformers, transformers2[,2:3], flanker, flankerSEM)
 
-incongrRT &lt;- accuracy %&gt;%
-  filter( congruency == &quot;I&quot;) %&gt;%
-  group_by(subject) %&gt;%
-  summarise(mean_incong_RT &lt;- mean(RT)) 
-
-flanker_effect&lt;- cbind(congrRT, incongrRT)
-
-flanker_effect[,3] = NULL
-
-names(flanker_effect)[2]&lt;-&quot;CongruentMean&quot;
-names(flanker_effect)[3]&lt;-&quot;IncongruentMean&quot;
-
-cond&lt;- c(&quot;flanker effect&quot;)
-
-graph1 &lt;- data.frame(graph1, cond)
-
-flanker &lt;- flanker_effect %&gt;%
-  mutate (IncongruentMean = IncongruentMean - CongruentMean) 
+for (i in transformers$subject) {
+  transformers$flanker = (transformers$meanRT.1 - transformers$meanRT)
+}
 
 
-  SEM &lt;- std(flanker$IncongruentMean)
-  averagelag &lt;- mean(flanker$IncongruentMean)
-  graph1 &lt;- data.frame(SEM, averagelag)
+
+#Calculate the SEM 
+for (i in transformers$subject) {
+  transformers$flankerSEM = (sd(transformers$flanker)/sqrt(length(transformers$flanker)))
+}
 
 
-ggplot(graph1, mapping = aes(x = cond, y = averagelag)) + 
+ggplot(transformers, mapping = aes(x = congruency, y = flanker)) + 
   geom_bar(stat = &quot;identity&quot;)+
   theme_classic(base_size = 12)+
   ylab(&quot;Mean Flanker Effect&quot;)
-   geom_errorbar(aes(ymin= averagelag - SEM, ymax=averagelag + SEM), 
+   geom_errorbar(aes(ymin= flanker - flankerSEM, ymax=flanker + flankerSEM), 
                  position=position_dodge(width = 0.9),
                  width = .2,
                  color = &quot;black&quot;)
@@ -732,14 +725,39 @@ ggplot(graph1, mapping = aes(x = cond, y = averagelag)) +
 <p>Multiple questions may often be asked of data, especially questions that may not have been of original interest to the researchers.</p>
 <p>In flanker experiments, like this one, it is well known that the flanker effect is modulated by the nature of the previous trial. Specifically, the flanker effect on trial n (the current trial), is larger when the previous trial (trial n-1) involved a congruent item, compared to an incongruent item.</p>
 <p>Transform the data to conduct a sequence analysis. The dataframe should already include a factor (column) for the congruency level of trial n. Make another column that codes for the congruency level of trial n-1 (the previous trial). This creates a 2x2 design with trial n congruency x trial n-1 congruency.</p>
-<p>First get teh subject means for each condition, then create a table and plot for teh overall means and SEMs in each condition. This should include:</p>
+<pre class="r"><code>#Make another column that codes for the congruency level of trial n-1 (the previous trial). This creates a 2x2 design with trial n congruency x trial n-1 congruency. 
+
+# Use the RTS data frame 
+
+previous &lt;- RTS$congruency
+previous &lt;- c(&quot;O&quot;, previous[1:4223])
+
+count &lt;- c( 1:4224)
+
+RTS &lt;- data.frame(RTS, previous, count)
+
+
+onlycongruent &lt;- RTS %&gt;%
+  filter(congruency == &quot;C&quot;, previous != &quot;O&quot;) %&gt;%
+  group_by(previous) %&gt;%
+  summarise(meanerRT = mean(Overreaction))
+
+onlyincongruent &lt;- RTS %&gt;%
+  filter(congruency == &quot;I&quot;) %&gt;%
+  group_by(previous) %&gt;%
+  summarise(ImeanerRT = mean(Overreaction))
+
+onlycongruentSEM &lt;- c(std(onlycongruent$meanerRT))
+onlyincongruentSEM &lt;- c(std(onlyincongruent$ImeanerRT))</code></pre>
+<p>First get the subject means for each condition, then create a table and plot for teh overall means and SEMs in each condition. This should include:</p>
 <ol style="list-style-type: decimal">
 <li>trial n congruent : trial n-1 congruent</li>
 <li>trial n incongruent : trial n-1 congruent</li>
 <li>trial n congruent : trial n-1 incongruent</li>
 <li>trial n incongruent : trial n-1 incongruent</li>
 </ol>
-<p>**<a href="tip:**" class="uri">tip:**</a> be careful, note that the first trial in each experiment can not be included, because it had no preceding trial</p>
+<p>**<a href="tip:**" class="uri">tip:**</a> be careful, note that the first trial in each experiment can not be includled, because it had no preceding trial</p>
+<pre class="r"><code>tab &lt;- as.table(onlycongruent, onlyincongruent)</code></pre>
 </div>
 </div>
 </div>

@@ -19,6 +19,10 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE, eval = FALSE)
 ## Star wars 
 
 ```{r}
+library(knitr)
+library(ggplot2)
+library(dplyr)
+
 df<- starwars
 
 df$name
@@ -167,21 +171,20 @@ center_letter<-tolower(center_letter)
 
 center_letter<- as.character(center_letter)
 
-accuracy<- all_data %>%
- cbind(center_letter) %>%
-  cbind(accurate = 0) %>%
-  
+#row 10 in the full data set is participant responses
+
+response<- all_data[,10]
+
+scores<-c(rep (0,4224))
+
+accuracy <- data.frame(center_letter,response, scores)
 
 
-
-accuracy <- accuracy %>%
-  mutate(accurate = response==center_letter)
-
-
-  accuracy_scores<-  as.integer(as.logical(accuracy$accurate))
-  
-  accuracy <- accuracy %>%
-    cbind(accuracy_scores)
+for (i in 1:4224){
+  if (accuracy[i,1]==accuracy[i,2]) {
+    accuracy[i,3]=1
+  } 
+}
 
 
 
@@ -194,27 +197,22 @@ The stimulus_onset column gives a computer timestamp in milliseconds indicating 
 **tip:** notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.
 
 ```{r}
-accuracy<- accuracy %>%
+RTS<- all_data %>%
   mutate()
-  as.numeric(accuracy$stimulus_onset)
+  as.numeric(all_data$stimulus_onset, all_data$response_time)
 
-class(accuracy$stimulus_onset)
-
-
-
-accuracy$stimulus_onset<- as.numeric(accuracy$stimulus_onset)
-accuracy$response_time<- as.numeric(accuracy$response_time)
-
-
-for (i in accuracy){
-    RT <- accuracy$response_time - accuracy$stimulus_onset
-  }
   
+Overreaction <- c(rep(0, 4224))
+RTS<- cbind(RTS, Overreaction)
 
-  accuracy <- cbind(accuracy, RT)
-  
-  
- 
+RTS$Overreaction<-c(RTS$response_time - RTS$stimulus_onset)
+
+RTS$Overreaction<-as.numeric(RTS$Overreaction)
+
+scores<- c(accuracy$scores)
+
+RTS<- cbind(RTS, scores)  
+
 ```
 
 
@@ -222,28 +220,48 @@ for (i in accuracy){
 
 Check how many trials each subject completed in the congruent and incongruent conditions, the mean accuracy for each subject in each congruency condition, and the mean RT for each subject in each congruency condition.
 
+
 ```{r}
-condcheck <- accuracy %>%
-  group_by(subject)
-print(condcheck)
-
-
-congrucheck<- accuracy %>%
+#The number of trials each sub completed in congruent and incongruent conditions 
+congruent <- RTS %>%
   filter(congruency == "C") %>%
+  group_by(subject)
+
+totalconpersub <-count(congruent$subject)
+print(totalconpersub)
+
+incongruent <- RTS %>%
+  filter(congruency == "I")
+totalinconpersub <-count(incongruent$subject)
+print(totalinconpersub)
+
+#Mean accuracy per sub per condition  
+
+ConAccuracy <- RTS %>%
   group_by(subject) %>%
-  summarise(mean_RTC = mean(RT)) 
+ summarize (averagecongacc = (mean(scores)))
 
-incongrucheck<- accuracy %>%
-  filter(congruency == "I") %>%
+
+InconAccuracy <- incongruent %>%
   group_by(subject) %>%
-  summarise(mean_RTC = mean(RT))
+  summarize (IAccuracy = mean(scores))
 
-ic = table(incongrucheck$subject)
-print(ic)
+#Mean RT per sub per condition 
 
-cc = table(congrucheck$subject)
-print (cc)
+conpersub <- c()
+inconpersub <- c()
 
+
+conpersub <- RTS %>%
+  group_by(subject, congruency) %>%
+  summarize (averageRT = (mean(Overreaction)))
+ 
+
+accpersub <- RTS %>%
+  group_by(subject, congruency) %>%
+  summarize (averageaccuracy = (mean(scores)))
+
+checks <- data.frame(conpersub, accpersub)
 
 ```
 
@@ -255,8 +273,8 @@ It is common to exclude Reaction times that are very slow. There are many method
 
 ```{r}
 
-accuracy %>%
-  filter(RT < 2000)
+checks %>%
+  filter(averageRT < 2000)
 
 ```
 
@@ -268,17 +286,11 @@ accuracy %>%
 
 ```{r}
 
-correctcongrRT <- accuracy %>%
-  filter( congruency == "C",
-    accuracy_scores == 1) %>%
-  group_by(subject) %>%
-  summarise(mean_cong_RT <- mean(RT)) 
-
-correctincongrRT <- accuracy %>%
-  filter( congruency == "I",
-    accuracy_scores == 1) %>%
-  group_by(subject) %>%
-  summarise(mean_incong_RT <- mean(RT)) 
+RTanalysis <- RTS %>%
+  filter(scores ==1)%>%
+  group_by(subject, congruency) %>%
+  summarise(meanRT = mean(Overreaction))
+  
 
 
 ```
@@ -289,43 +301,24 @@ correctincongrRT <- accuracy %>%
 
 std <- function(x) sd(x)/sqrt(length(x))
 
-overall_mean_cong <- accuracy %>%
-  filter(congruency == "C") %>%
-  summarise(mean_cong<- mean(RT),
-            SEM_cong<- std(RT))
+Overalls <- RTS %>%
+  group_by(congruency) %>%
+  summarise(meanRT = mean(Overreaction))
 
-overall_mean_incong <- accuracy %>%
-  filter(congruency == "I") %>%
-  summarise(mean_incong<- mean(RT),
-            SEM_incong<- std(RT))
+Overalls1 <- RTS %>%
+  group_by(congruency) %>%
+  summarise(SEMrt = std(Overreaction))
 
-overall_means<- data.frame(overall_mean_cong, overall_mean_incong)
-
-overall_means [2,1] <- 
-overall_means [1, 3]
-
-overall_means [2,2] <- 
-overall_means [1, 4]
-
-overall_means [1,3] <- c("congruent")
-overall_means [2, 3] <- c("incongruent")
-
-overall_means$SEM_incong....std.RT. = NULL
-names(overall_means)[1]<-"Mean"
-names(overall_means)[2]<-"Standard error of the mean"
-names(overall_means)[3]<-"Condition"
-
-knitr::kable(overall_means)
+Overalls <- data.frame(Overalls, Overalls1[,2])
 
 
 
 
-
-ggplot(overall_means, aes(x=Condition, y=Mean, fill = Condition)) + 
+ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency)) + 
     geom_bar(position=position_dodge(), stat="identity",
              colour="black", # Use black outlines,
              size=.3) +      # Thinner lines
-    geom_errorbar(aes(ymin=overall_means$Mean- overall_means$`Standard error of the mean`, ymax=overall_means$Mean+ overall_means$`Standard error of the mean`),
+    geom_errorbar(aes(ymin=(Overalls$meanRT - Overalls$SEMrt), ymax=Overalls$meanRT+ Overalls$SEMrt),
                   size=.3,    # Thinner lines
                   width=.2,
                   position=position_dodge(.9)) +
@@ -333,11 +326,6 @@ ggplot(overall_means, aes(x=Condition, y=Mean, fill = Condition)) +
     ylab("Mean RT") +
        ggtitle("The Effect of Congruency on the Flanker Task") 
 
-  
-#when I try to rescale the Y axis, I lose the bars   
-
-
-  
 ```
 
 3. Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect
@@ -346,41 +334,31 @@ ggplot(overall_means, aes(x=Condition, y=Mean, fill = Condition)) +
 
 ```{r}
 
-congrRT <- accuracy %>%
-  filter( congruency == "C") %>%
-  group_by(subject) %>%
-  summarise(mean_cong_RT <- mean(RT)) 
+transformers <- RTanalysis %>%
+  filter(congruency == "C")
+transformers2 <- RTanalysis %>%
+  filter(congruency == "I")
+flanker <- rep(0,22)
+flankerSEM <- rep(0,22)
+transformers <- data.frame(transformers, transformers2[,2:3], flanker, flankerSEM)
 
-incongrRT <- accuracy %>%
-  filter( congruency == "I") %>%
-  group_by(subject) %>%
-  summarise(mean_incong_RT <- mean(RT)) 
-
-flanker_effect<- cbind(congrRT, incongrRT)
-
-flanker_effect[,3] = NULL
-
-names(flanker_effect)[2]<-"CongruentMean"
-names(flanker_effect)[3]<-"IncongruentMean"
-
-cond<- c("flanker effect")
-
-graph1 <- data.frame(graph1, cond)
-
-flanker <- flanker_effect %>%
-  mutate (IncongruentMean = IncongruentMean - CongruentMean) 
+for (i in transformers$subject) {
+  transformers$flanker = (transformers$meanRT.1 - transformers$meanRT)
+}
 
 
-  SEM <- std(flanker$IncongruentMean)
-  averagelag <- mean(flanker$IncongruentMean)
-  graph1 <- data.frame(SEM, averagelag)
+
+#Calculate the SEM 
+for (i in transformers$subject) {
+  transformers$flankerSEM = (sd(transformers$flanker)/sqrt(length(transformers$flanker)))
+}
 
 
-ggplot(graph1, mapping = aes(x = cond, y = averagelag)) + 
+ggplot(transformers, mapping = aes(x = congruency, y = flanker)) + 
   geom_bar(stat = "identity")+
   theme_classic(base_size = 12)+
   ylab("Mean Flanker Effect")
-   geom_errorbar(aes(ymin= averagelag - SEM, ymax=averagelag + SEM), 
+   geom_errorbar(aes(ymin= flanker - flankerSEM, ymax=flanker + flankerSEM), 
                  position=position_dodge(width = 0.9),
                  width = .2,
                  color = "black")
@@ -399,22 +377,48 @@ In flanker experiments, like this one, it is well known that the flanker effect 
 
 Transform the data to conduct a sequence analysis. The dataframe should already include a factor (column) for the congruency level of trial n. Make another column that codes for the congruency level of trial n-1 (the previous trial). This creates a 2x2 design with trial n congruency x trial n-1 congruency. 
 
-First get teh subject means for each condition, then create a table and plot for teh overall means and SEMs in each condition. This should include:
+
+```{r}
+#Make another column that codes for the congruency level of trial n-1 (the previous trial). This creates a 2x2 design with trial n congruency x trial n-1 congruency. 
+
+# Use the RTS data frame 
+
+previous <- RTS$congruency
+previous <- c("O", previous[1:4223])
+
+count <- c( 1:4224)
+
+RTS <- data.frame(RTS, previous, count)
+
+
+onlycongruent <- RTS %>%
+  filter(congruency == "C", previous != "O") %>%
+  group_by(previous) %>%
+  summarise(meanerRT = mean(Overreaction))
+
+onlyincongruent <- RTS %>%
+  filter(congruency == "I") %>%
+  group_by(previous) %>%
+  summarise(ImeanerRT = mean(Overreaction))
+
+onlycongruentSEM <- c(std(onlycongruent$meanerRT))
+onlyincongruentSEM <- c(std(onlyincongruent$ImeanerRT))
+
+```
+
+
+First get the subject means for each condition, then create a table and plot for teh overall means and SEMs in each condition. This should include:
 
 1. trial n congruent : trial n-1 congruent
 2. trial n incongruent : trial n-1 congruent
 3. trial n congruent : trial n-1 incongruent
 4. trial n incongruent : trial n-1 incongruent
 
-**tip:** be careful, note that the first trial in each experiment can not be included, because it had no preceding trial
+**tip:** be careful, note that the first trial in each experiment can not be includled, because it had no preceding trial
 
 ```{r}
-
-
+tab <- as.table(onlycongruent, onlyincongruent)
 ```
-
-
-
 
 
 
