@@ -670,10 +670,10 @@ Overalls1 &lt;- RTS %&gt;%
 
 Overalls &lt;- data.frame(Overalls, Overalls1[,2])
 
+table1 &lt;- table(Overalls)
 
 
-
-ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency)) + 
+firstgraph &lt;- ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency ), ymin = 400, ymax = 800) + 
     geom_bar(position=position_dodge(), stat=&quot;identity&quot;,
              colour=&quot;black&quot;, # Use black outlines,
              size=.3) +      # Thinner lines
@@ -683,7 +683,9 @@ ggplot(Overalls, aes(x=congruency, y=meanRT, fill = congruency)) +
                   position=position_dodge(.9)) +
     xlab(&quot;Condition&quot;) +
     ylab(&quot;Mean RT&quot;) +
-       ggtitle(&quot;The Effect of Congruency on the Flanker Task&quot;) </code></pre>
+       ggtitle(&quot;The Effect of Congruency on the Flanker Task&quot;) 
+
+print(firstgraph)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect</li>
 </ol>
@@ -708,7 +710,7 @@ for (i in transformers$subject) {
 }
 
 
-ggplot(transformers, aes(x=subject, y=flanker)) + 
+theprettygraph &lt;- ggplot(transformers, aes(x=subject, y=flanker)) + 
     geom_bar(position=position_dodge(), stat=&quot;identity&quot;,
              colour=&quot;black&quot;, # Use black outlines,
              size=.3) +      # Thinner lines
@@ -718,7 +720,9 @@ ggplot(transformers, aes(x=subject, y=flanker)) +
                   position=position_dodge(.9)) +
     xlab(&quot;Subject&quot;) +
     ylab(&quot;Mean RT&quot;) +
-       ggtitle(&quot;Average Flanker Effect Across Subjects&quot;) </code></pre>
+       ggtitle(&quot;Average Flanker Effect Across Subjects&quot;)
+
+print(theprettygraph)</code></pre>
 </div>
 <div id="exploratory-analysis" class="section level3">
 <h3>Exploratory analysis</h3>
