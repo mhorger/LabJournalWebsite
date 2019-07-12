@@ -34,16 +34,7 @@ knitr::include_graphics("lab logo.png")
 
 
 
-
-
-
-
 ## Conference Presentations
-
-```{r sleep, echo=FALSE,  out.width = '60%'}
-
-knitr::include_graphics("image/SLEEP.png")
-```
 
 
 ```{r icis, echo=FALSE,  out.width = '60%'}
@@ -88,3 +79,7 @@ Horger, M. N., Marsiliani, R. S., & Berger, S. E. (2019, March). *The Intersecti
 
 Horger, M. N., Berger, S. E., DeMasi, A., Allia, A. M., & Scher, A. (2019, June). *Night Sleep and Napping Together Consolidate Infants’ Motor Problem Solving.* Poster presented at SLEEP, San Antonio, TX. 
 
+```{r sleep, echo=FALSE,  out.width = '60%'}
+
+knitr::include_graphics("image/SLEEP.png")
+```
