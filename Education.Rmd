@@ -18,7 +18,7 @@ Graduate Center, City University of New York
 
 Advisor: Sarah Berger, Ph.D.  
 
-```{r cuny, echo=FALSE,dev='png'}
+```{r 3snl, echo=FALSE,dev='png'}
 knitr::include_graphics('images/cunylogo')
 ```
 
