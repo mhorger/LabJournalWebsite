@@ -10,17 +10,6 @@ navbar:
       href: Research.html
     - text: "Links"
       href: Links.html
-    - text: "Presentation"
-      href: Final_project_presentation.html
-    - text: "Learning R"
-      href: Journal.html
-    - text: "R dictionary"
-      href: Dictionary.html
-    - text: "Data Vis Assignment"
-      href: DataVis.html
-    - text: "Data wrangling"
-      href: DataWrangle.html
-    - text: "Statistics Problems"
-      href: StatisticsProblems.html
+
 
 output_dir: "docs"
