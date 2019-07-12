@@ -18,11 +18,9 @@ Graduate Center, City University of New York
 
 Advisor: Sarah Berger, Ph.D.  
 
-```{r cuny, echo=FALSE,  out.width = '100%'}
-
-knitr::include_graphics("image/cunylogo.png")
+```{r cuny, echo=FALSE,dev='png'}
+knitr::include_graphics('images/cunylogo')
 ```
-
 
 **2009- 2013**		Bachelor of the Arts, Department of Psychology 
 
