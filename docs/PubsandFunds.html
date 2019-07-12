@@ -11,7 +11,7 @@
 
 
 
-<title>Education</title>
+<title>Publications and Funding</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -263,92 +260,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -356,16 +267,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -406,26 +307,46 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Education</h1>
+<h1 class="title toc-ignore">Publications and Funding</h1>
 
 </div>
 
 
-<p><strong>2016-Present</strong> Doctor of Philosophy, Department of Psychology</p>
-<p>Training Area: Developmental Psychology</p>
-<p>Graduate Center, City University of New York</p>
-<p>Advisor: Sarah Berger, Ph.D.</p>
-<p><img src="images/cunylogo" /><!-- --></p>
-<p><strong>2009- 2013</strong> Bachelor of the Arts, Department of Psychology</p>
-<p>Millersville University, Honors College Millersville, PA 17551</p>
-<p>Major: Psychology Minor: Anthropology</p>
-<p>Thesis Title: The Allocation of Preferred and Nonpreferred Rewards among Collaborating Children Advisor: Karena Rush, Ph.D</p>
-<p><img src="image/villelogo.png" width="100%" /></p>
-
-
-
+<div id="publications" class="section level1">
+<h1>Publications</h1>
+<div id="berger-s.-e.-harbourne-r.-t.-and-horger-m.-n.-2018.-chapter-two-cognition-action-trade-offs-reflect-the-organization-of-attention-in-infancy.-in-j.-b.-benson-ed.-advances-in-child-development-and-behavior-45-86.-new-york-ny-elsevier." class="section level3">
+<h3>Berger, S. E., Harbourne, R. T., and Horger, M. N. (2018). Chapter two: Cognition-action trade-offs reflect the organization of attention in infancy. In J. B. Benson (Ed.), Advances in Child Development and Behavior (45-86). New York, NY: Elsevier.</h3>
+<div id="abstract" class="section level4">
+<h4>Abstract</h4>
+<p>This chapter discusses what cognition–action trade-offs in infancy reveal about the organization and developmental trajectory of attention. We focus on internal attention because this aspect is most relevant to the immediate concerns of infancy, such as fluctuating levels of expertise, balancing multiple taxing skills simultaneously, learning how to control attention under variable conditions, and coordinating distinct psychological domains. Cognition–action trade-offs observed across the life span include perseveration during skill emergence, errors and inefficient strategies during decision making, and the allocation of resources when attention is taxed. An embodied cognitive-load account interprets these behavioral patterns as a result of limited attentional resources allocated across simultaneous, taxing task demands. For populations where motor errors could be costly, like infants and the elderly, attention is typically devoted to motor demands with errors occurring in the cognitive domain. In contrast, healthy young adults tend to preserve their cognitive performance by modifying their actions.</p>
 </div>
 </div>
+<div id="rush-k.-s.-golden-m.-e.-mortenson-b.-p.-albohn-d.-and-horger-m.-2017.-the-effects-of-a-mindfulness-and-biofeedback-program-on-the-on--and-off--task-behaviors-of-students-with-emotional-behavioral-disorders.-contemporary-school-psychology-181." class="section level3">
+<h3>Rush, K. S., Golden, M. E., Mortenson, B. P., Albohn, D., and Horger, M. (2017). The effects of a mindfulness and biofeedback program on the on- and off- task behaviors of students with emotional behavioral disorders. Contemporary School Psychology 18(1).</h3>
+<div id="abstract-1" class="section level4">
+<h4>Abstract</h4>
+<p>Research suggests that mind-body techniques are useful for enhancing self-regulatory behaviors, including attention and emotional regulation. The majority of research in this area focuses on adult behavior. However, there has been a growing interest in using mindfulness techniques with children and more recently, in the school setting. Students identified as emotionally disturbed (ED) could potentially benefit from such interventions. In this study, a 12-week mind-body curriculum utilizing mindfulness and game-based biofeedback techniques was implemented in special education emotional support classrooms with elementary and middle school students. A quasi-experimental design was implemented to examine the effects of the mindfulness and biofeedback program on students’ on-task and off-task behaviors in the classroom. Results indicated significant decreases in overall off-task behaviors and improvements that approached significance in on-task behaviors for the participants in the treatment group (n = 14) compared to the participants in the control group (n = 17). The potential benefits of using a mindfulness and biofeedback program with ED students are discussed as well as limitations of the study, implications for practice, and recommendations for future research.</p>
+</div>
+</div>
+</div>
+<div id="funding" class="section level1">
+<h1>Funding</h1>
+<div id="spring-2019-provosts-pre-dissertation-research-fellowship-the-graduate-center-cuny" class="section level3">
+<h3>Spring 2019 – Provost’s Pre Dissertation Research Fellowship (The Graduate Center CUNY)</h3>
+<div id="title-an-investigation-of-the-relationship-between-rem-and-nonrem-and-motor-learning." class="section level4">
+<h4>Title: An investigation of the relationship between REM and nonREM and motor learning.</h4>
+</div>
+</div>
+<div id="spring-2018--doctoral-student-research-grant-the-graduate-center-cuny" class="section level3">
+<h3>Spring 2018- Doctoral Student Research Grant (The Graduate Center CUNY)</h3>
+<div id="title-the-use-of-noninvasive-technology-to-code-sleep-states-in-infants" class="section level4">
+<h4>Title: “The Use of Noninvasive Technology to Code Sleep States in Infants”</h4>
+</div>
+</div>
+</div>
+
+
+
 
 </div>
 

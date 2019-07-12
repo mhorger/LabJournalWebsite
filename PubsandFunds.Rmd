@@ -1,0 +1,47 @@
+---
+title: "Publications and Funding"
+output: html_document
+---
+
+#Publications 
+
+###Berger, S. E., Harbourne, R. T., and Horger, M. N. (2018). Chapter two: Cognition-action trade-offs reflect the organization of attention in infancy. In J. B. Benson (Ed.), Advances in Child Development and Behavior (45-86). New York, NY: Elsevier.
+
+####Abstract 
+
+This chapter discusses what cognition–action trade-offs in infancy reveal about the
+organization and developmental trajectory of attention. We focus on internal attention
+because this aspect is most relevant to the immediate concerns of infancy, such as fluctuating
+levels of expertise, balancing multiple taxing skills simultaneously, learning how
+to control attention under variable conditions, and coordinating distinct psychological
+domains. Cognition–action trade-offs observed across the life span include perseveration
+during skill emergence, errors and inefficient strategies during decision making, and
+the allocation of resources when attention is taxed. An embodied cognitive-load
+account interprets these behavioral patterns as a result of limited attentional resources
+allocated across simultaneous, taxing task demands. For populations where motor
+errors could be costly, like infants and the elderly, attention is typically devoted to motor
+demands with errors occurring in the cognitive domain. In contrast, healthy young
+adults tend to preserve their cognitive performance by modifying their actions.
+
+
+
+
+
+
+
+###Rush, K. S., Golden, M. E., Mortenson, B. P., Albohn, D., and Horger, M. (2017). The effects of a mindfulness and biofeedback program on the on- and off- task behaviors of students with emotional behavioral disorders. Contemporary School Psychology 18(1).
+
+####Abstract
+
+Research suggests that mind-body techniques are useful for enhancing self-regulatory behaviors, including attention and emotional regulation. The majority of research in this area focuses on adult behavior. However, there has been a growing interest in using mindfulness techniques with children and more recently, in the school setting. Students identified as emotionally disturbed (ED) could potentially benefit from such interventions. In this study, a 12-week mind-body curriculum utilizing mindfulness and game-based biofeedback techniques was implemented in special education emotional support classrooms with elementary and middle school students. A quasi-experimental design was implemented to examine the effects of the mindfulness and biofeedback program on students’ on-task and off-task behaviors in the classroom. Results indicated significant decreases in overall off-task behaviors and improvements that approached significance in on-task behaviors for the participants in the treatment group (n = 14) compared to the participants in the control group (n = 17). The potential benefits of using a mindfulness and biofeedback program with ED students are discussed as well as limitations of the study, implications for practice, and recommendations for future research.
+ 
+ 
+#Funding
+###Spring 2019 – Provost’s Pre Dissertation Research Fellowship (The Graduate Center CUNY) 
+####Title: An investigation of the relationship between REM and nonREM and motor learning.
+
+
+###Spring 2018- Doctoral Student Research Grant (The Graduate Center CUNY)
+####Title: "The Use of Noninvasive Technology to Code Sleep States in Infants"
+
+
