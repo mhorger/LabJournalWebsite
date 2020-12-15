@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -69,9 +69,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -85,7 +83,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -190,8 +187,6 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
 
 <style type="text/css">
@@ -236,6 +231,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -248,20 +244,17 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -288,13 +281,7 @@ $(document).ready(function () {
   <a href="Research.html">Research</a>
 </li>
 <li>
-  <a href="Journal.html">Learning R</a>
-</li>
-<li>
-  <a href="Dictionary.html">R dictionary</a>
-</li>
-<li>
-  <a href="Links.html">Links</a>
+  <a href="PublicationsandFunding.html">Publications and Funding</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -328,12 +315,12 @@ $(document).ready(function () {
 <p><img src="images/primary.PNG" /><!-- --></p>
 <h1 id="melissa-horger"><strong>Melissa Horger</strong></h1>
 <h2 id="a-brief-bio"><strong>A brief bio</strong></h2>
-<p>Melissa Horger, B.A. Psychology, graduated from Millersville University in 2013 and then spent several years working with children and adolescents on the spectrum. She began a doctoral program in Developmental Psychology at the Graduate Center, City University of New York in 2016. Melissa’s research is based out of the Child Development Lab at the College of Staten Island where she also teaches. Her line of study focuses on cognitive and motor development, infant sleep, sleep states, and the relationship between sleep and learning. She also recently co-authored a chapter about cognition-action tradeoffs and the allocation of attention in infancy.</p>
+<p>Melissa Horger, B.A., M.A., graduated from Millersville University in 2013 and then spent several years working with children and adolescents on the spectrum. She began a doctoral program in Developmental Psychology at the Graduate Center, City University of New York in 2016. Melissa’s research is based out of the Child Development Lab at the College of Staten Island where she also teaches. Her line of study focuses on cognitive and motor development, infant sleep, sleep states, and the relationship between sleep and learning.</p>
 <h3 id="contact-information">Contact information</h3>
 <h4 id="email">Email</h4>
-<p><a href="mailto:mhorger814@gmail.com">mhorger814@gmail.com</a></p>
-<p><a href="mailto:mhorger@gradcenter.cuny.edu">mhorger@gradcenter.cuny.edu</a></p>
-<p><a href="mailto:melissa.horger@csi.cuny.edu">melissa.horger@csi.cuny.edu</a></p>
+<p><a href="mailto:mhorger814@gmail.com" class="email">mhorger814@gmail.com</a></p>
+<p><a href="mailto:mhorger@gradcenter.cuny.edu" class="email">mhorger@gradcenter.cuny.edu</a></p>
+<p><a href="mailto:melissa.horger@csi.cuny.edu" class="email">melissa.horger@csi.cuny.edu</a></p>
 <h4 id="phone">Phone</h4>
 <p>Personal - (215) 840-5854</p>
 <p>Lab - (918) 782-3770</p>
@@ -356,6 +343,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

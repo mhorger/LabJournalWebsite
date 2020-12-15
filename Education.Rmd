@@ -10,6 +10,13 @@ output:
     #code_folding: hide
 ---
 
+
+
+```{r cuny, echo=FALSE,  out.width = '15%', fig.align = 'right'}
+
+knitr::include_graphics("imageS/cunylogo.png")
+```
+
 **2016-Present**	Doctor of Philosophy, Department of Psychology
 
 Training Area: Developmental Psychology
@@ -18,22 +25,24 @@ Graduate Center, City University of New York
 
 Advisor: Sarah Berger, Ph.D.  
 
-```{r 3snl, echo=FALSE,dev='png'}
-knitr::include_graphics('images/cunylogo')
+
+
+```{r ville, echo=FALSE,  out.width = '40%', fig.align = 'right'}
+
+knitr::include_graphics("imageS/villelogo.png")
 ```
+
 
 **2009- 2013**		Bachelor of the Arts, Department of Psychology 
 
 Millersville University, Honors College
 Millersville, PA 17551
-
 Major: Psychology
 Minor: Anthropology 
 
 Thesis Title: The Allocation of Preferred and Nonpreferred Rewards among Collaborating Children
 Advisor: Karena Rush, Ph.D
 
-```{r ville, echo=FALSE,  out.width = '100%'}
 
-knitr::include_graphics("image/villelogo.png")
-```
+
+
