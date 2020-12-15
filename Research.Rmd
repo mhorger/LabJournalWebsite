@@ -105,8 +105,3 @@ knitr::include_graphics("images/psm19.png")
 
 
 
-
-
-
-
-
