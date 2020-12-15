@@ -8,8 +8,8 @@ navbar:
       href: Education.html
     - text: "Research"
       href: Research.html
-    - text: "Publications and Funding"
-      href: PublicationsandFunding.html
+    - text: "Publications"
+      href: PubsandFunds.html
 
 
 output_dir: "docs"

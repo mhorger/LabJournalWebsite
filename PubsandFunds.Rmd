@@ -1,13 +1,27 @@
 ---
-title: "Publications and Funding"
+title: "Publications"
 output: html_document
 ---
 
-#Publications 
 
-###Berger, S. E., Harbourne, R. T., and Horger, M. N. (2018). Chapter two: Cognition-action trade-offs reflect the organization of attention in infancy. In J. B. Benson (Ed.), Advances in Child Development and Behavior (45-86). New York, NY: Elsevier.
+### Horger, M. N., DeMasi, A., Allia, A., Scher, A., & Berger, S. E. (in press). Newly walking infants’ night sleep impacts next day learning and problem solving. In S. E. Berger, A. Scher & R. T. Harbourne (Eds.), Advances in Child Development and Behavior, Volume 60, Interdisciplinary Perspectives on the Relation between Sleep and Learning in Early Development (pp. xx-xx). San Diego, CA: Elsevier.
 
-####Abstract 
+
+#### Abstract
+
+Sleep is part of the process that prepares children and adults for next day cognitive activity. Insufficient or fragmented sleep has a detrimental impact on subsequent encoding (Rouleau et al., 2002) and cognitive functioning (Joo et al., 2012). However, fragmented sleep early in life is a developmental norm, limiting the extent to which conclusions derived from older populations can be generalized. To directly test the continuity of this relationship, newly-walking infants’ (N = 58) sleep was monitored overnight using actigraphy. The next morning they were taught a motor problem-solving task. The task required infants to navigate through a tunnel to reach a goal at the other end. We coded infants’ exploratory behaviors and the extent of training required to solve the task. Using a cluster analysis that accounted for exploratory behaviors and number of training prompts, infants were sorted into 3 profiles: those who found the task Easy to solve, those who found it Difficult, and those who Never solved it. Wake episodes and sleep efficiency were entered as predictors of cluster membership in a multinomial logistic regression. Of the infants who ultimately solved the task, those with more wake episodes and lower sleep efficiency had more difficulty. Specifically, fragmentation appeared to negatively impact preparedness to learn. Contrary to our expectations, infants who Never solved the task had the least fragmented sleep. Implications for the impact of sleep quality on subsequent functioning are discussed, as well as the impact of development in other domains, such as motor skill, on sleep. 
+
+
+### Horger, M. N., & Berger, S. E. (2019). The role of walking experience on whole-body exploration and problem solving. Cognitive Development, 52, 100825.
+
+#### Abstract
+
+One hundred and six infants with varied independent walking experience faced the problem of navigating a tunnel to reach a caregiver. Solving the task required infants to switch from standing to crawling so they could fit their bodies into the tunnel. Spontaneous exploratory behaviors were documented. Infants who did not immediately go through the tunnel received a strict 15-step training protocol to highlight relevant details of the task. Age and walk experience were entered as predictors into a series of stepwise regressions on measures of exploratory and problem-solving behaviors. In general, older infants were more successful than younger infants in completing the task. A significant nonlinear relationship was documented between walk experience and some outcome measures. Infants with a moderate amount of walk experience had more difficulty than those with very little or a lot. Microgenetically documenting problem solving as a function of experience revealed that attention is taxed during mastery of a motor skill. Availability of attentional resources, in turn, impacted walkers’ exploratory behaviors and ability to maintain problem-solving strategies.
+
+
+### Berger, S. E., Harbourne, R. T., and Horger, M. N. (2018). Chapter two: Cognition-action trade-offs reflect the organization of attention in infancy. In J. B. Benson (Ed.), Advances in Child Development and Behavior (45-86). New York, NY: Elsevier.
+
+#### Abstract 
 
 This chapter discusses what cognition–action trade-offs in infancy reveal about the
 organization and developmental trajectory of attention. We focus on internal attention
@@ -27,21 +41,11 @@ adults tend to preserve their cognitive performance by modifying their actions.
 
 
 
+### Rush, K. S., Golden, M. E., Mortenson, B. P., Albohn, D., and Horger, M. (2017). The effects of a mindfulness and biofeedback program on the on- and off- task behaviors of students with emotional behavioral disorders. Contemporary School Psychology 18(1).
 
-
-###Rush, K. S., Golden, M. E., Mortenson, B. P., Albohn, D., and Horger, M. (2017). The effects of a mindfulness and biofeedback program on the on- and off- task behaviors of students with emotional behavioral disorders. Contemporary School Psychology 18(1).
-
-####Abstract
+#### Abstract
 
 Research suggests that mind-body techniques are useful for enhancing self-regulatory behaviors, including attention and emotional regulation. The majority of research in this area focuses on adult behavior. However, there has been a growing interest in using mindfulness techniques with children and more recently, in the school setting. Students identified as emotionally disturbed (ED) could potentially benefit from such interventions. In this study, a 12-week mind-body curriculum utilizing mindfulness and game-based biofeedback techniques was implemented in special education emotional support classrooms with elementary and middle school students. A quasi-experimental design was implemented to examine the effects of the mindfulness and biofeedback program on students’ on-task and off-task behaviors in the classroom. Results indicated significant decreases in overall off-task behaviors and improvements that approached significance in on-task behaviors for the participants in the treatment group (n = 14) compared to the participants in the control group (n = 17). The potential benefits of using a mindfulness and biofeedback program with ED students are discussed as well as limitations of the study, implications for practice, and recommendations for future research.
  
  
-#Funding
-###Spring 2019 – Provost’s Pre Dissertation Research Fellowship (The Graduate Center CUNY) 
-####Title: An investigation of the relationship between REM and nonREM and motor learning.
-
-
-###Spring 2018- Doctoral Student Research Grant (The Graduate Center CUNY)
-####Title: "The Use of Noninvasive Technology to Code Sleep States in Infants"
-
 
