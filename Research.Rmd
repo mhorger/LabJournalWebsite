@@ -10,76 +10,103 @@ output:
     #code_folding: hide
 ---
 
-## Current Research Projects 
 
+```{r lablogo, echo=FALSE,  out.width = '75%', fig.align = 'center'}
 
-```{r lablogo, echo=FALSE,  out.width = '60%'}
-
-knitr::include_graphics("lab logo.png")
+knitr::include_graphics("images/lablogo.png")
 ```
+
+
+## Research in the data collection phase 
+
+**Parental Expectations and Infants' Sleep during COVID-19**
+
+  We are using a survey and still accepting responses!
+  https://gccuny.az1.qualtrics.com/jfe/form/SV_1Mknip2xlCEntjv 
 
 
 **Longitudinal Assessment of Sleep and Motor Milestone Acquisition.** 
 
+  By using Nanit video baby monitors and parent reported motor skill diaries, we get a prospective glimpse into infants' sleep around the acquisition of new motor skills including rolling, sitting, crawling, and walking. Preliminary results are in the conference presentations below!
+  
+
+**Supported vs Unsupported Sitters and Focused Attention**
+
+  Parents and their babies participate entirely on Zoom. We're interested in what we can learn about movement and cognition while your baby sits and plays with toys from your house. 
+
+
 **Novel Methodological Techniques for Coding Sleep States in Infancy**
 
-**Head-mounted Eye Tracking and Infant Reaching Behavior**
+  I developed a technique using wireless cardiorespiratory sensors and an actigraph to code infant sleep states. The procedure is easy enough for parents to incorporate into their usual bedtime routines. Parents and babies become part of the research team! 
 
-**The Relation Between Physical Space and Young Children’s Play: A Cross-Cultural Examination**
+
+```{r babysci, echo=FALSE,  out.width = '40%', fig.align = 'center'}
+
+knitr::include_graphics("images/babysci.jpg")
+```
+
+
+
+
+
+## Completed research projects 
 
 **Learning to Solve a Novel Locomotor Problem in Infancy: Does Sleep Play a Role?**
 
 **The Role of Motor Experience on Whole-Body Exploration and Problem Solving**
 
+**The Relation Between Physical Space and Young Children’s Play: A Cross-Cultural Examination**
+
+
+## Recent conference presentations
 
 
 
-## Conference Presentations
+```{r isdp20, echo=FALSE,  out.width = '60%'}
+
+knitr::include_graphics("images/twitterposter.gif")
+```
+```
+
 
 
 ```{r icis, echo=FALSE,  out.width = '60%'}
 
-knitr::include_graphics("image/prepforlearn.png")
+knitr::include_graphics("images/prepforlearn.png")
 ```
 
 
-###Undergraduate  
-Horger, M., Rush, K., and Gallagher, S. (2013, March) *Reward Allocation Among Collaborating Children* Poster presented at the Eastern Psychological Association, New York, NY
-
-Sube, C., Lambert, K., vanBuren, T., Horger, M., and Cook, S. (2013, March) *Investigating the Ability of Synesthetes to Process Meaning* Poster presented at the Eastern Psychological Association, New York, NY 
- 
-Horger, M. and Rush, K. (2012, March) *Using Biofeedback Training to Reduce Performance-Related Anxiety in Children* Poster presented at Millersville University’s Student Research Conference, Millersville, PA 
-
-Horger, M. and Rush, K. (2012, April) *Using Biofeedback Training to Reduce Performance-Related Anxiety in Children* Poster presented at the Hershey Neuroscience Retreat, Hershey, PA
-
-Horger, M., Gavin, K., Rush, K., and Mortenson, B. P. (2011, March) *The Reliability and Validity of Forced-Choice Preference Assessments for Infants and Toddlers Poster* presented at the Pennsylvania Applied Behavior Analysis Conference, Philadelphia, PA 
-
-Horger, M., Gavin, K., Rush, K., and Mortenson, B. P. (2012, March) *The Reliability and Validity of Forced-Choice Preference Assessments for Infants and Toddlers* Paper presentation at the Eastern Psychological Association, Pittsburgh, PA 
-
-Horger, M. and Rush, K. (2011, October) *Preference Assessments in Infants and Toddlers* Paper presentation at the PASSHE Psychology Conference. Kutztown, PA
-
-Horger, M. and Rush, K. (2011, March) *Social Skills in Children* Paper presentation at the Eastern Psychological Association, Boston, MA 
-
-
-
-###Graduate
-Horger, M., Berger, S., Orr, E., and Benish-Weisman, M. (2017, May) *The Relation between Culture, Parental Values, and Young Children’s Play.* Poster presented at the Association for Psychological Science, Boston, MA and Psychology Research Day, New York, NY. 
-
-Horger, M., Saad, P., Zillig, A., and Berger, S. (2017, October) *Regress for Success: Returning to Crawling Places Attentional Demands on New Walkers.* Poster presented at the Cognitive Development Society, Portland, OR 
-
-Horger, M., Saad, P., Scher, A., and Berger, S. (2018, July) *Infants' Ability to Consolidate New Information Depends on the Timing of a Nap Relative to Learning and Test.* Poster presented at the International Congress of Infant Studies, Philadelphia, PA. 
-
-Horger, M., Friedman, D., Scher, A., and Berger, S. (2018, July) *Individual Differences in the Quality of Night Sleep Influence Infants' Preparedness for Learning the Following Day.* Poster presented at the International Congress of Infant Studies, Philadelphia, PA.
-
-Hinav A., Horger M., Berger S., & Scher A. (2019, September). *Novice walkers perform a challenging task: Does temperament play a role?* Poster presented at the 19th European Conference on Developmental Psychology, Athens, GREECE.
-
-Berger, S. E., Scher, A., & Horger, M. N. (2019, February). *Learning to solve a novel locomotor problem depends on quality and timing of infants’ sleep.* Poster presented at the 6th Conference on Cognition Research of the Israeli Society for Cognitive Psychology, Akko, ISRAEL.
-
-Horger, M. N., Marsiliani, R. S., & Berger, S. E. (2019, March). *The Intersection of Motor and Language Skills in Problem Solving.* Paper presented at the Eastern Psychological Association, New York, NY. 
-
-Horger, M. N., Berger, S. E., DeMasi, A., Allia, A. M., & Scher, A. (2019, June). *Night Sleep and Napping Together Consolidate Infants’ Motor Problem Solving.* Poster presented at SLEEP, San Antonio, TX. 
 
 ```{r sleep, echo=FALSE,  out.width = '60%'}
 
-knitr::include_graphics("image/SLEEP.png")
+knitr::include_graphics("images/SLEEP.png")
 ```
+
+
+
+
+```{r icis20, echo=FALSE,  out.width = '60%'}
+
+knitr::include_graphics("images/icis20.png")
+```
+
+
+
+
+
+
+
+```{r psm19, echo=FALSE,  out.width = '60%'}
+
+knitr::include_graphics("images/psm19.png")
+```
+
+
+
+
+
+
+
+
+
+
